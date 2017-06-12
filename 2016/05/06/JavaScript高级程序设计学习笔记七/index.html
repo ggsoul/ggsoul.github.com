@@ -1,0 +1,834 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="关于JavaScript的几种类型的介绍">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript高级程序设计学习笔记七">
+<meta property="og:url" content="http://gaoxuefeng.com/2016/05/06/JavaScript高级程序设计学习笔记七/index.html">
+<meta property="og:site_name" content="高雪峰的个人博客">
+<meta property="og:description" content="关于JavaScript的几种类型的介绍">
+<meta property="og:updated_time" content="2016-06-13T08:02:50.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript高级程序设计学习笔记七">
+<meta name="twitter:description" content="关于JavaScript的几种类型的介绍">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <meta name="baidu-site-verification" content="3YPbgeBMlS" />
+  <title> JavaScript高级程序设计学习笔记七 | 高雪峰的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4c3782dc0cacd99020a13bb244258b4a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s11.cnzz.com/z_stat.php?id=1259006158&web_id=1259006158" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">高雪峰的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">只想走的更远一点</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-favorite">
+          <a href="/favorite" rel="section">
+            
+            最爱
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript高级程序设计学习笔记七
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T22:35:23+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/onebook/" itemprop="url" rel="index">
+                    <span itemprop="name">onebook</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/06/JavaScript高级程序设计学习笔记七/" class="leancloud_visitors" data-flag-title="JavaScript高级程序设计学习笔记七">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于JavaScript的几种类型的介绍</p>
+<a id="more"></a>
+<h2 id="Date类型"><a href="#Date类型" class="headerlink" title="Date类型"></a>Date类型</h2><p>获取当前日期对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">10</span> + <span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>指定时间日期对象：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//Tue May 25 2004 00:00:00 GMT+0800 (中国标准时间)</span></div><div class="line"><span class="keyword">var</span> someData = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.parse(<span class="string">"May 25, 2004"</span>));</div><div class="line"></div><div class="line"><span class="comment">//Fri May 06 2005 01:55:55 GMT+0800 (中国标准时间)</span></div><div class="line"><span class="keyword">var</span> allFives = <span class="keyword">new</span> <span class="built_in">Date</span>(<span class="built_in">Date</span>.UTC(<span class="number">2005</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">17</span>, <span class="number">55</span>, <span class="number">55</span>));</div></pre></td></tr></table></figure>
+<p>更多方法详见<a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Date#Date_instances" target="_blank" rel="external">Mozilla developer</a></p>
+<h2 id="RegExp类型"><a href="#RegExp类型" class="headerlink" title="RegExp类型"></a>RegExp类型</h2><p>用来支持正则表达式的类型。</p>
+<p><code>var expression = / pattern / flags ;</code></p>
+<p>模式(pattern)部分是正则表达式，后面可以带一个或多个标志(flags)。</p>
+<ul>
+<li>g：表示全局模式，即模式将被应用于所有的字符串</li>
+<li>i：表示不区分大小写模式，即在确定匹配项时忽略模式与字符串的大小写</li>
+<li>m：表示多行模式，即在达到一行文本末尾时还继续查找下一行</li>
+</ul>
+<p>正则表达是中的元字符，使用时需要转义：</p>
+<p><code>( [ { \ ^ $ | ) ? * + . ] }</code></p>
+<p>实例方法：</p>
+<ul>
+<li>exec()：接受一个参数，即要应用模式的字符串，然后返回包含第一个匹配项信息的数组。这个数组包含额外的属性，index和input，其中index表示匹配项在字符串中的位置，而input表示应用正则的字符串</li>
+<li>test()：接受一个字符串参数，在模式与该参数匹配的情况下返回true，否则false</li>
+</ul>
+<p>ECMAScript中的正则表达式不支持一些高级特性。</p>
+<h2 id="Function类型"><a href="#Function类型" class="headerlink" title="Function类型"></a>Function类型</h2><p>ECMAScript中的函数实际上是对象，”函数是对象，函数名是指针”，Java说万事万物皆对象，于是ECMAScript的函数直接就搞成了对象。函数变成对象的好处就是，语言结构简单了，函数可以随便传递了，没有重载也无所谓，可以直接分析参数做出不同的处理。</p>
+<p>函数声明与函数表达式是有区别的。声明的函数在代码执行之前有一个函数声明提升的过程，会将声明的函数放在源代码数的顶端。也就是函数声明可以卸载函数执行后面，函数表达式就不行啦，因为有一个赋值的过程，在赋值操作执行之前，变量是没有引用到函数体的。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//函数声明，可以</span></div><div class="line"><span class="built_in">console</span>.log(sum(<span class="number">10</span>, <span class="number">10</span>));</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params">num1, num2</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> num1 + num2;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">//函数表达式，不可以</span></div><div class="line"><span class="built_in">console</span>.log(sum(<span class="number">10</span>, <span class="number">10</span>));</div><div class="line"><span class="keyword">var</span> sum = <span class="function"><span class="keyword">function</span>(<span class="params">num1, num2</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> num1 + num2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>函数内部有两个特殊对象：arguments和this。函数对象有一个叫callee的属性，是指向拥有这个arguments对象函数的指针。ECMAScript 5也规范化了另一个函数对象的属性：caller，这个属性中保存着调用当前函数的函数的引用。</p>
+<p>函数有两个属性：length和prototype。length指的是函数希望接收的命名参数的个数，prototype是保存它们所有实例方法的真正所在。</p>
+<p>函数内部包含两个非继承而来的方法：apply()和call()。它们的区别在于传递的参数不同，apply接收两个参数，一个是在其中运行函数的作用域，另一个是参数数组，call第一个参数与之相同，而其余的参数都直接传递给函数。它们真正强大的地方是能够扩充函数赖以运行的作用域。</p>
+<p>bind()方法，会创建函数的实例：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.color = <span class="string">"red"</span>;</div><div class="line"><span class="keyword">var</span> o = &#123; <span class="attr">color</span>: <span class="string">"blue"</span> &#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sayColor</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="built_in">console</span>.log(<span class="keyword">this</span>.color);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> objectSayColor = sayColor.bind(o);</div><div class="line">objectSayColor(); <span class="comment">//blue</span></div></pre></td></tr></table></figure>
+<h2 id="基本包装类"><a href="#基本包装类" class="headerlink" title="基本包装类"></a>基本包装类</h2><p>为了便于操作基本类型值，提供的3个特殊的引用类型：Boolean、Number和String，每当读取一个基本类型值的时候，后台就会创建一个对应的基本包装类的对象，从而能够调用一些方法来操作这些数据。</p>
+<p>正常代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s1 = <span class="string">"some text"</span>;</div><div class="line"><span class="keyword">var</span> s2 = s1.substring(<span class="number">2</span>);</div></pre></td></tr></table></figure>
+<p>后台完成如下步骤：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> s1 = <span class="keyword">new</span> <span class="built_in">String</span>(<span class="string">"some text"</span>);</div><div class="line"><span class="keyword">var</span> s2 = s1.substring(<span class="number">2</span>);</div><div class="line">s1 = <span class="literal">null</span>;</div></pre></td></tr></table></figure>
+<p>Boolean类型重写了object的valueOf()方法，所以调用valueOf()能返回true和false不调用这个方法就不能返回true和false了，只有在能触发valueOf方法的场景才是对的。</p>
+<p>关于Number包装类的一些方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num = <span class="number">10.005</span>;</div><div class="line"><span class="built_in">console</span>.log(num.toPrecision(<span class="number">1</span>));   <span class="comment">// 1e+1</span></div><div class="line"><span class="built_in">console</span>.log(num.toPrecision(<span class="number">2</span>));  <span class="comment">// 10</span></div><div class="line"><span class="built_in">console</span>.log(num.toPrecision(<span class="number">3</span>)); <span class="comment">// 10.0</span></div><div class="line"><span class="built_in">console</span>.log(num.toExponential(<span class="number">1</span>));     <span class="comment">// 1.0e+1</span></div><div class="line"><span class="built_in">console</span>.log(num.toFixed(<span class="number">1</span>));     <span class="comment">// 10.0</span></div></pre></td></tr></table></figure>
+<p>Boolean和Number的包装类都重写了valueOf()、toLocaleString()和toString()方法，感觉没有特别大的用，String的包装类用的很多，这个基本包装类更多的用处是来实现将String是基本类型这一设定的而带来的更多需求。</p>
+<p>String类型的很多方法和数组操作类似，我个人觉得比较有用的是模式匹配方法：</p>
+<ul>
+<li>match()：本质与调用RegExp的exec方法相同</li>
+<li>search()：返回字符串中第一个匹配项的索引</li>
+<li>replace(): 用于替换子字符串</li>
+<li>split()：基于指定分隔符将一个字符串分割成多个子字符串，并将结果放在一个数组里</li>
+</ul>
+<p>replace()的例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">htmlEscape</span>(<span class="params">text</span>) </span>&#123;</div><div class="line">	<span class="keyword">return</span> text.replace(<span class="regexp">/[&lt;&gt;"&amp;]/g</span>, <span class="function"><span class="keyword">function</span>(<span class="params">match, pos, originalText</span>) </span>&#123;</div><div class="line">		<span class="keyword">switch</span>(match) &#123;</div><div class="line">			<span class="keyword">case</span> <span class="string">"&lt;"</span>:</div><div class="line">				<span class="keyword">return</span> <span class="string">"&amp;lt;"</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">"&gt;"</span>:</div><div class="line">				<span class="keyword">return</span> <span class="string">"&amp;gt;"</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">"&amp;"</span>:</div><div class="line">				<span class="keyword">return</span> <span class="string">"&amp;amp;"</span>;</div><div class="line">			<span class="keyword">case</span> <span class="string">"\""</span>:</div><div class="line">				<span class="keyword">return</span> <span class="string">"&amp;quot;"</span>;</div><div class="line">		&#125;</div><div class="line">	&#125;);</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(htmlEscape(<span class="string">"&lt;p class=\"greeting\"&gt;Hello world!&lt;/p&gt;"</span>));</div><div class="line"><span class="comment">//&lt;p class="greeting"&gt;Hello world!&lt;/p&gt;;</span></div></pre></td></tr></table></figure>
+<h2 id="Global对象"><a href="#Global对象" class="headerlink" title="Global对象"></a>Global对象</h2><p>诸如isNaN()、isFinite()、parseInt()和parseFloat()，实际上都是Global对象的方法。</p>
+<p>URI编码方法，有效的URI不包含某些字符，比如说空格，需要URI编码方法对URI编码，用特殊的UTF-8编码替换所有无效的字符，从而让浏览器能够理解。encodeURI()主要用于整个URI，encodeURIComponent()主要用于对URI中的某一段，比如说后缀参数。</p>
+<h2 id="Math对象"><a href="#Math对象" class="headerlink" title="Math对象"></a>Math对象</h2><p>Math对象提供计算功能。</p>
+<p>Math对象的方法:</p>
+<ul>
+<li>min()：确定一组数值中的最小值</li>
+<li>max()：确定一组数值中的最大值</li>
+<li>ceil()：执行向上舍入</li>
+<li>floor()：执行向下舍入</li>
+<li>round()：执行标准舍入，四舍五入</li>
+<li>random()：返回大于等于0小于1的一个随机数</li>
+</ul>
+<p>关于获取随机数：</p>
+<p><strong>值 = Math.floor(Math.random() * 可能值的总数 + 第一个可能的值)</strong></p>
+<p>选择一个1到10的数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> num = <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * <span class="number">10</span> + <span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>求一个范围之间的值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectFrom</span>(<span class="params">low, up</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> choices = up - low + <span class="number">1</span>;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random() * choices + low);</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> num = selectFrom(<span class="number">1</span>, <span class="number">10</span>);</div><div class="line"><span class="built_in">console</span>.log(num); <span class="comment">//介于1和10之间的一个数值(包括1和10)</span></div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>引用类型这一章内容很多，看得有点匆忙。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/JavaScript高级程序设计学习笔记六/" rel="next" title="JavaScript高级程序设计学习笔记六">
+                <i class="fa fa-chevron-left"></i> JavaScript高级程序设计学习笔记六
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/06/JavaScript高级程序设计学习笔记八/" rel="prev" title="JavaScript高级程序设计学习笔记八">
+                JavaScript高级程序设计学习笔记八 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/header.jpg"
+               alt="gxf" />
+          <p class="site-author-name" itemprop="name">gxf</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ggsoul" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/XuefGao" target="_blank" title="Weibo">
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/ggsoul" target="_blank" title="SegmentFault">
+                  
+                  SegmentFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gxf470001" target="_blank" title="Twitter">
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://searchp.cc/" title="searchpcc" target="_blank">searchpcc</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mrli.me/" title="Mr.li" target="_blank">Mr.li</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ycyx28.com/" title="Chao" target="_blank">Chao</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Date类型"><span class="nav-number">1.</span> <span class="nav-text">Date类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RegExp类型"><span class="nav-number">2.</span> <span class="nav-text">RegExp类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Function类型"><span class="nav-number">3.</span> <span class="nav-text">Function类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本包装类"><span class="nav-number">4.</span> <span class="nav-text">基本包装类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Global对象"><span class="nav-number">5.</span> <span class="nav-text">Global对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Math对象"><span class="nav-number">6.</span> <span class="nav-text">Math对象</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gxf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("WQkR0jDl5lLEcptvei9NmDR0-gzGzoHsz", "QIOxQpiKaIR8UafqIHm73OK0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

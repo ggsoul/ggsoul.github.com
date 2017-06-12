@@ -1,0 +1,811 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript,iframe," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="刚来公司时做得第一个项目是跨部门合作，使用了MessengerJS来做通信，十分简单，MessengerJS代码不长，这里分析一下iframe间通信的实现方式">
+<meta name="keywords" content="javascript,iframe">
+<meta property="og:type" content="article">
+<meta property="og:title" content="messengerjs iframe 跨域传数据">
+<meta property="og:url" content="http://gaoxuefeng.com/2016/05/06/messengerjs iframe 跨域传数据/index.html">
+<meta property="og:site_name" content="高雪峰的个人博客">
+<meta property="og:description" content="刚来公司时做得第一个项目是跨部门合作，使用了MessengerJS来做通信，十分简单，MessengerJS代码不长，这里分析一下iframe间通信的实现方式">
+<meta property="og:updated_time" content="2016-06-15T12:14:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="messengerjs iframe 跨域传数据">
+<meta name="twitter:description" content="刚来公司时做得第一个项目是跨部门合作，使用了MessengerJS来做通信，十分简单，MessengerJS代码不长，这里分析一下iframe间通信的实现方式">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <meta name="baidu-site-verification" content="3YPbgeBMlS" />
+  <title> messengerjs iframe 跨域传数据 | 高雪峰的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4c3782dc0cacd99020a13bb244258b4a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s11.cnzz.com/z_stat.php?id=1259006158&web_id=1259006158" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">高雪峰的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">只想走的更远一点</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-favorite">
+          <a href="/favorite" rel="section">
+            
+            最爱
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                messengerjs iframe 跨域传数据
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T23:08:28+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/work/" itemprop="url" rel="index">
+                    <span itemprop="name">work</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/06/messengerjs iframe 跨域传数据/" class="leancloud_visitors" data-flag-title="messengerjs iframe 跨域传数据">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>刚来公司时做得第一个项目是跨部门合作，使用了MessengerJS来做通信，十分简单，MessengerJS代码不长，这里分析一下iframe间通信的实现方式<br><a id="more"></a></p>
+<p>源码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> *     __  ___</div><div class="line"> *    /  |/  /___   _____ _____ ___   ____   ____ _ ___   _____</div><div class="line"> *   / /|_/ // _ \ / ___// ___// _ \ / __ \ / __ `// _ \ / ___/</div><div class="line"> *  / /  / //  __/(__  )(__  )/  __// / / // /_/ //  __// /</div><div class="line"> * /_/  /_/ \___//____//____/ \___//_/ /_/ \__, / \___//_/</div><div class="line"> *                                        /____/</div><div class="line"> *</div><div class="line"> * @description MessengerJS, a common cross-document communicate solution.</div><div class="line"> * @author biqing kwok</div><div class="line"> * @version 2.0</div><div class="line"> * @license release under MIT license</div><div class="line"> */</div><div class="line"></div><div class="line"><span class="built_in">window</span>.Messenger = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 消息前缀, 建议使用自己的项目名, 避免多项目之间的冲突</span></div><div class="line">    <span class="comment">// !注意 消息前缀应使用字符串类型</span></div><div class="line">    <span class="keyword">var</span> prefix = <span class="string">"[PROJECT_NAME]"</span>,</div><div class="line">        supportPostMessage = <span class="string">'postMessage'</span> <span class="keyword">in</span> <span class="built_in">window</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Target 类, 消息对象</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Target</span>(<span class="params">target, name, prefix</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> errMsg = <span class="string">''</span>;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">arguments</span>.length &lt; <span class="number">2</span>)&#123;</div><div class="line">            errMsg = <span class="string">'target error - target and name are both required'</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> target != <span class="string">'object'</span>)&#123;</div><div class="line">            errMsg = <span class="string">'target error - target itself must be window object'</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> name != <span class="string">'string'</span>)&#123;</div><div class="line">            errMsg = <span class="string">'target error - target name must be string type'</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(errMsg)&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(errMsg);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">this</span>.target = target;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line">        <span class="keyword">this</span>.prefix = prefix;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 往 target 发送消息, 出于安全考虑, 发送消息会带上前缀</span></div><div class="line">    <span class="keyword">if</span> ( supportPostMessage )&#123;</div><div class="line">        <span class="comment">// IE8+ 以及现代浏览器支持</span></div><div class="line">        Target.prototype.send = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</div><div class="line">            <span class="keyword">this</span>.target.postMessage(<span class="keyword">this</span>.prefix + <span class="string">'|'</span> + <span class="keyword">this</span>.name + <span class="string">'__Messenger__'</span> + msg, <span class="string">'*'</span>);</div><div class="line">        &#125;;</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">// 兼容IE 6/7</span></div><div class="line">        Target.prototype.send = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</div><div class="line">            <span class="keyword">var</span> targetFunc = <span class="built_in">window</span>.navigator[<span class="keyword">this</span>.prefix + <span class="keyword">this</span>.name];</div><div class="line">            <span class="keyword">if</span> ( <span class="keyword">typeof</span> targetFunc == <span class="string">'function'</span> ) &#123;</div><div class="line">                targetFunc(<span class="keyword">this</span>.prefix + msg, <span class="built_in">window</span>);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"target callback function is not defined"</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 信使类</span></div><div class="line">    <span class="comment">// 创建Messenger实例时指定, 必须指定Messenger的名字, (可选)指定项目名, 以避免Mashup类应用中的冲突</span></div><div class="line">    <span class="comment">// !注意: 父子页面中projectName必须保持一致, 否则无法匹配</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">Messenger</span>(<span class="params">messengerName, projectName</span>)</span>&#123;</div><div class="line">        <span class="keyword">this</span>.targets = &#123;&#125;;</div><div class="line">        <span class="keyword">this</span>.name = messengerName;</div><div class="line">        <span class="keyword">this</span>.listenFunc = [];</div><div class="line">        <span class="keyword">this</span>.prefix = projectName || prefix;</div><div class="line">        <span class="keyword">this</span>.initListen();</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 添加一个消息对象</span></div><div class="line">    Messenger.prototype.addTarget = <span class="function"><span class="keyword">function</span>(<span class="params">target, name</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> targetObj = <span class="keyword">new</span> Target(target, name,  <span class="keyword">this</span>.prefix);</div><div class="line">        <span class="keyword">this</span>.targets[name] = targetObj;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">// 初始化消息监听</span></div><div class="line">    Messenger.prototype.initListen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> self = <span class="keyword">this</span>;</div><div class="line">        <span class="keyword">var</span> generalCallback = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</div><div class="line">            <span class="keyword">if</span>(<span class="keyword">typeof</span> msg == <span class="string">'object'</span> &amp;&amp; msg.data)&#123;</div><div class="line">                msg = msg.data;</div><div class="line">            &#125;</div><div class="line">            </div><div class="line">            <span class="keyword">var</span> msgPairs = msg.split(<span class="string">'__Messenger__'</span>);</div><div class="line">            <span class="keyword">var</span> msg = msgPairs[<span class="number">1</span>];</div><div class="line">            <span class="keyword">var</span> pairs = msgPairs[<span class="number">0</span>].split(<span class="string">'|'</span>);</div><div class="line">            <span class="keyword">var</span> prefix = pairs[<span class="number">0</span>];</div><div class="line">            <span class="keyword">var</span> name = pairs[<span class="number">1</span>];</div><div class="line"></div><div class="line">            <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; self.listenFunc.length; i++)&#123;</div><div class="line">                <span class="keyword">if</span> (prefix + name === self.prefix + self.name) &#123;</div><div class="line">                    self.listenFunc[i](msg);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> ( supportPostMessage )&#123;</div><div class="line">            <span class="keyword">if</span> ( <span class="string">'addEventListener'</span> <span class="keyword">in</span> <span class="built_in">document</span> ) &#123;</div><div class="line">                <span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>, generalCallback, <span class="literal">false</span>);</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> ( <span class="string">'attachEvent'</span> <span class="keyword">in</span> <span class="built_in">document</span> ) &#123;</div><div class="line">                <span class="built_in">window</span>.attachEvent(<span class="string">'onmessage'</span>, generalCallback);</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// 兼容IE 6/7</span></div><div class="line">            <span class="built_in">window</span>.navigator[<span class="keyword">this</span>.prefix + <span class="keyword">this</span>.name] = generalCallback;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="comment">// 监听消息</span></div><div class="line">    Messenger.prototype.listen = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line">        <span class="keyword">var</span> len = <span class="keyword">this</span>.listenFunc.length;</div><div class="line">        <span class="keyword">var</span> cbIsExist = <span class="literal">false</span>;</div><div class="line">        <span class="keyword">for</span> (; i &lt; len; i++) &#123;</div><div class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.listenFunc[i] == callback) &#123;</div><div class="line">                cbIsExist = <span class="literal">true</span>;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (!cbIsExist) &#123;</div><div class="line">            <span class="keyword">this</span>.listenFunc.push(callback);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 注销监听</span></div><div class="line">    Messenger.prototype.clear = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">this</span>.listenFunc = [];</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 广播消息</span></div><div class="line">    Messenger.prototype.send = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> targets = <span class="keyword">this</span>.targets,</div><div class="line">            target;</div><div class="line">        <span class="keyword">for</span>(target <span class="keyword">in</span> targets)&#123;</div><div class="line">            <span class="keyword">if</span>(targets.hasOwnProperty(target))&#123;</div><div class="line">                targets[target].send(msg);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> Messenger;</div><div class="line">&#125;)();</div></pre></td></tr></table></figure>
+<p><strong>下面主要分析代码结构</strong></p>
+<h2 id="supportPostMessage变量"><a href="#supportPostMessage变量" class="headerlink" title="supportPostMessage变量"></a>supportPostMessage变量</h2><p>用来检测当前浏览器是否支持postMessage</p>
+<p>postMessage是HTML5引入的通信API，它可以避开同源策略的限制，实现安全的跨域通信</p>
+<p>向外界窗口发送消息</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">otherWindow.postMessage(message, targetOrigin);</div></pre></td></tr></table></figure>
+<ul>
+<li>otherWindow:  指目标窗口，也就是给哪个window发消息，是 window.frames 属性的成员或者由 window.open 方法创建的窗口</li>
+<li>message:  是要发送的消息，类型为 String、Object (IE8、9 不支持)，一般使用json数据</li>
+<li>targetOrigin:  是限定消息接收范围，协议+主机+端口号[+URL]，URL会被忽略，所以可以不写，不限制请使用 ‘*’</li>
+</ul>
+<p>接受信息的message事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> onmessage = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> data = event.data;</div><div class="line">    <span class="keyword">var</span> origin = event.origin;</div><div class="line">    <span class="comment">//do someing</span></div><div class="line">&#125;;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.addEventListener != <span class="string">'undefined'</span>) &#123;</div><div class="line">    <span class="built_in">window</span>.addEventListener(<span class="string">'message'</span>, onmessage, <span class="literal">false</span>);</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">window</span>.attachEvent != <span class="string">'undefined'</span>) &#123;</div><div class="line">    <span class="comment">//for ie</span></div><div class="line">    <span class="built_in">window</span>.attachEvent(<span class="string">'onmessage'</span>, onmessage);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>注意：ie6/7不支持postMessage，因此在ie6/7中跨域通信通常使用window.name</p>
+<p>window.name的美妙之处：name 值在不同的页面（甚至不同域名）加载后依旧存在，并且可以支持非常长的 name 值（2MB）</p>
+<p>window.navigator有与window.name类似的特性，而且可以保存回调方法</p>
+<p>MessengerJS的实现思路是高级浏览器使用postMessage，不支持postMessage的使用window.navigator来保存回调方法</p>
+<h2 id="Target类"><a href="#Target类" class="headerlink" title="Target类"></a>Target类</h2><p>消息类，发送执行者</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Target</span>(<span class="params">target, name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.target = target;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;</div><div class="line"></div><div class="line">Target.prototype.send = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;</div><div class="line">    <span class="comment">// 发送消息</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h2 id="Messenger类"><a href="#Messenger类" class="headerlink" title="Messenger类"></a>Messenger类</h2><p>信使类，创建多个消息对象，注册多个监听事件，每一个消息对象的广播消息会被这个信使类下面的所有监听事件接收到</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Messenger</span>(<span class="params">messengerName, projectName</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.targets = &#123;&#125;;</div><div class="line">    <span class="keyword">this</span>.name = messengerName;</div><div class="line">    <span class="keyword">this</span>.listenFunc = [];</div><div class="line">    <span class="keyword">this</span>.initListen();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// 添加一个消息对象</span></div><div class="line">Messenger.prototype.addTarget = <span class="function"><span class="keyword">function</span>(<span class="params">target, name</span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 初始化消息监听</span></div><div class="line">Messenger.prototype.initListen = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 监听消息</span></div><div class="line">Messenger.prototype.listen = <span class="function"><span class="keyword">function</span>(<span class="params">callback</span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 注销监听</span></div><div class="line">Messenger.prototype.clear = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">// 广播消息</span></div><div class="line">Messenger.prototype.send = <span class="function"><span class="keyword">function</span>(<span class="params">msg</span>)</span>&#123;&#125;;</div></pre></td></tr></table></figure>
+<p>实现逻辑是：</p>
+<ul>
+<li>initListen方法初始化，将generalCallback回调方法注册到message监听中</li>
+<li>addTarget将消息对象添加到targets对象中</li>
+<li>listen方法将监听方法添加到listenFunc数组中</li>
+<li>send方法执行每一个target对象的send方法</li>
+<li>target对象的send方法执行，触发了message监听，触发了generalCallback的执行，从而执行了listenFunc数组中的方法</li>
+</ul>
+<p>在postMessage的注册回调方法里加了一个回调方法组listenFunc</p>
+<p>在postMessage的监听触发方法外加了一层集体触发对象targets</p>
+<p>从而达到了广播的效果</p>
+<p>postMessage本身可以实现广播的效果，但是MessengerJS为了兼容，限制了postMessage的能力，自行实现了广播</p>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>MessengerJS来做iframe通信解决的最常见的问题是，在主页面为iframe留足高度</p>
+<p>parent页面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> messenger = <span class="keyword">new</span> Messenger(<span class="string">'parent'</span>);</div><div class="line">    <span class="keyword">var</span> iframe = <span class="built_in">document</span>.getElementById(<span class="string">'iframepage'</span>);</div><div class="line">    messenger.addTarget(iframe.contentWindow, <span class="string">'iframe'</span>);</div><div class="line"></div><div class="line">    messenger.listen(<span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line">        <span class="keyword">var</span> result = <span class="built_in">parseInt</span>(msg, <span class="number">10</span>) + <span class="number">20</span>;</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (result &lt; mainWindowHeight) &#123;</div><div class="line">            result = mainWindowHeight;</div><div class="line">        &#125;</div><div class="line">        $(<span class="string">'#iframepage'</span>).height(result);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>iframe页面</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// iframe跨域传数据</span></div><div class="line"><span class="keyword">var</span> messenger = <span class="keyword">new</span> Messenger(<span class="string">'iframe'</span>);</div><div class="line">messenger.addTarget(<span class="built_in">window</span>.parent, <span class="string">'parent'</span>); </div><div class="line"></div><div class="line"><span class="comment">// 跨域传main 高度</span></div><div class="line"><span class="keyword">var</span> height = $(<span class="string">'.main'</span>).height();</div><div class="line">messenger.targets[<span class="string">'parent'</span>].send(height);</div><div class="line"></div><div class="line">messenger.listen(<span class="function"><span class="keyword">function</span> (<span class="params">msg</span>) </span>&#123;</div><div class="line"></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>postMessage是一个用于安全的使用跨源通信的方法，帮助web开发回归正轨</p>
+<p>MessengerJS实现效果很好，即便做频繁的交互，也不会有明显的卡顿，不过时代在进步，以后可能会很少用到这样的兼容了</p>
+<p>官方博文看这里：<a href="https://github.com/biqing/MessengerJS" target="_blank" rel="external">MessengerJS</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+            <a href="/tags/iframe/" rel="tag">#iframe</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/chrome扩展的开发/" rel="next" title="chrome扩展的开发">
+                <i class="fa fa-chevron-left"></i> chrome扩展的开发
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/06/H5扇形/" rel="prev" title="H5扇形">
+                H5扇形 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/header.jpg"
+               alt="gxf" />
+          <p class="site-author-name" itemprop="name">gxf</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ggsoul" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/XuefGao" target="_blank" title="Weibo">
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/ggsoul" target="_blank" title="SegmentFault">
+                  
+                  SegmentFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gxf470001" target="_blank" title="Twitter">
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://searchp.cc/" title="searchpcc" target="_blank">searchpcc</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mrli.me/" title="Mr.li" target="_blank">Mr.li</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ycyx28.com/" title="Chao" target="_blank">Chao</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#supportPostMessage变量"><span class="nav-number">1.</span> <span class="nav-text">supportPostMessage变量</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Target类"><span class="nav-number">2.</span> <span class="nav-text">Target类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Messenger类"><span class="nav-number">3.</span> <span class="nav-text">Messenger类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用场景"><span class="nav-number">4.</span> <span class="nav-text">使用场景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gxf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("WQkR0jDl5lLEcptvei9NmDR0-gzGzoHsz", "QIOxQpiKaIR8UafqIHm73OK0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

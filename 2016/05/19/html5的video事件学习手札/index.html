@@ -1,0 +1,918 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="html5," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="为了监控移动端视频播放的情况，研究了一下 html5 &amp;lt;video&amp;gt; 标签的属性与事件触发，及其在各系统和各个浏览器的兼容情况">
+<meta name="keywords" content="html5">
+<meta property="og:type" content="article">
+<meta property="og:title" content="html5的video元素学习手札">
+<meta property="og:url" content="http://gaoxuefeng.com/2016/05/19/html5的video事件学习手札/index.html">
+<meta property="og:site_name" content="高雪峰的个人博客">
+<meta property="og:description" content="为了监控移动端视频播放的情况，研究了一下 html5 &amp;lt;video&amp;gt; 标签的属性与事件触发，及其在各系统和各个浏览器的兼容情况">
+<meta property="og:updated_time" content="2016-06-13T09:30:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="html5的video元素学习手札">
+<meta name="twitter:description" content="为了监控移动端视频播放的情况，研究了一下 html5 &amp;lt;video&amp;gt; 标签的属性与事件触发，及其在各系统和各个浏览器的兼容情况">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <meta name="baidu-site-verification" content="3YPbgeBMlS" />
+  <title> html5的video元素学习手札 | 高雪峰的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4c3782dc0cacd99020a13bb244258b4a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s11.cnzz.com/z_stat.php?id=1259006158&web_id=1259006158" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">高雪峰的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">只想走的更远一点</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-favorite">
+          <a href="/favorite" rel="section">
+            
+            最爱
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                html5的video元素学习手札
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-19T13:23:06+08:00" content="2016-05-19">
+              2016-05-19
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/work/" itemprop="url" rel="index">
+                    <span itemprop="name">work</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/19/html5的video事件学习手札/" class="leancloud_visitors" data-flag-title="html5的video元素学习手札">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>为了监控移动端视频播放的情况，研究了一下 html5 <code>&lt;video&gt;</code> 标签的属性与事件触发，及其在各系统和各个浏览器的兼容情况</p>
+<a id="more"></a>
+<h2 id="属性与事件"><a href="#属性与事件" class="headerlink" title="属性与事件"></a>属性与事件</h2><p>理解清楚属性和事件，才能更好的使用 video ，达到预期的效果，更好的检测视频播放的状况来做出分析和调整，这里仅列举了解到且大致理解的，更多相关后续补充</p>
+<h3 id="属性"><a href="#属性" class="headerlink" title="属性"></a>属性</h3><p><code>&lt;video&gt;</code> 标签嵌入到HTML文档中</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span> <span class="attr">autoplay</span>=<span class="string">"autoplay"</span> <span class="attr">controls</span>=<span class="string">""</span> <span class="attr">poster</span>=<span class="string">""</span> <span class="attr">preload</span>=<span class="string">"none"</span>&gt;</span><span class="tag">&lt;/<span class="name">video</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>初始化 <code>&lt;video&gt;</code> 标签时主要设置的属性</p>
+<ol>
+<li>src：要嵌到页面的视频的URL。可选；你也可以使用video块内的 <code>&lt;source&gt;</code> 元素来指定需要嵌到页面的视频</li>
+<li>autoplay：布尔属性；指定后，视频会马上自动开始播放，不会停下来等着数据载入结束</li>
+<li>controls：加上这个属性，Gecko 会提供用户控制，允许用户控制视频的播放，包括音量，跨帧，暂停/恢复播放</li>
+<li>poster：一个海报帧的URL，用于在用户播放或者跳帧之前展示。如果属性未指定，那么在第一帧可用之前什么都不会展示；之后第一帧就像海报帧一样展示</li>
+<li>preload：该枚举属性旨在告诉浏览器作者认为达到最佳的用户体验的方式是什么。可能是下列值之一：<ul>
+<li>none：提示作者认为用户不需要查看该视频，服务器也想要最小化访问流量；换句话说就是提示浏览器该视频不需要缓存</li>
+<li>metadata：提示尽管作者认为用户不需要查看该视频，不过抓取元数据（比如：长度）还是很合理的</li>
+<li>auto：用户需要这个视频优先加载；换句话说就是提示：如果需要的话，可以下载整个视频，即使用户并不一定会用它</li>
+<li>空字符串：也就代指 auto 值</li>
+</ul>
+</li>
+<li>buffered：这个属性可以读取到哪段时间范围内的媒体被缓存了。该属性包含了一个 TimeRanges 对象</li>
+<li>played：一个 TimeRanges 对象，指明了视频已经播放的所有范围</li>
+<li>loop：布尔属性；指定后，会在视频结尾的地方，自动返回视频开始的地方</li>
+<li>muted：布尔属性，指明了视频里的音频的默认设置。设置后，音频会初始化为静音。默认值是 false ,意味着视频播放的时候音频也会播放</li>
+<li>height：视频展示区域的高度，单位是 CSS 像素</li>
+<li>width：视频显示区域的宽度，单位是 CSS 像素</li>
+<li>crossorigin：该枚举属性指明抓取相关图片是否必须用到CORS（跨域资源共享）。 支持CORS的资源 可在 <code>&lt;canvas&gt;</code>元素中被重用，而不会被污染。允许的值如下：<ul>
+<li>anonymous：跨域请求会被执行，但是不发送凭证。</li>
+<li>use-credentials：跨域请求A cross-origin request会被执行，且凭证会被发送。</li>
+</ul>
+</li>
+</ol>
+<p>TimeRanges 对象表示事件段，比如，视频快进的时间段，有一个 length 属性，表示时间段的个数，有两个方法 start() 和 end() ，分别返回时间段开始的时间点和结束的时间点</p>
+<p>事件交互中主要使用的属性</p>
+<ol>
+<li>currentTime：播放进行到的时间点，单位为秒</li>
+<li>duration：视频总时长，单位为秒</li>
+</ol>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>还有更多事件api，这里只列举了试过的</p>
+<ol>
+<li>playing：在媒体开始播放时触发（不论是初次播放、在暂停后恢复、或是在结束后重新开始）</li>
+<li>ended：播放结束时触发</li>
+<li>pause：播放暂停时触发</li>
+<li>waiting：在一个待执行的操作（如回放）因等待另一个操作（如跳跃或下载）被延迟时触发</li>
+<li>timeupdate：元素的 currentTime 属性表示的时间已经改变</li>
+<li>seeking：    在跳跃操作开始时触发</li>
+<li>seeked：在跳跃操作完成时触发</li>
+<li>error：在发生错误时触发。元素的 error 属性会包含更多信息</li>
+<li>loadeddata： 媒体的第一帧已经加载完毕</li>
+</ol>
+<h2 id="监控指标"><a href="#监控指标" class="headerlink" title="监控指标"></a>监控指标</h2><ol>
+<li>播放：start：1（首次播放）2（重播）</li>
+<li>播放：end：1</li>
+<li>播放暂停：pause：1</li>
+<li>播放中止：pause：1</li>
+<li>快进/快退：Jump：1（快进）2（快退）</li>
+<li>错误：fail： 1（取回过程）；2（当下载时发生错误）；3（当解码时发生错误）；4（不支持音频/视频）</li>
+<li>播放等待： wait：1</li>
+<li>播放时长：totaltime：秒（包含重播）</li>
+</ol>
+<p>其中1，2，3，5，6，7都很好监控，对相应事件进行监听就可以了，这里主要讲下是怎么监控播放中止和播放时长的</p>
+<h2 id="播放中止"><a href="#播放中止" class="headerlink" title="播放中止"></a>播放中止</h2><p>具体场景是移动端浏览器切换tab导致的隐藏和用户按home键退出浏览器</p>
+<p>html5 提供了 Page Visibility API 来支持监听tab切换，与之对应新增了</p>
+<ul>
+<li>document.hidden 属性，它显示页面是否为用户当前观看的页面，值为 ture 或 false</li>
+<li>document.visibilityState 属性， visible 表示页面被展现， hidden 表示页面未被展现， prerender 表示页面在重新生成，用户不可见</li>
+<li>visibilitychange 事件，监听页面在 visible 与 hidden 之间的切换</li>
+</ul>
+<p>visibilitychange事件的具体使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> hidden;</div><div class="line"><span class="keyword">var</span> visibilityChange;</div><div class="line"><span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.hidden !== <span class="string">'undefined'</span>) &#123;</div><div class="line">    hidden = <span class="string">'hidden'</span>;</div><div class="line">    visibilityChange = <span class="string">'visibilitychange'</span>;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.mozHidden !== <span class="string">'undefined'</span>) &#123;</div><div class="line">    hidden = <span class="string">'mozHidden'</span>;</div><div class="line">    visibilityChange = <span class="string">'mozvisibilitychange'</span>;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.msHidden !== <span class="string">'undefined'</span>) &#123;</div><div class="line">    hidden = <span class="string">'msHidden'</span>;</div><div class="line">    visibilityChange = <span class="string">'msvisibilitychange'</span>;</div><div class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">document</span>.webkitHidden !== <span class="string">'undefined'</span>) &#123;</div><div class="line">    hidden = <span class="string">'webkitHidden'</span>;</div><div class="line">    visibilityChange = <span class="string">'webkitvisibilitychange'</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">document</span>.addEventListener(visibilityChange, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="built_in">document</span>[hidden]) &#123;</div><div class="line">        <span class="comment">// do something...</span></div><div class="line">    &#125;</div><div class="line">&#125;, <span class="literal">false</span>);</div></pre></td></tr></table></figure>
+<p>关于 visibilitychange 事件的兼容性，测试了两部手机，华为mt7 和 iphone6 ，兼容情况如下</p>
+<p>华为mt7</p>
+<ul>
+<li>qq浏览器：tab切换触发，home键退出触发</li>
+<li>uc浏览器：tab切换触发，home键退出触发（退出后进程继续在跑，其它浏览器进程被暂停）</li>
+<li>手机百度：tab切换不触发，home键退出不触发</li>
+</ul>
+<p>iphone6</p>
+<ul>
+<li>uc浏览器：tab切换触发，home键不触发</li>
+<li>百度浏览器：同上</li>
+<li>手机百度：同上</li>
+<li>Safari：tab切换触发，home键退出触发</li>
+</ul>
+<p>由于兼容问题，且各系统的各个浏览器基本在tab切换触发，home键退出触发的情况下触发pause事件，所以播放中止的日志依旧打印pause，如果后面没有继续操作则把这个pause日志当做播放中止</p>
+<p>页面刷新和浏览器tab被关闭的时候会触发 window.onunload ，也可以做为补充场景</p>
+<h2 id="播放时长"><a href="#播放时长" class="headerlink" title="播放时长"></a>播放时长</h2><p>起初的思路是获取到开始播放到停止播放的事件差，记下时间点使用了 currentTime 属性，主要实现在两方面</p>
+<ol>
+<li>playing 时记下时间点startT， pause 和 ended 和 seeked 时记下时间点endT，endT - startT 即播放时长</li>
+<li>seeked 时记下时间点startT， seeking 时记下时间点endT，endT - startT 即播放时长</li>
+</ol>
+<p>这个思路在 ios 下是看似没有问题的，但是 android 下确实不行，主要原因是 seeking 事件的监听没理解到位，seeking 事件触发点是用户目标跳跃到的位置，比如：视频播放在 0 秒点时，用户点击到了 60 秒点处，这是取到的 currentTime 就是 60 ，本来以为会是 0 ， ios 下看似没有问题是因为它的全屏播放模式下，进度条是要拖拽的，不能直接点击到某个点</p>
+<p>于是，使用 timeupdate 来获取 seeking 触发前的时间点，就可以获取到相对准确的播放时长了</p>
+<h2 id="error事件"><a href="#error事件" class="headerlink" title="error事件"></a>error事件</h2><p>监听 error 事件会返回 error.code 来标识错误类型：</p>
+<ul>
+<li>1 = MEDIA_ERR_ABORTED - 取回过程被用户中止</li>
+<li>2 = MEDIA_ERR_NETWORK - 当下载时发生错误</li>
+<li>3 = MEDIA_ERR_DECODE - 当解码时发生错误</li>
+<li>4 = MEDIA_ERR_SRC_NOT_SUPPORTED - 不支持音频/视频</li>
+</ul>
+<p>官网的解释是：</p>
+<ul>
+<li>MEDIA_ERR_ABORTED (numeric value 1)<blockquote>
+<p>The fetching process for the media resource was aborted by the user agent at the user’s request.<br>在取回资源过程中，被用户的操作中止（您中止了视频播放）</p>
+</blockquote>
+</li>
+<li>MEDIA_ERR_NETWORK (numeric value 2)<blockquote>
+<p>A network error of some description caused the user agent to stop fetching the media resource, after the resource was established to be usable.<br>因为一些网络问题导致的用户无法取回资源，前提是资源被确定为可用（网络问题导致视频下载中断）</p>
+</blockquote>
+</li>
+<li>MEDIA_ERR_DECODE (numeric value 3)<blockquote>
+<p>An error of some description occurred while decoding the media resource, after the resource was established to be usable.<br>解码资源时产生的问题，前提是资源被确定为可用（『a corruption problem（翻译不过来）』 或者 所使用的视频功能的浏览器不支持）</p>
+</blockquote>
+</li>
+<li>MEDIA_ERR_SRC_NOT_SUPPORTED (numeric value 4)<blockquote>
+<p>The media resource indicated by the src attribute was not suitable.<br>由src属性所指定的媒体资源不适合（视频无法加载，或因为服务器或网络故障，或格式不支持）</p>
+</blockquote>
+</li>
+</ul>
+<p>总结一下就是，1、2、3是在视频可用情况下因为外在因素导致的播放失败，4是可能因为资源本身有问题导致的播放失败（存在资源可播放也打印 error.code 为4的情况）</p>
+<h2 id="遇到的一些状况"><a href="#遇到的一些状况" class="headerlink" title="遇到的一些状况"></a>遇到的一些状况</h2><ul>
+<li>没有 <code>&lt;source&gt;</code> 元素且 src 属性为空时播放会触发 error 事件，状态码为4<blockquote>
+<p>解决：忽略 src 属性为空时的报错</p>
+</blockquote>
+</li>
+<li>播放结束会触发暂停<blockquote>
+<p>解决：声明状态变量，随着具体操作更新状态，播放状态下才会执行暂停操作，结束状态不执行</p>
+</blockquote>
+</li>
+<li>播放结束后重播会触发 seeking 和 seeked ，一般浏览器触发一次， android 下uc浏览器触发多次<blockquote>
+<p>解决：同上</p>
+</blockquote>
+</li>
+<li>一些浏览器监听不到 seeking 和 seeked<blockquote>
+<p>解决：在 timeupdate 里来分析猜测用户行为</p>
+</blockquote>
+</li>
+<li>一些浏览器存在多次连续触发 seeking + seeked 的情况<blockquote>
+<p>解决：时间戳 + 节流 等待最后一次</p>
+</blockquote>
+</li>
+<li>seeking 和 seeked 与 timeupdate 需要保证不会同时执行<blockquote>
+<p>解决：监听到 seeking 触发，就不再执行 timeupdate 模拟<br>走过的坑：我曾设想在播放时直接判断出是否支持 seeking ，方式是播放时设置 currentTime 为 0.01 ，然后检测 seeking 属性，后来发现浏览器在这样设置后的 seeking 属性值不一致</p>
+</blockquote>
+</li>
+<li>个别浏览器播放状态下不触发 seeking 和 seeked ，但是在重播的时候触发<blockquote>
+<p>解决：声明状态变量，随着具体操作更新状态，结束状态不监听 seeking 触发</p>
+</blockquote>
+</li>
+</ul>
+<p>提示一下，遇到浏览器表现不同的情况，千万不要尝试对各个浏览器适配 hack ，没法根本上解决问题，而我的做法是声明状态变量，随着具体操作更新状态，在正确的状态下才进行操作，通过播放状态来规范事件的触发时机</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>欲先善其事必先利其器，遇到没搞过的技术，一定要先测试一遍 api ，不然太浪费时间，学习内容来源</p>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/Events/Media_events" target="_blank" rel="external">媒体相关事件</a></p>
+<p>希望能多提宝贵建议，帮助笔者继续优化</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html5/" rel="tag">#html5</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/13/八皇后问题的JavaScript解法/" rel="next" title="八皇后问题的JavaScript解法">
+                <i class="fa fa-chevron-left"></i> 八皇后问题的JavaScript解法
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/06/12/小知识点（一）/" rel="prev" title="小知识点（一）">
+                小知识点（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/header.jpg"
+               alt="gxf" />
+          <p class="site-author-name" itemprop="name">gxf</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ggsoul" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/XuefGao" target="_blank" title="Weibo">
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/ggsoul" target="_blank" title="SegmentFault">
+                  
+                  SegmentFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gxf470001" target="_blank" title="Twitter">
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://searchp.cc/" title="searchpcc" target="_blank">searchpcc</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mrli.me/" title="Mr.li" target="_blank">Mr.li</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ycyx28.com/" title="Chao" target="_blank">Chao</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#属性与事件"><span class="nav-number">1.</span> <span class="nav-text">属性与事件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#属性"><span class="nav-number">1.1.</span> <span class="nav-text">属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">1.2.</span> <span class="nav-text">事件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#监控指标"><span class="nav-number">2.</span> <span class="nav-text">监控指标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放中止"><span class="nav-number">3.</span> <span class="nav-text">播放中止</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#播放时长"><span class="nav-number">4.</span> <span class="nav-text">播放时长</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#error事件"><span class="nav-number">5.</span> <span class="nav-text">error事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#遇到的一些状况"><span class="nav-number">6.</span> <span class="nav-text">遇到的一些状况</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gxf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("WQkR0jDl5lLEcptvei9NmDR0-gzGzoHsz", "QIOxQpiKaIR8UafqIHm73OK0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

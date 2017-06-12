@@ -1,0 +1,848 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="html5,javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="使用H5 canvas绘制的可交互扇形">
+<meta name="keywords" content="html5,javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="H5扇形">
+<meta property="og:url" content="http://gaoxuefeng.com/2016/05/06/H5扇形/index.html">
+<meta property="og:site_name" content="高雪峰的个人博客">
+<meta property="og:description" content="使用H5 canvas绘制的可交互扇形">
+<meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/caniuse1.png">
+<meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/circle3.png">
+<meta property="og:updated_time" content="2016-06-15T12:15:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="H5扇形">
+<meta name="twitter:description" content="使用H5 canvas绘制的可交互扇形">
+<meta name="twitter:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/caniuse1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <meta name="baidu-site-verification" content="3YPbgeBMlS" />
+  <title> H5扇形 | 高雪峰的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4c3782dc0cacd99020a13bb244258b4a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s11.cnzz.com/z_stat.php?id=1259006158&web_id=1259006158" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">高雪峰的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">只想走的更远一点</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-favorite">
+          <a href="/favorite" rel="section">
+            
+            最爱
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                H5扇形
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T23:18:52+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/create/" itemprop="url" rel="index">
+                    <span itemprop="name">create</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/06/H5扇形/" class="leancloud_visitors" data-flag-title="H5扇形">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>使用H5 canvas绘制的可交互扇形</p>
+<a id="more"></a>
+<h2 id="requestAnimationFrame"><a href="#requestAnimationFrame" class="headerlink" title="requestAnimationFrame()"></a>requestAnimationFrame()</h2><p><strong>现有动画实现方式的不足</strong></p>
+<p><code>setTimeout</code>和<code>setInterval</code>都不十分精确。为它们传入的第二个参数，实际上只是指定了把动画代码添加到浏览器UI线程队列中以等待执行的时间。如果队列前面已经加入了其他任务，那动画代码就要等前面的任务完成后再执行。</p>
+<p>css3动画有局限性，比如不是所有属性都能参与动画、动画缓动效果太少、无法完全控制动画过程等。</p>
+<p><strong>requestAnimationFrame()的优势</strong></p>
+<p>它告诉浏览器某些JavaScript代码将要执行动画，浏览器可以再运行某些代码后进行适当的优化，十分精确，没有css3的局限问题，可对所有属性操作，动画缓动效果可以依据缓动公式，十分丰富。</p>
+<p><code>requestAnimationFrame()</code>就是为了绘制canvas而生，再合适不过了。</p>
+<p><strong>代码实现</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> requestAnimationFrame = <span class="built_in">window</span>.requestAnimationFrame ||</div><div class="line">						<span class="built_in">window</span>.webkitRequestAnimationFrame ||</div><div class="line">						<span class="built_in">window</span>.mozRequestAnimationFrame ||</div><div class="line">						<span class="built_in">window</span>.oRequestAnimationFrame ||</div><div class="line">						<span class="built_in">window</span>.msRequestAnimationFrame;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">updateProgress</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> div = <span class="built_in">document</span>.getElementById(<span class="string">"status"</span>);</div><div class="line">	div.style.width = (<span class="built_in">parseInt</span>(div.style.width, <span class="number">10</span>) + <span class="number">5</span>) + <span class="string">"%"</span>;</div><div class="line"></div><div class="line">	<span class="keyword">if</span>(div.style.left != <span class="string">"100%"</span>) &#123;</div><div class="line">		requestAnimationFrame(uploadProgress);</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">requestAnimationFrame(uploadProgress);</div></pre></td></tr></table></figure>
+<p>这里展示高级浏览器版本，兼容版请自行google。</p>
+<p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/caniuse1.png" alt="caniuse1"></p>
+<h2 id="easing缓冲动画"><a href="#easing缓冲动画" class="headerlink" title="easing缓冲动画"></a>easing缓冲动画</h2><p>当初学习的时候的文章找不到了，大致的理解是：时间间隔一直，每个间隔运行的距离不同。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//iteration当前执行次数</span></div><div class="line"><span class="comment">//startValue执行开始的位置</span></div><div class="line"><span class="comment">//changeValue需要执行到的最终位置</span></div><div class="line"><span class="comment">//totalIterations需要执行的总次数</span></div><div class="line"></div><div class="line">easing.easeOutBounce(iteration, startValue, changeValue, totalIterations);</div></pre></td></tr></table></figure>
+<p>看上面的参数能了解到，easing产生的是与直线的偏移，iteration表示的是偏移的延续，totalIterations表示的动画进行速度，startValue表示的是偏移的起始，changeValue表示的是偏移的量。</p>
+<hr>
+<h2 id="canvas方法"><a href="#canvas方法" class="headerlink" title="canvas方法"></a>canvas方法</h2><p>用到的一些canvas方法：</p>
+<ul>
+<li>fillRect()：在画布上绘制的矩形会填充指定颜色，由fillStyle属性指定</li>
+<li>strokeRect()：在画布上绘制的矩形会使用指定的颜色描边，由strokeStyle属性指定</li>
+<li>clearRect()：清除画布上的矩形区域</li>
+<li>arc(x, y, radius, startAngle, endAngle, counterclockwise)：以(x, y)为圆心绘制一条弧线，弧线半径为radius，起始和结束角度(用弧度表示)分别为startAngle和endAngle。最后一个参数表示是否按逆时针方向计算，值为false表示顺时针方向计算</li>
+<li>lineTo(x, y)：从上一点开始绘制一条直线，到(x, y)为止</li>
+<li>drawImage(image, x, y, width, height)：绘制图像到画布上，参数有3种，不一一介绍</li>
+<li>save()与restore()：保存上下文环境，操作…，恢复上次保存的上下文环境</li>
+</ul>
+<p>这里只用到了这些，其他方法以后再介绍</p>
+<hr>
+<h2 id="css3-3D-Transform"><a href="#css3-3D-Transform" class="headerlink" title="css3 3D Transform"></a>css3 3D Transform</h2><p>为了能更酷炫点，再加上css3的3D翻转效果</p>
+<ul>
+<li>transform-style：指定嵌套元素如何在3D空间中呈现。它主要有两个属性值：flat和preserve-3d，它本身需要设置在父元素中，如果设置了transform-style值为preserve-3d，就不能设置overflow值为hidden</li>
+<li>perspective：设置查看者的位置，并将可视内容映射到一个视锥上，继而投到一个2D视平面上，就是视距</li>
+<li>perspective-origin：决定perspective属性的源点角度</li>
+<li>transition：过渡效果</li>
+<li>translateZ()：使一个元素在三维空间移动</li>
+<li>rotateY()：指定一个元素围绕Y轴旋转，旋转的量被定义为指定的角度；如果值为正值，元素围绕Y轴顺时针旋转；反之，如果值为负值，元素围绕Y轴逆时针旋转</li>
+</ul>
+<p>这里只用到了这些，不做详细介绍，太多了…</p>
+<p>准备工作先进行到这里，接下来进行本例的讲解。</p>
+<hr>
+<h2 id="具体实现"><a href="#具体实现" class="headerlink" title="具体实现"></a>具体实现</h2><p><strong>参数数组</strong></p>
+<ul>
+<li>value：所占比重，百分之几</li>
+<li>color：选中时颜色</li>
+<li>highlight：选中时鼠标悬停时颜色</li>
+<li>grey：未选中时颜色</li>
+<li>greylight：未选中时鼠标悬停时颜色</li>
+</ul>
+<p>我自己设置传入的参数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> pieData = [</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.32</span>,</div><div class="line">		<span class="attr">color</span>:<span class="string">"#E8264b"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF0049"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#5B5B5B"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#333"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.13</span>,</div><div class="line">		<span class="attr">color</span>: <span class="string">"#E64261"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF5A5E"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#666"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#333"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.13</span>,</div><div class="line">		<span class="attr">color</span>: <span class="string">"#E05070"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF5A5E"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#727272"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#444"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.1</span>,</div><div class="line">		<span class="attr">color</span>: <span class="string">"#E05D7D"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF5A5E"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#7F7F7F"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#444"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.09</span>,</div><div class="line">		<span class="attr">color</span>: <span class="string">"#DB7691"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF5A5E"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#8E8E8E"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#666"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.09</span>,</div><div class="line">		<span class="attr">color</span>: <span class="string">"#D6829C"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF5A5E"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#999"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#666"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.07</span>,</div><div class="line">		<span class="attr">color</span>: <span class="string">"#D497AA"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF5A5E"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#A5A5A5"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#666"</span></div><div class="line">	&#125;,</div><div class="line">	&#123;</div><div class="line">		<span class="attr">value</span>: <span class="number">0.07</span>,</div><div class="line">		<span class="attr">color</span>: <span class="string">"#D497AA"</span>,</div><div class="line">		<span class="attr">highlight</span>: <span class="string">"#FF5A5E"</span>,</div><div class="line">		<span class="attr">grey</span>: <span class="string">"#A5A5A5"</span>,</div><div class="line">		<span class="attr">greylight</span>: <span class="string">"#666"</span></div><div class="line">	&#125;</div><div class="line">];</div></pre></td></tr></table></figure>
+<p><strong>绘制圆盘</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawing</span> (<span class="params">ctx, i</span>) </span>&#123;<span class="comment">//传入canvas的context</span></div><div class="line"></div><div class="line">    startValue = endValue;<span class="comment">//每个扇形开始绘制的位置</span></div><div class="line"></div><div class="line">	endValue = startValue + <span class="built_in">Math</span>.PI * pieData[i].value * <span class="number">2</span>;<span class="comment">//每个扇形结束绘制的位置</span></div><div class="line"></div><div class="line">	ctx.beginPath();<span class="comment">//开始绘制</span></div><div class="line">	</div><div class="line">	ctx.arc(<span class="number">225</span>, <span class="number">225</span>, radiusBig, startValue, endValue, <span class="literal">false</span>);<span class="comment">//绘制扇形的弧线</span></div><div class="line">	</div><div class="line">	ctx.lineTo(<span class="number">225</span>,<span class="number">225</span>);<span class="comment">//绘制扇形链接圆心的两条直线</span></div><div class="line">	</div><div class="line">	ctx.lineWidth = <span class="number">2</span>;<span class="comment">//设置线的宽度</span></div><div class="line">	</div><div class="line">	ctx.closePath();<span class="comment">//结束绘制</span></div><div class="line">	</div><div class="line">	ctx.fillStyle = pieData[i].grey;<span class="comment">//设置扇形颜色</span></div><div class="line">	</div><div class="line">	ctx.strokeStyle = <span class="string">"#fff"</span>;<span class="comment">//设置线的颜色</span></div><div class="line">	</div><div class="line">	ctx.fill();<span class="comment">//填充</span></div><div class="line">	</div><div class="line">	ctx.stroke();<span class="comment">//描边</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>绘制文字及其位置</strong></p>
+<p>putIcon()用来计算绘制位置，r为半径，&theta;为角度，x = r + r <em> sin&theta;， y = r - r </em> cos&theta;，left和top的值为x和y。</p>
+<p>(先写在这，本人不会画图，等学会再来画)</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawThing</span>(<span class="params">ctx</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> i = <span class="number">0</span>;</div><div class="line">	<span class="keyword">var</span> icon = <span class="literal">undefined</span>;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>( ; i &lt; pieLen ; i++ ) &#123;</div><div class="line">		drawing(ctx, i);</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">for</span>(i = <span class="number">0</span> ; i &lt; pieLen ; i++ ) &#123;</div><div class="line">		<span class="keyword">if</span>( !effects[i].clicked ) &#123;</div><div class="line">			icon = putIcon(i, <span class="number">225</span>, <span class="number">140</span>);</div><div class="line">			ctx.font = <span class="string">"bold 30px Arial"</span>;</div><div class="line">			ctx.textAlign = <span class="string">"center"</span>;</div><div class="line">			ctx.fillStyle = <span class="string">"#fff"</span>;</div><div class="line">			ctx.fillText(i + <span class="number">1</span>, icon.x, icon.y);</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">putIcon</span>(<span class="params">count, radiusW, radiusN</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> values = </div><div class="line">		angle = </div><div class="line">		i = <span class="number">0</span>;</div><div class="line"></div><div class="line">	<span class="keyword">for</span>( ; i &lt; count; i++) &#123;</div><div class="line">		values += pieData[i].value;</div><div class="line">	&#125;</div><div class="line">	angle = <span class="built_in">Math</span>.PI * <span class="number">2</span> * (values + pieData[count].value / <span class="number">2</span>);</div><div class="line"></div><div class="line">	<span class="keyword">return</span> &#123;</div><div class="line">		<span class="attr">x</span>: <span class="built_in">Math</span>.floor(radiusW + <span class="built_in">Math</span>.sin(angle) * radiusN),</div><div class="line">		<span class="attr">y</span>: <span class="built_in">Math</span>.floor(radiusW - <span class="built_in">Math</span>.cos(angle) * radiusN)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>确定交互区域</strong></p>
+<p>确定交互区域本人的思路是获取鼠标在视口上的(x ,y)，再将这个点是否是可交互区域，能耗可能会比较大，没想到更好的做法，不过看到css3的clip-path属性可以实现类似效果，之后会研究下。</p>
+<p>首先确定点击区域为外层大圆与内层小圆之间，公式：(x - r) <em> (x - r) + (y - r) </em> (y - r) = r * r;</p>
+<p>直线方程：(x - x1)/(x2 - x1) = (y - y1)/(y2 - y1);</p>
+<p>两点即可判断一条直线，先确定圆心点(r, r)，再根据角度确定直线与圆交点(r + r <em> sin&theta;, y = r - r </em> cos&theta;)</p>
+<p>得到的直线方程为：y = (x - r) <em> (-r </em> cos&theta;) / (r * sin&theta;) + r;</p>
+<p>相邻两条直线建立二元一次不等式组，即可确定中间区域；</p>
+<p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/circle3.png" alt="circle3"></p>
+<p><strong>动画缓动</strong></p>
+<p>将easing与requestAnimationFrame()的结合使用，这是实现掉落效果的动画</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">clickThing</span> (<span class="params">ctx, i</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> iteration = <span class="number">0</span>;</div><div class="line">	<span class="keyword">var</span> totalIterations = <span class="number">30</span>;</div><div class="line">	<span class="keyword">var</span> backX, backY;</div><div class="line">	<span class="keyword">var</span> icon = putIcon(i, <span class="number">225</span>, <span class="number">140</span>, <span class="literal">true</span>);</div><div class="line">	<span class="keyword">var</span> ty = icon.y - <span class="number">25</span>;</div><div class="line">	<span class="comment">//立即执行的递归方法</span></div><div class="line">	(<span class="function"><span class="keyword">function</span> <span class="title">miniIcon</span> (<span class="params"></span>) </span>&#123;</div><div class="line">		ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, <span class="number">500</span>, <span class="number">500</span>);</div><div class="line">		backY = easing.easeOutBounce(iteration, ty, <span class="number">25</span>, totalIterations);</div><div class="line">		ctx.font = <span class="string">"bold 30px Arial"</span>;</div><div class="line">		ctx.textAlign = <span class="string">"center"</span>;</div><div class="line">		ctx.fillStyle = <span class="string">"#fff"</span>;</div><div class="line">		ctx.fillText(i + <span class="number">1</span>, icon.x, backY);</div><div class="line">		<span class="keyword">if</span>(iteration &lt; totalIterations) &#123;</div><div class="line">			iteration++;</div><div class="line">			requestAnimationFrame(<span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">				miniIcon();</div><div class="line">			&#125;);</div><div class="line">		&#125;</div><div class="line">	&#125;)();</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>使用css3实现3D翻转效果</strong></p>
+<p>最外层设置视距perspective: 2000px;perspective-origin:right top;<br>父级设置transition: all 0.7s ease-out;transform-style: preserve-3d;子级设置left和top为自身高宽的一半，使圆心位置为翻转中心点,back-c为背面，front-c为正面，改变rotatey(0deg)为rotatey(-180deg)表示从正面翻转180度到背面，反之亦然，translateZ()在这里用来表示层叠关系，一层盖在另一层上面。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="selector-class">.wrap</span> &#123;</div><div class="line">	<span class="attribute">perspective</span>: <span class="number">2000px</span>;</div><div class="line">	<span class="attribute">perspective-origin</span>:right top;</div><div class="line">	<span class="attribute">position</span>: relative;</div><div class="line">	<span class="attribute">width</span>: <span class="number">450px</span>;</div><div class="line">	<span class="attribute">height</span>: <span class="number">450px</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.wrap</span> <span class="selector-class">.wrap-box</span> &#123;</div><div class="line">	<span class="attribute">transition</span>: all <span class="number">0.7s</span> ease-out;</div><div class="line">	<span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">top</span>: <span class="number">50%</span>;</div><div class="line">	<span class="attribute">left</span>: <span class="number">50%</span>;</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#back-c</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">top</span>: -<span class="number">225px</span>;</div><div class="line">	<span class="attribute">left</span>: -<span class="number">225px</span>;</div><div class="line">	<span class="attribute">transform</span>: <span class="built_in">translateZ</span>(1px) <span class="built_in">rotatey</span>(0deg);</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#white-c</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">top</span>: -<span class="number">225px</span>;</div><div class="line">	<span class="attribute">left</span>: -<span class="number">225px</span>;</div><div class="line">	<span class="attribute">transform</span>: <span class="built_in">translateZ</span>(-2px) <span class="built_in">rotatey</span>(0deg);</div><div class="line">&#125;</div><div class="line"><span class="selector-id">#front-c</span> &#123;</div><div class="line">	<span class="attribute">position</span>: absolute;</div><div class="line">	<span class="attribute">top</span>: -<span class="number">225px</span>;</div><div class="line">	<span class="attribute">left</span>: -<span class="number">225px</span>;</div><div class="line">	<span class="attribute">transform</span>: <span class="built_in">translateZ</span>(-1px) <span class="built_in">rotatey</span>(-180deg);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><strong>html内容</strong></p>
+<p>写了很多canvas，white-c是翻转之后盖在上面的白色小圆，每次绘制都要画一次，所以拿出来减少能耗，text-c也是出于这个原因，text-c用来绘制小动画，line-c是拿出来当触发器用的，没必要单拎出来，只是想区分用途才拿出来的。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap"</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrap-box"</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"back-c"</span> <span class="attr">height</span>=<span class="string">"450"</span> <span class="attr">width</span>=<span class="string">"450"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"front-c"</span> <span class="attr">height</span>=<span class="string">"450"</span> <span class="attr">width</span>=<span class="string">"450"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"white-c"</span> <span class="attr">height</span>=<span class="string">"450"</span> <span class="attr">width</span>=<span class="string">"450"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"text-c"</span> <span class="attr">height</span>=<span class="string">"450"</span> <span class="attr">width</span>=<span class="string">"450"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"line-c"</span> <span class="attr">height</span>=<span class="string">"450"</span> <span class="attr">width</span>=<span class="string">"450"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>花了点时间看了下自己的代码，找寻下迷失的自己，继续启程。</p>
+<hr>
+<p>感兴趣的看官点击这里 <a href="http://pro-circle-35a04.coding.io/" target="_blank" rel="external">coding:circle</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/html5/" rel="tag">#html5</a>
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/messengerjs iframe 跨域传数据/" rel="next" title="messengerjs iframe 跨域传数据">
+                <i class="fa fa-chevron-left"></i> messengerjs iframe 跨域传数据
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/06/jquery插件开发相关/" rel="prev" title="jquery插件开发相关">
+                jquery插件开发相关 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/header.jpg"
+               alt="gxf" />
+          <p class="site-author-name" itemprop="name">gxf</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ggsoul" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/XuefGao" target="_blank" title="Weibo">
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/ggsoul" target="_blank" title="SegmentFault">
+                  
+                  SegmentFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gxf470001" target="_blank" title="Twitter">
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://searchp.cc/" title="searchpcc" target="_blank">searchpcc</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mrli.me/" title="Mr.li" target="_blank">Mr.li</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ycyx28.com/" title="Chao" target="_blank">Chao</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#requestAnimationFrame"><span class="nav-number">1.</span> <span class="nav-text">requestAnimationFrame()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#easing缓冲动画"><span class="nav-number">2.</span> <span class="nav-text">easing缓冲动画</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#canvas方法"><span class="nav-number">3.</span> <span class="nav-text">canvas方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#css3-3D-Transform"><span class="nav-number">4.</span> <span class="nav-text">css3 3D Transform</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#具体实现"><span class="nav-number">5.</span> <span class="nav-text">具体实现</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gxf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("WQkR0jDl5lLEcptvei9NmDR0-gzGzoHsz", "QIOxQpiKaIR8UafqIHm73OK0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

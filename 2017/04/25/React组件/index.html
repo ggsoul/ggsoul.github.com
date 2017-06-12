@@ -1,0 +1,900 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="react," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Components用来把UI拆分成独立的，可重复使用的部分，然后做不同的考量。React.Component由React提供。">
+<meta name="keywords" content="react">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React组件">
+<meta property="og:url" content="http://gaoxuefeng.com/2017/04/25/React组件/index.html">
+<meta property="og:site_name" content="高雪峰的个人博客">
+<meta property="og:description" content="Components用来把UI拆分成独立的，可重复使用的部分，然后做不同的考量。React.Component由React提供。">
+<meta property="og:updated_time" content="2017-05-05T08:09:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React组件">
+<meta name="twitter:description" content="Components用来把UI拆分成独立的，可重复使用的部分，然后做不同的考量。React.Component由React提供。">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <meta name="baidu-site-verification" content="3YPbgeBMlS" />
+  <title> React组件 | 高雪峰的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4c3782dc0cacd99020a13bb244258b4a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s11.cnzz.com/z_stat.php?id=1259006158&web_id=1259006158" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">高雪峰的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">只想走的更远一点</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-favorite">
+          <a href="/favorite" rel="section">
+            
+            最爱
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                React组件
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-25T19:26:07+08:00" content="2017-04-25">
+              2017-04-25
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/reprint/" itemprop="url" rel="index">
+                    <span itemprop="name">reprint</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/04/25/React组件/" class="leancloud_visitors" data-flag-title="React组件">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Components用来把UI拆分成独立的，可重复使用的部分，然后做不同的考量。<code>React.Component</code>由<code>React</code>提供。</p>
+<a id="more"></a>
+<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p><code>React.Component</code>是一个抽象的基类，没有直接有意义的参考。通常用来定义有一个<code>render</code>方法的子类。</p>
+<p>一个简洁的组件:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeting</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  render() &#123;</div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果没有使用ES6，可以使用<code>create-react-class</code>模块来代替。</p>
+<h3 id="组件生命周期"><a href="#组件生命周期" class="headerlink" title="组件生命周期"></a>组件生命周期</h3><p>每一个组件都有一些生命周期方法，可以重写这些方法来实现在特定时间点的处理。有 <strong><code>will</code></strong> 前缀的方法是在某事发生前，有 <strong><code>did</code></strong> 前缀的方法是在某事发生后。</p>
+<h4 id="装载"><a href="#装载" class="headerlink" title="装载"></a>装载</h4><p>组件实例创建并插入到<code>DOM</code>中时会调用这些方法：</p>
+<ul>
+<li><code>constructor()</code></li>
+<li><code>componentWillMount()</code></li>
+<li><code>render()</code></li>
+<li><code>componentDidMount()</code></li>
+</ul>
+<h4 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h4><p><code>props</code>和<code>state</code>的改变会导致更新。组件被重绘的时候会调用这些方法：</p>
+<ul>
+<li><code>componentWillReceiveProps()</code></li>
+<li><code>shouldComponentUpdate()</code></li>
+<li><code>componentWillUpdate()</code></li>
+<li><code>render()</code></li>
+<li><code>componentDidUpdate()</code></li>
+</ul>
+<h4 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h4><p>从<code>DOM</code>中移除组件时会调用这个方法：</p>
+<ul>
+<li><code>componentWillUnmount()</code></li>
+</ul>
+<h3 id="其它APIs"><a href="#其它APIs" class="headerlink" title="其它APIs"></a>其它APIs</h3><p>每个组件也提供了一些其它APIs：</p>
+<ul>
+<li><code>setState()</code></li>
+<li><code>forceUpdate()</code></li>
+</ul>
+<h3 id="类属性"><a href="#类属性" class="headerlink" title="类属性"></a>类属性</h3><ul>
+<li><code>defaultProps</code></li>
+<li><code>displayName</code></li>
+</ul>
+<h3 id="实例属性"><a href="#实例属性" class="headerlink" title="实例属性"></a>实例属性</h3><ul>
+<li><code>props</code></li>
+<li><code>state</code></li>
+</ul>
+<hr>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><h3 id="render"><a href="#render" class="headerlink" title="render()"></a><code>render()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">render()</div></pre></td></tr></table></figure>
+<p>组件中一定要有<code>render()</code>方法。</p>
+<p>被调用时会检查<code>this.props</code>和<code>this.state</code>来返回一个<code>React</code>原件。这个原件也可以是一个原生<code>DOM</code>组件的画像，比如<code>&lt;div /&gt;</code>，或者自定义的综合组件。</p>
+<p>如果不想要渲染任何东西，可以直接返回<code>null</code>或者<code>false</code>。这时调用<code>ReactDOM.findDOMNode(this)</code>也会返回<code>null</code>。</p>
+<p><code>render()</code>方法应该是纯净的，每次被调用是都应该返回相同的结果，不应该在方法里修改组件状态，或者与浏览器有直接交互。如果想要和浏览器交互，在<code>componentDidMount()</code>或者其它声明周期中完成你的工作。保持<code>render()</code>的纯净使组件更容易理解。</p>
+<blockquote>
+<p>Note</p>
+<p>如果<code>shouldComponentUpdate()</code>返回false，<code>render()</code>不会被执行</p>
+</blockquote>
+<hr>
+<h3 id="constructor-NaN"><a href="#constructor-NaN" class="headerlink" title="constructor()"></a><code>constructor()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(props)</div></pre></td></tr></table></figure>
+<p><code>React</code>组件装载之前会执行构造方法。在子类中执行构造方法时，应该在其它声明的上方执行<code>super(props)</code>。需要注意的是，构造方法中的<code>this.props</code>会变成<code>undefined</code>。</p>
+<p>在构造方法中初始化<code>state</code>很合适。如果不初始化<code>state</code>也不绑定方法，那不需要在组件中实现构造方法。</p>
+<p>基于<code>props</code>初始化<code>state</code>是可以的。这些初始有效的<code>props</code>，可以直接设置到<code>state</code>中。下面是一个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">constructor</span>(props) &#123;</div><div class="line">  <span class="keyword">super</span>(props);</div><div class="line">  <span class="keyword">this</span>.state = &#123;</div><div class="line">    <span class="attr">color</span>: props.initialColor</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>需要注意的是，<code>state</code>不会随着<code>props</code>及时更新。可以用<code>lift the state up</code>来代替同步更新<code>props</code>给<code>state</code>。</p>
+<p>如果想要使用<code>props</code>设置<code>state</code>的值，可以使用<code>componentWillReceiveProps(nextProps)</code>来同步更新<code>state</code>。但是<code>lift the state up</code>更简单而且能避免错误。</p>
+<p><code>lift the state up</code>指的是把几个子类的<code>state</code>提升到他们最临近的父级里面，然后通过父级接收子类事件统一处理后，用<code>props</code>的方式再分发给子类。</p>
+<hr>
+<h3 id="componentWillMount"><a href="#componentWillMount" class="headerlink" title="componentWillMount()"></a><code>componentWillMount()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillMount()</div></pre></td></tr></table></figure>
+<p><code>componentWillMount()</code>是在首次装载发生之前立即调用。在<code>render()</code>之前调用，因此在这个方法里同步设置<code>state</code>不会触发重绘。避免在这个方法里引入任何副作用或者订阅。</p>
+<p>这只是一个声明周期钩子。通常推荐使用<code>constructor()</code>。</p>
+<hr>
+<h3 id="componentDidMount"><a href="#componentDidMount" class="headerlink" title="componentDidMount()"></a><code>componentDidMount()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentDidMount()</div></pre></td></tr></table></figure>
+<p><code>componentDidMount()</code>是在首次装载完成之后立即被调用。这里获取<code>DOM</code>元素最合适。如果有从远端请求数据的需求，可以在这里初始化网络请求。在这里设置<code>state</code>会触发重绘。</p>
+<hr>
+<h3 id="componentWillReceiveProps"><a href="#componentWillReceiveProps" class="headerlink" title="componentWillReceiveProps()"></a><code>componentWillReceiveProps()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillReceiveProps(nextProps)</div></pre></td></tr></table></figure>
+<p><code>componentWillReceiveProps()</code>是在更新属性准备重绘之前调用。如果你需要根据新的<code>props</code>来修改<code>state</code>，你可以拿比较<code>this.props</code>和<code>nextProps</code>后的结果交给<code>this.setState()</code>来完成<code>state</code>的转换。</p>
+<p>注意<code>props</code>没有改变的时候也会触发该方法，所以如果只是想处理改变，那请确保比较了当前值和最新值。父组件可能会导致组件重绘。</p>
+<p>首次装载时不会调用<code>componentWillReceiveProps</code>。如果组件的<code>props</code>更新会调用这个方法。通常调用<code>this.setState</code>不会触发<code>componentWillReceiveProps</code>。</p>
+<hr>
+<h3 id="shouldComponentUpdate"><a href="#shouldComponentUpdate" class="headerlink" title="shouldComponentUpdate()"></a><code>shouldComponentUpdate()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">shouldComponentUpdate(nextProps, nextState)</div></pre></td></tr></table></figure>
+<p>使用<code>shouldComponentUpdate()</code>是为了让<code>React</code>知道当前<code>props</code>或<code>state</code>的更新是否影响到组件的输出。默认是每次<code>state</code>的更新都会重绘，多数情况下应该依靠默认行为。</p>
+<p><code>shouldComponentUpdate()</code>是在新的<code>props</code>或<code>state</code>被接收准备重绘之前被调用。默认返回<code>true</code>。首次装载或使用<code>forceUpdate()</code>时，该方法不被调用。</p>
+<p>如果子组件的<code>state</code>改变了，那即便父组件的该方法返回<code>false</code>，子组件依旧会重绘。</p>
+<p>如果<code>shouldComponentUpdate()</code>返回<code>false</code>，那么<code>componentWillUpdate()</code>、<code>render()</code>和<code>componentDidUpdate()</code>都不会被调用。需要注意的是，<code>React</code>在未来可能会对待<code>shouldComponentUpdate()</code>作为一种暗示，为非一个严格的指令，返回<code>false</code>也会重绘组件。</p>
+<p>如果你确定特定组件在解析时很慢，可以换用继承<code>React.PureComponent</code>，<code>React.PureComponent</code>没有实现浅比较<code>props</code>和<code>state</code>的<code>shouldComponentUpdate()</code>。如果你有信心自己手写，可以比较<code>this.props</code>与<code>nextProps</code>和<code>this.state</code>与<code>nextState</code>来判断更新可以跳过。</p>
+<p>对于复杂的数据的比较是非常耗时的，而且可能无法比较，通过使用<code>Immutable.js</code>能够很好地解决这个问题，<code>Immutable.js</code>的基本原则是对于不变的对象返回相同的引用，而对于变化的对象，返回新的引用。</p>
+<hr>
+<h3 id="componentWillUpdate"><a href="#componentWillUpdate" class="headerlink" title="componentWillUpdate()"></a><code>componentWillUpdate()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillUpdate(nextProps, nextState)</div></pre></td></tr></table></figure>
+<p><code>componentWillUpdate()</code>是在更新<code>props</code>或<code>state</code>准备重绘之前被调用。这是在发生更新之前做准备的时机。首次装载的时候没有调用这个方法。</p>
+<p>注意不能在这里调用<code>this.setState()</code>，应该使用<code>componentWillReceiveProps()</code>来根据<code>props</code>更新<code>state</code>。</p>
+<blockquote>
+<p>Note</p>
+<p>如果<code>shouldComponentUpdate()</code>返回false，那么<code>componentWillUpdate()</code>不会被调用</p>
+</blockquote>
+<hr>
+<h3 id="componentDidUpdate"><a href="#componentDidUpdate" class="headerlink" title="componentDidUpdate()"></a><code>componentDidUpdate()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentDidUpdate(prevProps, prevState)</div></pre></td></tr></table></figure>
+<p><code>componentDidUpdate()</code>是在重绘之后执行，首次装载时不会触发。</p>
+<p>可以在这个时机操作组件更新完成后的<code>DOM</code>。可以比较<code>props</code>的改变在这里做网络请求。（<code>props</code>如果没有改变，可能不需要发起网络请求）。</p>
+<blockquote>
+<p>Note</p>
+<p>如果<code>shouldComponentUpdate()</code>返回false，那么<code>componentDidUpdate()</code>不会被调用</p>
+</blockquote>
+<hr>
+<h3 id="componentWillUnmount"><a href="#componentWillUnmount" class="headerlink" title="componentWillUnmount()"></a><code>componentWillUnmount()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">componentWillUnmount()</div></pre></td></tr></table></figure>
+<p><code>componentWillUnmount()</code>在组件被卸载和销毁之前会被调用。在这个方法里执行必要的清理工作，比如没用的计时器，取消网络请求，或者是清除在<code>componentDidMount</code>执行时创建的<code>DOM</code>元素。</p>
+<hr>
+<h3 id="setState"><a href="#setState" class="headerlink" title="setState()"></a><code>setState()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setState(updater, [callback])</div></pre></td></tr></table></figure>
+<p><code>setState()</code>更新组件<code>state</code>，并且告诉<code>React</code>这个组件需要根据<code>state</code>的更新来重绘，但只是加入到执行队列。这是一个更新用户操作和处理服务端数据的主要方法。</p>
+<p>请把<code>setState()</code>当做一个请求而非立即执行方法。在单线程执行多个组件时，给了更好的性能，<code>React</code>可能会延迟执行它。<code>React</code>不能保证<code>state</code>更新被立即执行。</p>
+<p><code>setState()</code>不总是立即更新组件。它会把<code>JavaScript</code>执行进度中调用的<code>setState()</code>合并在一起，延迟执行。在<code>setState()</code>之后读取<code>this.state</code>是有问题的。用来代替的是，使用<code>componentDidUpdate</code>或者一个<code>setState</code>回调(<code>setState(updater, callback)</code>)，或者是更新完成后保证可以被触发的方法。如果你需要前一个<code>state</code>来设置当前<code>state</code>，请看下面的<code>updater</code>。</p>
+<p><code>setState()</code>总是会触发重绘，除非<code>shouldComponentUpdate()</code>返回<code>false</code>。如果由于对象很复杂没办法使用<code>shouldComponentUpdate()</code>来判断是否重绘，可以执行<code>setState()</code>在新的<code>state</code>与原有<code>state</code>存在变更的时候来避免不必要的重绘。</p>
+<p>第一个参数可以是像这样的<code>updater</code>方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">(prevState, props) =&gt; nextState</div></pre></td></tr></table></figure>
+<p><code>prevState</code>是对之前<code>state</code>的引用。不应该直接改变。应该通过根据<code>prevState</code>和<code>props</code>的输入构建一个新的状态对象来表示更改。例如，假设我们想根据<code>props.step</code>增加一个变量值：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState, props</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> &#123;<span class="attr">counter</span>: prevState.counter + props.step&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p><code>updater</code>收到的<code>prevState</code>和<code>props</code>都是最新的。</p>
+<p><code>setState()</code>第二个参数是一个可选的回调方法，一旦<code>setState</code>执行完并且组件重绘完时执行。通常推荐使用<code>componentDidUpdate()</code>。</p>
+<p>也可以通过第一个参数为对象给<code>setState()</code>代替方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">setState(stateChange, [callback])</div></pre></td></tr></table></figure>
+<p>会执行一个浅复制<code>stateChange</code>到新的<code>state</code>，例如调整购物车商品数量：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.setState(&#123;<span class="attr">quantity</span>: <span class="number">2</span>&#125;)</div></pre></td></tr></table></figure></p>
+<p>这种格式的<code>setState()</code>也是异步的，并且同一个生命周期的多次请求会合并在一起。比如想在同一个生命周期加入增加数量，结果相当于：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">Object</span>.assign(</div><div class="line">  previousState,</div><div class="line">  &#123;<span class="attr">quantity</span>: state.quantity + <span class="number">1</span>&#125;,</div><div class="line">  &#123;<span class="attr">quantity</span>: state.quantity + <span class="number">1</span>&#125;,</div><div class="line">  ...</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>在同一生命周期中后续请求会覆盖之前请求，所以数量只会增加一次。如果后面的<code>state</code>依赖前面的<code>state</code>，推荐使用<code>updater</code>方法代替：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.setState(<span class="function">(<span class="params">prevState</span>) =&gt;</span> &#123;</div><div class="line">  <span class="keyword">return</span> &#123;<span class="attr">counter</span>: prevState.quantity + <span class="number">1</span>&#125;;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="forceUpdate"><a href="#forceUpdate" class="headerlink" title="forceUpdate()"></a><code>forceUpdate()</code></h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">component.forceUpdate(callback)</div></pre></td></tr></table></figure>
+<p>默认，如果组件里面的<code>state</code>或者<code>props</code>更新，组件会重绘。但是如果<code>render()</code>调用依赖其它的数据，可以通过<code>forceUpdate()</code>来触发组件渲染。</p>
+<p>调用<code>forceUpdate()</code>会导致组件<code>render()</code>执行，并且跳过<code>shouldComponentUpdate()</code>。这将触发子组件的正常生命周期方法，包括每个子组件的<code>shouldComponentUpdate()</code>。如果标记更新，<code>React</code>会仅仅修改<code>DOM</code>。</p>
+<p>通常应该避免使用<code>forceUpdate()</code>并且只使用<code>this.props</code>和<code>this.state</code>来读取。</p>
+<hr>
+<h2 id="类属性-1"><a href="#类属性-1" class="headerlink" title="类属性"></a>类属性</h2><h3 id="defaultProps"><a href="#defaultProps" class="headerlink" title="defaultProps"></a><code>defaultProps</code></h3><p><code>defaultProps</code>可以用来定义组件自己的默认属性，设置类的默认<code>props</code>。这是使用于未声明的<code>props</code>，但不使用于空<code>props</code>。例如：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomButton</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">  <span class="comment">// ...</span></div><div class="line">&#125;</div><div class="line"></div><div class="line">CustomButton.defaultProps = &#123;</div><div class="line">  <span class="attr">color</span>: <span class="string">'blue'</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>如果<code>props.color</code>没有被提供，它会被默认设置为<code>&#39;blue&#39;</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">CustomButton</span> /&gt;</span> ; // props.color会被设置为blue</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>如果<code>props.color</code>被设置为<code>null</code>，那它就是<code>null</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">render() &#123;</div><div class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">CustomButton</span> <span class="attr">color</span>=<span class="string">&#123;null&#125;</span> /&gt;</span> ; // props.color会被设置为null</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h3 id="displayName"><a href="#displayName" class="headerlink" title="displayName"></a><code>displayName</code></h3><p><code>displayName</code>被用作<code>debug</code>信息。</p>
+<hr>
+<h2 id="实例属性-1"><a href="#实例属性-1" class="headerlink" title="实例属性"></a>实例属性</h2><h3 id="props"><a href="#props" class="headerlink" title="props"></a><code>props</code></h3><p><code>this.props</code>包含组件调用者定义的<code>props</code>。尤其是，<code>this.props.children</code>是一个特殊的属性，通常由JSX表达式中的子标签定义，而不是标记本身。</p>
+<h3 id="state"><a href="#state" class="headerlink" title="state"></a><code>state</code></h3><p><code>state</code>包含特定于该组件的状态，随时间而改变。<code>state</code>是用户自定义的，应该是一个清晰的<code>JavaScript</code>对象。</p>
+<p>不要直接改变<code>this.state</code>，因为<code>setState()</code>可能会替换你的改变。把<code>this.state</code>当做不可变的。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag">#react</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/04/23/丽江游记/" rel="next" title="丽江游记">
+                <i class="fa fa-chevron-left"></i> 丽江游记
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/05/24/promise的使用/" rel="prev" title="promise的使用">
+                promise的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/header.jpg"
+               alt="gxf" />
+          <p class="site-author-name" itemprop="name">gxf</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ggsoul" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/XuefGao" target="_blank" title="Weibo">
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/ggsoul" target="_blank" title="SegmentFault">
+                  
+                  SegmentFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gxf470001" target="_blank" title="Twitter">
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://searchp.cc/" title="searchpcc" target="_blank">searchpcc</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mrli.me/" title="Mr.li" target="_blank">Mr.li</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ycyx28.com/" title="Chao" target="_blank">Chao</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#组件生命周期"><span class="nav-number">1.1.</span> <span class="nav-text">组件生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#装载"><span class="nav-number">1.1.1.</span> <span class="nav-text">装载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#更新"><span class="nav-number">1.1.2.</span> <span class="nav-text">更新</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#挂载"><span class="nav-number">1.1.3.</span> <span class="nav-text">挂载</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其它APIs"><span class="nav-number">1.2.</span> <span class="nav-text">其它APIs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类属性"><span class="nav-number">1.3.</span> <span class="nav-text">类属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例属性"><span class="nav-number">1.4.</span> <span class="nav-text">实例属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">2.</span> <span class="nav-text">参考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#render"><span class="nav-number">2.1.</span> <span class="nav-text">render()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#constructor-NaN"><span class="nav-number">2.2.</span> <span class="nav-text">constructor()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillMount"><span class="nav-number">2.3.</span> <span class="nav-text">componentWillMount()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidMount"><span class="nav-number">2.4.</span> <span class="nav-text">componentDidMount()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillReceiveProps"><span class="nav-number">2.5.</span> <span class="nav-text">componentWillReceiveProps()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shouldComponentUpdate"><span class="nav-number">2.6.</span> <span class="nav-text">shouldComponentUpdate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillUpdate"><span class="nav-number">2.7.</span> <span class="nav-text">componentWillUpdate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentDidUpdate"><span class="nav-number">2.8.</span> <span class="nav-text">componentDidUpdate()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#componentWillUnmount"><span class="nav-number">2.9.</span> <span class="nav-text">componentWillUnmount()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#setState"><span class="nav-number">2.10.</span> <span class="nav-text">setState()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#forceUpdate"><span class="nav-number">2.11.</span> <span class="nav-text">forceUpdate()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#类属性-1"><span class="nav-number">3.</span> <span class="nav-text">类属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#defaultProps"><span class="nav-number">3.1.</span> <span class="nav-text">defaultProps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#displayName"><span class="nav-number">3.2.</span> <span class="nav-text">displayName</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例属性-1"><span class="nav-number">4.</span> <span class="nav-text">实例属性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props"><span class="nav-number">4.1.</span> <span class="nav-text">props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#state"><span class="nav-number">4.2.</span> <span class="nav-text">state</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gxf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("WQkR0jDl5lLEcptvei9NmDR0-gzGzoHsz", "QIOxQpiKaIR8UafqIHm73OK0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

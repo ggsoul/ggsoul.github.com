@@ -1,0 +1,828 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;lt;script&amp;gt;元素是为了给HTML页面中引入JavaScript脚本而产生的">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript高级程序设计学习笔记二">
+<meta property="og:url" content="http://gaoxuefeng.com/2016/05/06/JavaScript高级程序设计学习笔记二/index.html">
+<meta property="og:site_name" content="高雪峰的个人博客">
+<meta property="og:description" content="&amp;lt;script&amp;gt;元素是为了给HTML页面中引入JavaScript脚本而产生的">
+<meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/note1.png">
+<meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/note2.png">
+<meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/note3.png">
+<meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/execution2.jpg">
+<meta property="og:updated_time" content="2016-06-13T08:05:07.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript高级程序设计学习笔记二">
+<meta name="twitter:description" content="&amp;lt;script&amp;gt;元素是为了给HTML页面中引入JavaScript脚本而产生的">
+<meta name="twitter:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/note1.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <meta name="baidu-site-verification" content="3YPbgeBMlS" />
+  <title> JavaScript高级程序设计学习笔记二 | 高雪峰的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4c3782dc0cacd99020a13bb244258b4a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s11.cnzz.com/z_stat.php?id=1259006158&web_id=1259006158" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">高雪峰的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">只想走的更远一点</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-favorite">
+          <a href="/favorite" rel="section">
+            
+            最爱
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                JavaScript高级程序设计学习笔记二
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-06T21:39:36+08:00" content="2016-05-06">
+              2016-05-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/onebook/" itemprop="url" rel="index">
+                    <span itemprop="name">onebook</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/06/JavaScript高级程序设计学习笔记二/" class="leancloud_visitors" data-flag-title="JavaScript高级程序设计学习笔记二">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><code>&lt;script&gt;</code>元素是为了给HTML页面中引入JavaScript脚本而产生的</p>
+<a id="more"></a>
+<h2 id="script元素"><a href="#script元素" class="headerlink" title="script元素"></a>script元素</h2><h3 id="六个属性"><a href="#六个属性" class="headerlink" title="六个属性"></a>六个属性</h3><ul>
+<li>async：异步加载(仅适用于与外部脚本)</li>
+<li>charset：表示通过src属性指定的代码的字符集</li>
+<li>defer：延迟加载</li>
+<li>language：已弃用，原本表示代码使用的脚本语言</li>
+<li>src：表示包含要执行的外部文件</li>
+<li>type：表示编写代码使用的脚本语言，可以看成language的替代属性</li>
+</ul>
+<h3 id="两种使用方式"><a href="#两种使用方式" class="headerlink" title="两种使用方式"></a>两种使用方式</h3><h4 id="直接嵌入HTML文件中"><a href="#直接嵌入HTML文件中" class="headerlink" title="直接嵌入HTML文件中"></a>直接嵌入HTML文件中</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span>&gt;</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">sayHi</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		alert(<span class="string">"Hi!"</span>);</div><div class="line">	&#125;</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
+<p>这种方式需要注意的地方是不要在代码中出现<code>&lt;/script&gt;</code>字符串，会被当做<br><code>&lt;script&gt;</code>元素的结束，解决办法是使用转义字符<code>&lt;/script&gt;</code>。</p>
+<h4 id="使用src属性包含外部文件"><a href="#使用src属性包含外部文件" class="headerlink" title="使用src属性包含外部文件"></a>使用src属性包含外部文件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/javascript"</span> src=<span class="string">"examplr.js"</span>&gt;<span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
+<h2 id="关于JavaScript引入"><a href="#关于JavaScript引入" class="headerlink" title="关于JavaScript引入"></a>关于JavaScript引入</h2><h3 id="内联引入"><a href="#内联引入" class="headerlink" title="内联引入"></a>内联引入</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"> <span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"> <span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/style.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Critical Path: Script<span class="tag">&lt;/<span class="name">title</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Hello <span class="tag">&lt;<span class="name">span</span>&gt;</span>web performance<span class="tag">&lt;/<span class="name">span</span>&gt;</span> students!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"../assets/images/header.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></div><div class="line">      <span class="keyword">var</span> span = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'span'</span>)[<span class="number">0</span>];</div><div class="line">      span.textContent = <span class="string">'interactive'</span>; <span class="comment">// change DOM text content</span></div><div class="line">      span.style.display = <span class="string">'inline'</span>;  <span class="comment">// change CSSOM property</span></div><div class="line">      <span class="comment">// create a new element, style it, and append it to the DOM</span></div><div class="line">      <span class="keyword">var</span> loadTime = <span class="built_in">document</span>.createElement(<span class="string">'div'</span>);</div><div class="line">      loadTime.textContent = <span class="string">'You loaded this page on: '</span> + <span class="keyword">new</span> <span class="built_in">Date</span>();</div><div class="line">      loadTime.style.color = <span class="string">'blue'</span>;</div><div class="line">      <span class="built_in">document</span>.body.appendChild(loadTime);</div><div class="line">    <span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>这是一段例子，引自<a href="http://developers.guge.io/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript?hl=zh-cn" target="_blank" rel="external">Google developers</a></p>
+<p>这段代码里面的内联脚本靠近页面底部，如果我们将脚本移至span元素上方，您会发现脚本不起作用，并提示无法再文档中找到任何span元素的引用。这表明一个重要的特性：脚本会在脚本中插入的确切点执行。HTML解析器遇到脚本代码时，它会暂停构建DOM的流程，并对JavaScript引擎进行控制；JavaScript引擎运行完后，浏览器就会从断开的地方继续运行并恢复DOM构建。</p>
+<p>总结一句话就是：<em>执行内联脚本会阻止 DOM 构建，也会使首次呈现出现延迟</em></p>
+<p>内联脚本即使放在靠近页面底部的位置也还是会有首次呈现出现延迟的问题，不过编写其他代码可以推迟它们的执行。</p>
+<h3 id="defer属性"><a href="#defer属性" class="headerlink" title="defer属性"></a>defer属性</h3><p>defer是HTML4.0中定义的，作用是等文档完成解析完成后按照它们在文档中出现的顺序再去下载解析。</p>
+<h4 id="defer在浏览器支持程度不同"><a href="#defer在浏览器支持程度不同" class="headerlink" title="defer在浏览器支持程度不同"></a>defer在浏览器支持程度不同</h4><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">//defer测试代码，可将代码复制到本地自己测试，外部脚本src引入，内联脚本直接粘帖</div><div class="line">&lt;script type="text/javascript" defer&gt;</div><div class="line">    alert('defer')</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    alert('script')</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;script type="text/javascript"&gt;</div><div class="line">    window.onload = function()&#123;</div><div class="line">        alert('onload')</div><div class="line">    &#125;</div><div class="line">&lt;/script&gt;</div></pre></td></tr></table></figure>
+<ul>
+<li>外部JS在各个浏览器里运行结果跟定义的执行顺序正常，alert信息会按照 script-&gt;defer-&gt;onload顺序弹出</li>
+<li>内联脚本，如果脚本都是IE9/8/7/6按照定义的顺序弹出信息，其他浏览器则按照 defer-&gt;script-&gt;onload 顺序弹出信息，表示defer失效</li>
+<li>而如果有多个内联defer脚本、在body和head都有分布或者在iframe中也有内联defer脚本，则在IE6中表现一致。</li>
+</ul>
+<p>(IE6我没有装虚拟机，所以没有测试)</p>
+<h4 id="defer的使用"><a href="#defer的使用" class="headerlink" title="defer的使用"></a>defer的使用</h4><p><strong>外部引用加defer</strong></p>
+<p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/note1.png" alt="note1"></p>
+<p><strong>内联不加defer(chrome)</strong></p>
+<p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/note2.png" alt="note2"></p>
+<p>感觉没啥差别，而且defer浏览器表现不同的问题，所以如果是内联JavaScript的话，将脚本放在body底部比给脚本增加defer属性让脚本延迟加载更好。</p>
+<h3 id="async属性"><a href="#async属性" class="headerlink" title="async属性"></a>async属性</h3><p>async是HTML5的新增属性，IE10和主流浏览器都支持该属性，作用是让js文件和浏览器加载css一样是异步加载的。</p>
+<p>async实现的引入与上面两者的比较中，优势很明显</p>
+<p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/note3.png" alt="note3"></p>
+<p>一种添加额外代码实现的异步加载，在DOM中创建script标签：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">delay_js</span>(<span class="params">src</span>) </span>&#123;</div><div class="line">	<span class="keyword">var</span> objScript = <span class="built_in">document</span>.createElement(<span class="string">'script'</span>);</div><div class="line">	objScript.setAttribute(<span class="string">'src'</span>, src);</div><div class="line">	objScript.setAttribute(<span class="string">'type'</span>, <span class="string">'text/javascript'</span>);</div><div class="line">	<span class="built_in">document</span>.body.appendChild(objScript);</div><div class="line">	<span class="keyword">return</span> objScript;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以上代码异步加载的js下载时跟其他一样是并行的，但是执行阶段还是会阻止页面渲染，延长了window.onload的事件。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadjs</span>(<span class="params">src, succ</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> elem = delay_js(src);</div><div class="line">    <span class="keyword">if</span> ((navigator.userAgent.indexOf(<span class="string">'MSIE'</span>) == <span class="number">-1</span>) ? <span class="literal">false</span>: <span class="literal">true</span>) &#123;</div><div class="line">        elem.onreadystatechange = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (<span class="regexp">/loaded|complete/</span>.test(<span class="keyword">this</span>.readyState))&#123;</div><div class="line">                succ()</div><div class="line">            &#125;</div><div class="line">        &#125;;</div><div class="line">    &#125;<span class="keyword">else</span>&#123;</div><div class="line">        elem.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">            succ();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    elem.onerror = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>这种异步方式，引自<a href="http://www.html5jscss.com/js_async.html" target="_blank" rel="external">html5jscss</a></p>
+<p>我曾经写过delay_js这样的方法，然后把它放在window.onload里面去执行，不过显然让它并行的下载会更快。</p>
+<p>我在这里还有一些有误区的地方:</p>
+<ul>
+<li>在做图片预加载的时候，1.创建对象 2.设置src属性 3.设置onload方法</li>
+<li>在做JavaScript的异步引入时，1.创建对象 2.设置src属性 3.设置type属性 4.添加到body里面 5.设置onload方法</li>
+</ul>
+<p>这之间明显的区别是创建的img标签不用添加到body里面就可以触发onload，而script标签不添加到body里面将不会触发onload。我询问了下微信，他告诉我<code>&lt;script&gt;</code>元素插入body后是执行，而下载只是执行的一部分，下载完成后JavaScript会立即执行，而图片预加载是创建出了Image对象，直接就可以下载内容了。</p>
+<p>下图为normal、defer和async的比较，引自<a href="http://peter.sh/experiments/asynchronous-and-deferred-javascript-execution-explained/" target="_blank" rel="external">Peter Beverloo</a></p>
+<p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/execution2.jpg" alt="execution2"></p>
+<p>推荐使用引入外部js文件的方式，它有几点优势：</p>
+<ul>
+<li>可维护性：遍及不同HTML页面的JavaScript会造成维护问题。但把所有JavaScript文件都放在一个文件夹中，维护起来就轻松多了。</li>
+<li>可缓存：浏览器能够根据具体的设置缓存链接的所有外部JavaScript文件。如果有两个页面都使用一个文件，那么这个文件只需要下载一次。</li>
+<li>可以使用async这个属性，并且没有副作用的使用defer属性。达到的目的是告诉浏览器我这个文件是需要下载的，就不要让DOM构建停止下来了。</li>
+</ul>
+<h2 id="noscript元素"><a href="#noscript元素" class="headerlink" title="noscript元素"></a>noscript元素</h2><p>这个元素是为了当浏览器不支持JavaScript时，让页面平稳退化的，现在不支持JavaScript的浏览器很少，不过会有禁止脚本的情况。这两中情况都可以使用<code>&lt;noscript&gt;</code>元素。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">p</span>&gt;</span>本页面需要浏览器支持(启用)JavaScript。<span class="tag">&lt;/<span class="name">p</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>JavaScript在实现DOM和BOM操作的同时，确实也带来了一点干扰，不过只要认真的去分析，就能够将这点干扰降低到最小，接下来将进入JavaScript语言部分。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/JavaScript高级程序设计学习笔记一/" rel="next" title="JavaScript高级程序设计学习笔记一">
+                <i class="fa fa-chevron-left"></i> JavaScript高级程序设计学习笔记一
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/06/JavaScript高级程序设计学习笔记三/" rel="prev" title="JavaScript高级程序设计学习笔记三">
+                JavaScript高级程序设计学习笔记三 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/header.jpg"
+               alt="gxf" />
+          <p class="site-author-name" itemprop="name">gxf</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ggsoul" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/XuefGao" target="_blank" title="Weibo">
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/ggsoul" target="_blank" title="SegmentFault">
+                  
+                  SegmentFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gxf470001" target="_blank" title="Twitter">
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://searchp.cc/" title="searchpcc" target="_blank">searchpcc</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mrli.me/" title="Mr.li" target="_blank">Mr.li</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ycyx28.com/" title="Chao" target="_blank">Chao</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#script元素"><span class="nav-number">1.</span> <span class="nav-text">script元素</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#六个属性"><span class="nav-number">1.1.</span> <span class="nav-text">六个属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#两种使用方式"><span class="nav-number">1.2.</span> <span class="nav-text">两种使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#直接嵌入HTML文件中"><span class="nav-number">1.2.1.</span> <span class="nav-text">直接嵌入HTML文件中</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用src属性包含外部文件"><span class="nav-number">1.2.2.</span> <span class="nav-text">使用src属性包含外部文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于JavaScript引入"><span class="nav-number">2.</span> <span class="nav-text">关于JavaScript引入</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#内联引入"><span class="nav-number">2.1.</span> <span class="nav-text">内联引入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer属性"><span class="nav-number">2.2.</span> <span class="nav-text">defer属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#defer在浏览器支持程度不同"><span class="nav-number">2.2.1.</span> <span class="nav-text">defer在浏览器支持程度不同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#defer的使用"><span class="nav-number">2.2.2.</span> <span class="nav-text">defer的使用</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#async属性"><span class="nav-number">2.3.</span> <span class="nav-text">async属性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#noscript元素"><span class="nav-number">3.</span> <span class="nav-text">noscript元素</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gxf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("WQkR0jDl5lLEcptvei9NmDR0-gzGzoHsz", "QIOxQpiKaIR8UafqIHm73OK0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>

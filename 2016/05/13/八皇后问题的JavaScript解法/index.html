@@ -1,0 +1,793 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="javascript," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="关于八皇后问题的 JavaScript 解法，总觉得是需要学习一下算法的，哪天要用到的时候发现真不会就尴尬了">
+<meta name="keywords" content="javascript">
+<meta property="og:type" content="article">
+<meta property="og:title" content="八皇后问题的JavaScript解法">
+<meta property="og:url" content="http://gaoxuefeng.com/2016/05/13/八皇后问题的JavaScript解法/index.html">
+<meta property="og:site_name" content="高雪峰的个人博客">
+<meta property="og:description" content="关于八皇后问题的 JavaScript 解法，总觉得是需要学习一下算法的，哪天要用到的时候发现真不会就尴尬了">
+<meta property="og:updated_time" content="2016-06-13T08:00:11.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="八皇后问题的JavaScript解法">
+<meta name="twitter:description" content="关于八皇后问题的 JavaScript 解法，总觉得是需要学习一下算法的，哪天要用到的时候发现真不会就尴尬了">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: false,
+    motion: true,
+    duoshuo: {
+      userId: undefined,
+      author: '博主'
+    }
+  };
+</script>
+
+  <meta name="baidu-site-verification" content="3YPbgeBMlS" />
+  <title> 八皇后问题的JavaScript解法 | 高雪峰的个人博客 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?4c3782dc0cacd99020a13bb244258b4a";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="http://s11.cnzz.com/z_stat.php?id=1259006158&web_id=1259006158" type="text/javascript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">高雪峰的个人博客</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">只想走的更远一点</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-favorite">
+          <a href="/favorite" rel="section">
+            
+            最爱
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                八皇后问题的JavaScript解法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-05-13T15:28:24+08:00" content="2016-05-13">
+              2016-05-13
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/think/" itemprop="url" rel="index">
+                    <span itemprop="name">think</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+
+          
+          
+             <span id="/2016/05/13/八皇后问题的JavaScript解法/" class="leancloud_visitors" data-flag-title="八皇后问题的JavaScript解法">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>关于八皇后问题的 JavaScript 解法，总觉得是需要学习一下算法的，哪天要用到的时候发现真不会就尴尬了</p>
+<a id="more"></a>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>八皇后问题是一个以国际象棋为背景的问题：如何能够在 8×8 的国际象棋棋盘上放置八个皇后，使得任何一个皇后都无法直接吃掉其他的皇后？为了达到此目的，任两个皇后都不能处于同一条横行、纵行或斜线上</p>
+<p>八皇后问题可以推广为更一般的n皇后摆放问题：这时棋盘的大小变为 n×n ，而皇后个数也变成n 。当且仅当<code>n = 1</code>或<code>n ≥ 4</code>时问题有解</p>
+<h2 id="盲目的枚举算法"><a href="#盲目的枚举算法" class="headerlink" title="盲目的枚举算法"></a>盲目的枚举算法</h2><p>通过N重循环，枚举满足约束条件的解（八重循环代码好多，这里进行四重循环），找到四个皇后的所有可能位置，然后再整个棋盘里判断这四个皇后是否会直接吃掉彼此，程序思想比较简单</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">check1</span>(<span class="params">arr, n</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt; n; j++) &#123;</div><div class="line">            <span class="keyword">if</span>((arr[i] == arr[j]) || <span class="built_in">Math</span>.abs(arr[i] - arr[j]) == j - i) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">queen1</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(arr[<span class="number">0</span>] = <span class="number">1</span>; arr[<span class="number">0</span>] &lt;= <span class="number">4</span>; arr[<span class="number">0</span>]++) &#123;</div><div class="line">        <span class="keyword">for</span>(arr[<span class="number">1</span>] = <span class="number">1</span>; arr[<span class="number">1</span>] &lt;= <span class="number">4</span>; arr[<span class="number">1</span>]++) &#123;</div><div class="line">            <span class="keyword">for</span>(arr[<span class="number">2</span>] = <span class="number">1</span>; arr[<span class="number">2</span>] &lt;= <span class="number">4</span>; arr[<span class="number">2</span>]++) &#123;</div><div class="line">                <span class="keyword">for</span>(arr[<span class="number">3</span>] = <span class="number">1</span>; arr[<span class="number">3</span>] &lt;= <span class="number">4</span>; arr[<span class="number">3</span>]++) &#123;</div><div class="line">                    <span class="keyword">if</span>(!check1(arr, <span class="number">4</span>)) &#123;</div><div class="line">                        <span class="keyword">continue</span>;</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                        <span class="built_in">console</span>.log(arr);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">queen1();</div><div class="line"><span class="comment">//[ 2, 4, 1, 3 ]</span></div><div class="line"><span class="comment">//[ 3, 1, 4, 2 ]</span></div></pre></td></tr></table></figure>
+<p>关于结果，在 4*4 的棋盘里，四个皇后都不可能是在一排， arr[0] 到 arr[3] 分别对应四个皇后，数组的下标与下标对应的值即皇后在棋盘中的位置</p>
+<h2 id="回溯法"><a href="#回溯法" class="headerlink" title="回溯法"></a>回溯法</h2><p>『走不通，就回头』，在适当节点判断是否符合，不符合就不再进行这条支路上的探索</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">check2</span>(<span class="params">arr, n</span>) </span>&#123;</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt;= n - <span class="number">1</span>; i++) &#123;</div><div class="line">        <span class="keyword">if</span>((<span class="built_in">Math</span>.abs(arr[i] - arr[n]) == n - i) || (arr[i] == arr[n])) &#123;</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">queen2</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line"></div><div class="line">    <span class="keyword">for</span>(arr[<span class="number">0</span>] = <span class="number">1</span>; arr[<span class="number">0</span>] &lt;= <span class="number">4</span>; arr[<span class="number">0</span>]++) &#123;</div><div class="line">        <span class="keyword">for</span>(arr[<span class="number">1</span>] = <span class="number">1</span>; arr[<span class="number">1</span>] &lt;= <span class="number">4</span>; arr[<span class="number">1</span>]++) &#123;</div><div class="line">            <span class="keyword">if</span>(!check2(arr, <span class="number">1</span>)) <span class="keyword">continue</span>; <span class="comment">//摆两个皇后产生冲突的情况</span></div><div class="line">            <span class="keyword">for</span>(arr[<span class="number">2</span>] = <span class="number">1</span>; arr[<span class="number">2</span>] &lt;= <span class="number">4</span>; arr[<span class="number">2</span>]++) &#123;</div><div class="line">                <span class="keyword">if</span>(!check2(arr, <span class="number">2</span>)) <span class="keyword">continue</span>; <span class="comment">//摆三个皇后产生冲突的情况</span></div><div class="line">                <span class="keyword">for</span>(arr[<span class="number">3</span>] = <span class="number">1</span>; arr[<span class="number">3</span>] &lt;= <span class="number">4</span>; arr[<span class="number">3</span>]++) &#123;</div><div class="line">                    <span class="keyword">if</span>(!check2(arr, <span class="number">3</span>)) &#123;</div><div class="line">                    	<span class="keyword">continue</span>;</div><div class="line">                    &#125; <span class="keyword">else</span> &#123;</div><div class="line">                    	<span class="built_in">console</span>.log(arr);</div><div class="line">                    &#125;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">queen2();</div><div class="line"><span class="comment">//[ 2, 4, 1, 3 ]</span></div><div class="line"><span class="comment">//[ 3, 1, 4, 2 ]</span></div></pre></td></tr></table></figure>
+<h2 id="非递归回溯法"><a href="#非递归回溯法" class="headerlink" title="非递归回溯法"></a>非递归回溯法</h2><p>算法框架</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span>(k &gt; <span class="number">0</span> 『有路可走』 and 『未达到目标』) &#123; <span class="comment">// k &gt; 0 有路可走</span></div><div class="line">    <span class="keyword">if</span>(k &gt; n) &#123; <span class="comment">// 搜索到叶子节点</span></div><div class="line">        <span class="comment">// 搜索到一个解，输出</span></div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="comment">//a[k]第一个可能的值</span></div><div class="line">        <span class="keyword">while</span>(『a[k]在不满足约束条件且在搜索空间内』) &#123;</div><div class="line">            <span class="comment">// a[k]下一个可能的值</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span>(『a[k]在搜索空间内』) &#123;</div><div class="line">            <span class="comment">// 标示占用的资源</span></div><div class="line">            <span class="comment">// k = k + 1;</span></div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="comment">// 清理所占的状态空间</span></div><div class="line">            <span class="comment">// k = k - 1;</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>具体代码如下，最外层while下面包含两部分，一部分是对当前皇后可能值的遍历，另一部分是决定是进入下一层还是回溯上一层</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">backdate</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line"></div><div class="line">    <span class="keyword">var</span> k = <span class="number">1</span>; <span class="comment">// 第n的皇后</span></div><div class="line">    arr[<span class="number">0</span>] = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">while</span>(k &gt; <span class="number">0</span>) &#123;</div><div class="line"></div><div class="line">        arr[k<span class="number">-1</span>] = arr[k<span class="number">-1</span>] + <span class="number">1</span>;</div><div class="line">        <span class="keyword">while</span>((arr[k<span class="number">-1</span>] &lt;= n) &amp;&amp; (!check2(arr, k<span class="number">-1</span>))) &#123;</div><div class="line">            arr[k<span class="number">-1</span>] = arr[k<span class="number">-1</span>] + <span class="number">1</span>;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 这个皇后满足了约束条件，进行下一步判断</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span>(arr[k<span class="number">-1</span>] &lt;= n) &#123;</div><div class="line">            <span class="keyword">if</span>(k == n) &#123; <span class="comment">// 第n个皇后</span></div><div class="line">                <span class="built_in">console</span>.log(arr);</div><div class="line">            &#125; <span class="keyword">else</span> &#123;</div><div class="line">                k = k + <span class="number">1</span>; <span class="comment">// 下一个皇后</span></div><div class="line">                arr[k<span class="number">-1</span>] = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            k = k - <span class="number">1</span>; <span class="comment">// 回溯，上一个皇后</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">backdate(<span class="number">4</span>);</div><div class="line"><span class="comment">//[ 2, 4, 1, 3 ]</span></div><div class="line"><span class="comment">//[ 3, 1, 4, 2 ]</span></div></pre></td></tr></table></figure>
+<h2 id="递归回溯法"><a href="#递归回溯法" class="headerlink" title="递归回溯法"></a>递归回溯法</h2><p>递归调用大大减少了代码量，也增加了程序的可读性</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [], n = <span class="number">4</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">backtrack</span>(<span class="params">k</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span>(k &gt; n) &#123;</div><div class="line">        <span class="built_in">console</span>.log(arr);</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">1</span>;i &lt;= n; i++) &#123;</div><div class="line">            arr[k<span class="number">-1</span>] = i;</div><div class="line">            <span class="keyword">if</span>(check2(arr, k<span class="number">-1</span>)) &#123;</div><div class="line">                backtrack(k + <span class="number">1</span>);</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">backtrack(<span class="number">1</span>);</div><div class="line"><span class="comment">//[ 2, 4, 1, 3 ]</span></div><div class="line"><span class="comment">//[ 3, 1, 4, 2 ]</span></div></pre></td></tr></table></figure>
+<h2 id="华而不实的amb"><a href="#华而不实的amb" class="headerlink" title="华而不实的amb"></a>华而不实的amb</h2><p>什么是 amb ？给它一个数据列表，它能返回满足约束条件的成功情况的一种方式，没有成功情况就会失败，当然，它可以返回所有的成功情况。笔者写了上面那么多的重点，就是为了在这里推荐这个amb算法，它适合处理简单的回溯场景，很有趣，让我们来看看它是怎么工作的</p>
+<p>首先来处理一个小问题，寻找相邻字符串：拿到几组字符串数组，每个数组拿出一个字符串，前一个字符串的末位字符与后一个字符串的首位字符相同，满足条件则输出这组新取出来的字符串</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">ambRun(<span class="function"><span class="keyword">function</span>(<span class="params">amb, fail</span>) </span>&#123;</div><div class="line"></div><div class="line">    <span class="comment">// 约束条件方法</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">linked</span>(<span class="params">s1, s2</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> s1.slice(<span class="number">-1</span>) == s2.slice(<span class="number">0</span>, <span class="number">1</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="comment">// 注入数据列表</span></div><div class="line">    <span class="keyword">var</span> w1 = amb([<span class="string">"the"</span>, <span class="string">"that"</span>, <span class="string">"a"</span>]);</div><div class="line">    <span class="keyword">var</span> w2 = amb([<span class="string">"frog"</span>, <span class="string">"elephant"</span>, <span class="string">"thing"</span>]);</div><div class="line">    <span class="keyword">var</span> w3 = amb([<span class="string">"walked"</span>, <span class="string">"treaded"</span>, <span class="string">"grows"</span>]);</div><div class="line">    <span class="keyword">var</span> w4 = amb([<span class="string">"slowly"</span>, <span class="string">"quickly"</span>]);</div><div class="line"></div><div class="line">    <span class="comment">// 执行程序</span></div><div class="line">    <span class="keyword">if</span> (!(linked(w1, w2) &amp;&amp; linked(w2, w3) &amp;&amp; linked(w3, w4))) fail();</div><div class="line"></div><div class="line">    <span class="built_in">console</span>.log([w1, w2, w3, w4].join(<span class="string">' '</span>));</div><div class="line">    <span class="comment">// "that thing grows slowly"</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>看起来超级简洁有没有！不过使用的前提是，你不在乎性能，它真的是很浪费时间！</p>
+<p>下面是它的 javascript 实现，有兴趣可以研究研究它是怎么把回溯抽出来的</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">ambRun</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> choices = [];</div><div class="line">    <span class="keyword">var</span> index;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">amb</span>(<span class="params">values</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span> (values.length == <span class="number">0</span>) &#123;</div><div class="line">            fail();</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">if</span> (index == choices.length) &#123;</div><div class="line">            choices.push(&#123;<span class="attr">i</span>: <span class="number">0</span>,</div><div class="line">                <span class="attr">count</span>: values.length&#125;);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">var</span> choice = choices[index++];</div><div class="line">        <span class="keyword">return</span> values[choice.i];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">fail</span>(<span class="params"></span>) </span>&#123; <span class="keyword">throw</span> fail; &#125;</div><div class="line"></div><div class="line">    <span class="keyword">while</span> (<span class="literal">true</span>) &#123;</div><div class="line">        <span class="keyword">try</span> &#123;</div><div class="line">            index = <span class="number">0</span>;</div><div class="line">            <span class="keyword">return</span> func(amb, fail);</div><div class="line">        &#125; <span class="keyword">catch</span> (e) &#123;</div><div class="line">            <span class="keyword">if</span> (e != fail) &#123;</div><div class="line">                <span class="keyword">throw</span> e;</div><div class="line">            &#125;</div><div class="line">            <span class="keyword">var</span> choice;</div><div class="line"></div><div class="line">            <span class="keyword">while</span> ((choice = choices.pop()) &amp;&amp; ++choice.i == choice.count) &#123;&#125;</div><div class="line">            <span class="keyword">if</span> (choice == <span class="literal">undefined</span>) &#123;</div><div class="line">                <span class="keyword">return</span> <span class="literal">undefined</span>;</div><div class="line">            &#125;</div><div class="line">            choices.push(choice);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>以及使用 amb 实现的八皇后问题的具体代码</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">ambRun(<span class="function"><span class="keyword">function</span>(<span class="params">amb, fail</span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> N = <span class="number">4</span>;</div><div class="line">    <span class="keyword">var</span> arr = [];</div><div class="line">    <span class="keyword">var</span> turn = [];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> n = <span class="number">0</span>; n &lt; N; n++) &#123;</div><div class="line">        turn[turn.length] = n + <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">while</span>(n--) &#123;</div><div class="line">        arr[arr.length] = amb(turn);</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; N; ++i) &#123;</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> j = i + <span class="number">1</span>; j &lt; N; ++j) &#123;</div><div class="line">            <span class="keyword">var</span> a = arr[i], b = arr[j];</div><div class="line">            <span class="keyword">if</span> (a == b || <span class="built_in">Math</span>.abs(a - b) == j - i) fail();</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="built_in">console</span>.log(arr);</div><div class="line">    fail();</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h2 id="八皇后问题的JavaScript解法"><a href="#八皇后问题的JavaScript解法" class="headerlink" title="八皇后问题的JavaScript解法"></a>八皇后问题的JavaScript解法</h2><p>这是八皇后问题的JavaScript解法，整个程序都没用for循环，都是靠递归来实现的，充分运用了Array对象的map, reduce, filter, concat, slice方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"><span class="keyword">var</span> queens = <span class="function"><span class="keyword">function</span> (<span class="params">boarderSize</span>) </span>&#123;</div><div class="line">  <span class="comment">// 用递归生成一个start到end的Array</span></div><div class="line">  <span class="keyword">var</span> interval = <span class="function"><span class="keyword">function</span> (<span class="params">start, end</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (start &gt; end) &#123; <span class="keyword">return</span> []; &#125;</div><div class="line">    <span class="keyword">return</span> interval(start, end - <span class="number">1</span>).concat(end);</div><div class="line">  &#125;;</div><div class="line">  <span class="comment">// 检查一个组合是否有效</span></div><div class="line">  <span class="keyword">var</span> isValid = <span class="function"><span class="keyword">function</span> (<span class="params">queenCol</span>) </span>&#123;</div><div class="line">    <span class="comment">// 检查两个位置是否有冲突</span></div><div class="line">    <span class="keyword">var</span> isSafe = <span class="function"><span class="keyword">function</span> (<span class="params">pointA, pointB</span>) </span>&#123;</div><div class="line">      <span class="keyword">var</span> slope = (pointA.row - pointB.row) / (pointA.col - pointB.col);</div><div class="line">      <span class="keyword">if</span> ((<span class="number">0</span> === slope) || (<span class="number">1</span> === slope) || (<span class="number">-1</span> === slope)) &#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;</div><div class="line">      <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> len = queenCol.length;</div><div class="line">    <span class="keyword">var</span> pointToCompare = &#123;</div><div class="line">      <span class="attr">row</span>: queenCol[len - <span class="number">1</span>],</div><div class="line">      <span class="attr">col</span>: len</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 先slice出除了最后一列的数组，然后依次测试每列的点和待测点是否有冲突，最后合并测试结果</span></div><div class="line">    <span class="keyword">return</span> queenCol</div><div class="line">      .slice(<span class="number">0</span>, len - <span class="number">1</span>)</div><div class="line">      .map(<span class="function"><span class="keyword">function</span> (<span class="params">row, index</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> isSafe(&#123;<span class="attr">row</span>: row, <span class="attr">col</span>: index + <span class="number">1</span>&#125;, pointToCompare);</div><div class="line">      &#125;)</div><div class="line">      .reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> a &amp;&amp; b;</div><div class="line">      &#125;);</div><div class="line">  &#125;;</div><div class="line">  <span class="comment">// 递归地去一列一列生成符合规则的组合</span></div><div class="line">  <span class="keyword">var</span> queenCols = <span class="function"><span class="keyword">function</span> (<span class="params">size</span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (<span class="number">1</span> === size) &#123;</div><div class="line">      <span class="keyword">return</span> interval(<span class="number">1</span>, boarderSize).map(<span class="function"><span class="keyword">function</span> (<span class="params">i</span>) </span>&#123; <span class="keyword">return</span> [i]; &#125;);</div><div class="line">    &#125;</div><div class="line">    <span class="comment">// 先把之前所有符合规则的列组成的集合再扩展一列，然后用reduce降维，最后用isValid过滤掉不符合规则的组合</span></div><div class="line">    <span class="keyword">return</span> queenCols(size - <span class="number">1</span>)</div><div class="line">      .map(<span class="function"><span class="keyword">function</span> (<span class="params">queenCol</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> interval(<span class="number">1</span>, boarderSize).map(<span class="function"><span class="keyword">function</span> (<span class="params">row</span>) </span>&#123;</div><div class="line">          <span class="keyword">return</span> queenCol.concat(row);</div><div class="line">        &#125;);</div><div class="line">      &#125;)</div><div class="line">      .reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> a.concat(b);</div><div class="line">      &#125;)</div><div class="line">      .filter(isValid);</div><div class="line">  &#125;;</div><div class="line">  <span class="comment">// queens函数入口</span></div><div class="line">  <span class="keyword">return</span> queenCols(boarderSize);</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(queens(<span class="number">8</span>));</div><div class="line"><span class="comment">// 输出结果:</span></div><div class="line"><span class="comment">// [ [ 1, 5, 8, 6, 3, 7, 2, 4 ],</span></div><div class="line"><span class="comment">//   [ 1, 6, 8, 3, 7, 4, 2, 5 ],</span></div><div class="line"><span class="comment">//   ...</span></div><div class="line"><span class="comment">//   [ 8, 3, 1, 6, 2, 5, 7, 4 ],</span></div><div class="line"><span class="comment">//   [ 8, 4, 1, 3, 6, 2, 7, 5 ] ]</span></div></pre></td></tr></table></figure>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>回溯算法是很常用的基本算法，认真掌握是没有错的，笔者也是一边学习一边写下本篇，学习内容来源</p>
+<p><a href="https://zh.wikipedia.org/wiki/%E5%85%AB%E7%9A%87%E5%90%8E%E9%97%AE%E9%A2%98" target="_blank" rel="external">八皇后问题</a><br><a href="http://www.cnblogs.com/steven_oyj/archive/2010/05/22/1741376.html" target="_blank" rel="external">五大常用算法之四：回溯法</a><br><a href="http://www.cnblogs.com/houkai/p/3480940.html" target="_blank" rel="external">回溯法——八皇后问题</a><br><a href="http://mihai.bazon.net/blog/amb-in-javascript" target="_blank" rel="external">Amb() in JavaScript</a><br><a href="https://yyqian.com/post/1442113857711/" target="_blank" rel="external">八皇后问题的 JavaScript 解法</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/javascript/" rel="tag">#javascript</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/05/06/简易瀑布流布局/" rel="next" title="简易瀑布流布局">
+                <i class="fa fa-chevron-left"></i> 简易瀑布流布局
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/05/19/html5的video事件学习手札/" rel="prev" title="html5的video元素学习手札">
+                html5的video元素学习手札 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/header.jpg"
+               alt="gxf" />
+          <p class="site-author-name" itemprop="name">gxf</p>
+          <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/ggsoul" target="_blank" title="GitHub">
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/XuefGao" target="_blank" title="Weibo">
+                  
+                  Weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://segmentfault.com/u/ggsoul" target="_blank" title="SegmentFault">
+                  
+                  SegmentFault
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/gxf470001" target="_blank" title="Twitter">
+                  
+                  Twitter
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://searchp.cc/" title="searchpcc" target="_blank">searchpcc</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://mrli.me/" title="Mr.li" target="_blank">Mr.li</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://ycyx28.com/" title="Chao" target="_blank">Chao</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#盲目的枚举算法"><span class="nav-number">2.</span> <span class="nav-text">盲目的枚举算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#回溯法"><span class="nav-number">3.</span> <span class="nav-text">回溯法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#非递归回溯法"><span class="nav-number">4.</span> <span class="nav-text">非递归回溯法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#递归回溯法"><span class="nav-number">5.</span> <span class="nav-text">递归回溯法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#华而不实的amb"><span class="nav-number">6.</span> <span class="nav-text">华而不实的amb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八皇后问题的JavaScript解法"><span class="nav-number">7.</span> <span class="nav-text">八皇后问题的JavaScript解法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">gxf</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("WQkR0jDl5lLEcptvei9NmDR0-gzGzoHsz", "QIOxQpiKaIR8UafqIHm73OK0");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script type="text/javascript" async src="//push.zhanzhang.baidu.com/push.js">
+</script>
+
+
+</body>
+</html>
