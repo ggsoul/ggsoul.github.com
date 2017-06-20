@@ -43,7 +43,7 @@ var postMessage = {
                     that.post({
                         actionType: ['changeHeight', 'shareUrl'],
                         actionParams: {
-                            changeHeight: '409px',
+                            changeHeight: '107.25%',
                             shareUrl: videoInfo
                         }
                     });
