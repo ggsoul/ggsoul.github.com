@@ -41,9 +41,9 @@ var postMessage = {
 
                 if (data.actionType === 'connect') {
                     that.post({
-                        actionType: ['changeHeight', 'shareUrl'],
+                        actionType: ['wrapCss', 'shareUrl'],
                         actionParams: {
-                            changeHeight: '111%',
+                            wrapCss: {'padding-top': '111%'},
                             shareUrl: videoInfo
                         }
                     });
