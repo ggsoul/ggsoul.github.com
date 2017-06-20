@@ -22,7 +22,7 @@ var videoInfo = {
 var postMessage = {
     msgTimer: {},
     flag: "bdvideo",
-    source: "aqiyi",
+    source: "iqiyi",
 
     init: function() {
 
