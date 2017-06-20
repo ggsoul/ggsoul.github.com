@@ -82,9 +82,19 @@ $(document).ready(function() {
             $('.m-album-num').addClass('hide');
             $('.m-album-num').eq(index).removeClass('hide');
 
+            var paddingTop = '';
+
+            if ($('.m-album-num').eq(index).children().length > 5) {
+
+                paddingTop = '111%';
+            }
+            else {
+                paddingTop = '97%';
+            }
+
             postMessage.post({
                 actionType: 'wrapCss',
-                actionParams: {'padding-top': '100%'}
+                actionParams: {'padding-top': paddingTop}
             });
         }
     });
