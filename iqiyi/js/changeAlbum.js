@@ -39,35 +39,53 @@ var videoList = [
     }
 ];
 
-var albumList = [];
-var myVideo = null;
+$(document).ready(function() {
 
-if (document.querySelectorAll) {
-    albumList = document.querySelectorAll(".c-album-item");
-} else {
-    albumList = document.getElementsByClassName("c-album-item")
-}
+    $('.c-album-item').click(function(e) {
+        e.preventDefault();
 
-if (document.querySelector) {
-    myVideo = document.querySelector("video")
-} else {
-    myVideo = document.getElementsByTagName("video")[0]
-}
+        if ($(this).find('.album-current').hasClass('hide')) {
 
-albumList.forEach(function(item, index) {
-    item.addEventListener('click', function(e) {
-        if (e && e.preventDefault) {
-            e.preventDefault();
+            $('.album-current').each(function() {
+
+                if ($(this).hasClass('show')) {
+                    $('.album-current').removeClass('show').addClass('hide');
+                }
+            });
+
+            $(this).find('.album-current').removeClass('hide').addClass('show');
+
+            var index = $(this).data('num') - 1;
+            var videoData = videoList[index % 5];
+
+            $('video')[0].src = videoData.src;
+            $('video')[0].poster = videoData.opt.poster;
+
+            postMessage.post({
+                actionType: 'shareUrl',
+                actionParams: videoData.opt
+            });
         }
+    });
 
-        var videoData = videoList[index % 5];
+    $('.c-tab-item').click(function(e) {
+        e.preventDefault();
 
-        myVideo.src = videoData.src;
-        myVideo.poster = videoData.opt.poster;
+        var index = $(this).index();
 
-        postMessage.post({
-            actionType: 'shareUrl',
-            actionParams: videoData.opt
-        });
-    }, !1);
+        if ($('.m-album-num').eq(index).hasClass('hide')) {
+
+            $('.c-tab-item').removeClass('selected');
+            $(this).addClass('selected');
+
+            $('.m-album-num').removeClass('hide');
+            $('.m-album-num').addClass('hide');
+            $('.m-album-num').eq(index).removeClass('hide');
+
+            postMessage.post({
+                actionType: 'wrapCss',
+                actionParams: {'padding-top': '100%'}
+            });
+        }
+    });
 });
