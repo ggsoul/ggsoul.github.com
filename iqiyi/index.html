@@ -169,5 +169,20 @@
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <script src="./js/postMessage.js"></script>
     <script src="./js/changeAlbum.js"></script>
+    <script src="./js/index.js"></script>
+    <script>
+        BoxJS && BoxJS.ready(function() {
+
+            alert(BoxJS.isBox);
+            BoxJS.invoke('utils.getDeviceInfo', {
+                data: {
+                    keys: ['netInfo']
+                },
+                success: function(params) {
+                    alert(JSON.stringify(params));
+                }
+            });
+        });
+    </script>
 </body>
 </html>
