@@ -43,7 +43,7 @@ var postMessage = {
                     that.post({
                         actionType: ['wrapCss', 'shareUrl'],
                         actionParams: {
-                            wrapCss: {'padding-top': '111%'},
+                            wrapCss: {'height': $('body').height()},
                             shareUrl: videoInfo
                         }
                     });
