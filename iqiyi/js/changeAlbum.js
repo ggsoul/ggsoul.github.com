@@ -74,19 +74,19 @@ $(document).ready(function() {
             $('.m-album-num').addClass('hide');
             $('.m-album-num').eq(index).removeClass('hide');
 
-            var paddingTop = '';
+            var height = '';
 
             if ($('.m-album-num').eq(index).children().length > 5) {
 
-                paddingTop = '111%';
+                height = $('body').height();
             }
             else {
-                paddingTop = '97%';
+                height = $('body').height();
             }
 
             postMessage.post({
                 actionType: 'wrapCss',
-                actionParams: {'padding-top': paddingTop}
+                actionParams: {'height': height}
             });
         }
     });
