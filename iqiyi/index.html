@@ -170,26 +170,5 @@
     <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
     <script src="./js/postMessage.js"></script>
     <script src="./js/changeAlbum.js"></script>
-    <script src="./js/index.js"></script>
-    <script>
-        BoxJS && BoxJS.ready(function() {
-
-            alert(BoxJS.isBox);
-            BoxJS.invoke('utils.getDeviceInfo', {
-                data: {
-                    keys: ['netInfo']
-                },
-                success: function(params) {
-                    alert('gg');
-                }
-            });
-        });
-        BoxJS && BoxJS.config({
-            id: 'feed',
-            success: function () {
-
-            }
-        });
-    </script>
 </body>
 </html>
