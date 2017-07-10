@@ -64,6 +64,17 @@
     .m-box-items .g-tab-num .m-tab-num {
         overflow: scroll;
     }
+    .m-sliding .m-sliding-list {
+        padding-top: 3%;
+        padding-bottom: 3%;
+    }
+    .g-tab-num .m-tab-num-list .c-tab-item {
+        height: 0;
+        line-height: 0;
+    }
+    .g-tab-num .m-tab-num-list .selected {
+        border-bottom: none;
+    }
     </style>
 </head>
 <body>
@@ -77,15 +88,6 @@
     </div>
 
     <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
-        <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
-            <section class="m-title m-title-borderB">
-                <h3 class="c-title-des">剧集
-                    <span class="c-info" glue-node="albumNum">
-                    更新至16集/共58集
-                    </span>
-                </h3>
-            </section>
-        </div>
         <div class="m-box-items m-box-items-full" glue-component="page.playMovie.component.albumList" glue-id="albumList" data-behavior="common.behavior.horizontalScroll.horizontalScroll" glue-node="tabBody" data-pageSize="10" data-aid="203965201">
 
             <section class="g-tab-num g-tab-num-line">
