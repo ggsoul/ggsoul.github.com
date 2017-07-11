@@ -224,6 +224,7 @@ var postMessage = {
 
         window.addEventListener("message", function(e) {
             var data = e.data || {};
+            console.log(data);
 
             if (data.flag === that.flag) {
 
