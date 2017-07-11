@@ -205,17 +205,17 @@ var postMessage = {
             console.log('初始发送链接请求回调');
         });*/
 
-        // this.msgTimer = window.setInterval(function() {
-        //
-        //     BdVideoBox.Base.connect({
-        //         msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
-        //         flag: 'bdvideo',
-        //         source: "iqiyi"
-        //     }, function(){
-        //
-        //     });
-        //
-        // }, 1000);
+        this.msgTimer = window.setInterval(function() {
+
+            BdVideoBox.Base.connect({
+                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+                flag: 'bdvideo',
+                source: "iqiyi"
+            }, function(){
+
+            });
+
+        }, 1000);
 
         this.bindEvent()
     },
