@@ -61,9 +61,6 @@
         z-index: 101;
         overflow: hidden;
     }
-    .m-box-items .g-tab-num .m-tab-num {
-        overflow: scroll;
-    }
     </style>
 </head>
 <body>
@@ -92,12 +89,6 @@
                 <div class="m-tab-num m-sliding" glue-node="horizontalScroll">
                     <div class="m-tab-num-list m-sliding-list" style="-webkit-transform: translate(0px, 0px) scale(1); transform: translate(0px, 0px) scale(1);" glue-node="groupTitle">
                         <span class="c-tab-item  selected " glue-type="switchTab" data-key="$collectionInfo.id-1" tab-index="0" from="1" to="10" >1-10</span>
-                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
-                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
-                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
-                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
-                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
-                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
                         <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
                     </div>
                 </div>
@@ -166,8 +157,257 @@
             </div>
         </div>
     </div>
+
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-    <script src="./js/postMessage.js"></script>
-    <script src="./js/changeAlbum.js"></script>
+
+    <!--<script src="./js/postMessage.js"></script>
+    <script src="./js/changeAlbum.js"></script>-->
+    <!-第三方引入处->
+    <!--<script src="http://szth-sys-rpm70.szth.baidu.com:8376/src/longvideo/index/dev.js?v=8"></script>-->
+    <script src="http://szth-sys-rpm70.szth.baidu.com:8376/static/fecommon/longvideo/BdVideoBox.js?v=1"></script>
+    <script>
+
+var videoInfo = {
+    "id":"8704195909973021667",
+    "commentVersion":"2017244180",
+    "dtid":"",
+    "title":"《加勒比海盗5》最新幕后精彩预告，杰克船长如何改变厄运",
+    "poster":"http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg",
+    "source_from":"trans",
+    "locid":"http://www.internal.video.baidu.com/2f1c1c1c29d346b65cba8b6d95271166.html",
+    "comment_id":"",
+    "shareInfo":{
+        "mediaType":"all",
+        "title":"《加勒比海盗5》最新幕后精彩预告，杰克船长如何改变厄运","content":"好看的视频,打开看看吧！",
+        "type":"url",
+        "source":"baidumedia",
+        "linkUrl":"https://sv.baidu.com/videoui/page/videoland?isBdboxShare=1&context=%7B%22nid%22%3A%22sv_8704195909973021667%22%7D&pd=share",
+        "iconUrl":"http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg",
+        "categoryInfo":{"nid":"sv_8704195909973021667"}
+    }
+};
+
+
+var postMessage = {
+    msgTimer: {},
+    flag: "bdvideo",
+    source: "iqiyi",
+
+    init: function() {
+
+
+        /*var msgid = BdVideoBox('base', 'getMsgId');
+        // 通信：初始发送链接请求
+        BdVideoBox('base', 'connect', {
+            msgId: msgid,
+            flag: 'bdvideo',
+            source: "iqiyi"
+        }, function () {
+            console.log('初始发送链接请求回调');
+        });*/
+        BdVideoBox.Base.connect({
+            msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+            flag: 'bdvideo',
+            source: "iqiyi"
+        }, function(){
+
+        });
+
+        this.bindEvent()
+    },
+    bindEvent: function() {
+        var that = this;
+
+        window.addEventListener("message", function(e) {
+            var data = e.data || {};
+
+            if (data.flag === that.flag) {
+
+                if (data.actionType === 'connect') {
+                    /*that.post({
+                        actionType: ['wrapCss', 'shareUrl'],
+                        actionParams: {
+                            wrapCss: {'padding-top': '111%'},
+                            shareUrl: videoInfo
+                        }
+                    });*/
+                    // 通信：初始链接成功，修改高度
+                    /*BdVideoBox('baseUi', 'setWrapCss', {
+                        msgId: BdVideoBox('base', 'getMsgId'),
+                        wrapCss: {'padding-top': '111%'}
+                    }, function () {
+                        console.log('内嵌页wrapCss');
+                    });
+                    // 通信：初始链接成功，设置分享url
+                    BdVideoBox('baseUi', 'setShareConf', {
+                        msgId: BdVideoBox('base', 'getMsgId'),
+                        shareConf: videoInfo
+                    }, function () {
+                        console.log('setShareConf');
+                    });*/
+                    BdVideoBox.BaseUi.setWrapCss({
+                        msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+                        wrapCss: {'height': $('body').height()}
+                    }, function(){
+
+                    });
+
+                    /*BdVideoBox.BaseUi.setVideoInfo({
+                        msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+                        shareConf: videoInfo
+                    }, function(){
+
+                    });*/
+                }
+
+                window.clearTimeout(that.msgTimer[data.msgId]);
+                delete that.msgTimer[data.msgId]
+            }
+        });
+    },
+    isSupportedPostMsg: function() {
+        return window.parent && window.parent.postMessage
+    },
+    /*getMsgId: function() {
+        return + new Date + "" + Math.round(Math.random() * 1000)
+    },*/
+    /*post: function(params, cycle) {
+        if (!this.isSupportedPostMsg()) {
+            return
+        }
+        var that = this;
+        var msgId = this.getMsgId();
+        params = params || {};
+        params.flag = that.flag;
+        params.source = that.source;
+        params.msgId = msgId;
+
+        window.parent.postMessage(params, "*");
+
+        if (cycle) {
+            this.msgTimer[msgId] = window.setInterval(function() {
+                params.resend = params.resend ? params.resend++ : 1;
+                window.parent.postMessage(params, "*")
+            }, 1000);
+        }
+        else {
+            this.msgTimer[msgId] = window.setTimeout(function() {
+                params.resend = 1;
+                window.parent.postMessage(params, "*")
+            }, 1000);
+        }
+    }*/
+};
+
+var videoList = [
+    {
+        id: '8704195909973021667',
+        poster: 'http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg',
+        src: 'https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed'
+    },
+    {
+        id: '12653024706116713870',
+        poster: 'https://ss0.bdstatic.com/9bA1vGfa2gU2pMbfm9GUKT-w/timg?searchbox_feed&quality=100&wh_rate=0&size=b800_1000&ref=http%3A%2F%2Fwww.baidu.com&sec=0&di=2f36eb2d343c14ee4e203aed8b20835d&src=http%3A%2F%2Fb.bdstatic.com%2Fsearchbox%2Ffile%2Fstar%2F20170620%2F1497925866194925.png',
+        src: 'https://vd1.bdstatic.com/mda-hfvebxr9fw53wuyc/mda-hfvebxr9fw53wuyc.mp4?playlist=%5B%22hd%22%5D&auth_key=1497938875-0-0-5bc7b21f76077c65825e93ec17034a40&bcevod_channel=searchbox_feed'
+    },
+    {
+        id: '11324487133180799594',
+        poster: 'http://vd1.bdstatic.com/mda-hdewiv13quzsqyj7/mda-hdewiv13quzsqyj7.jpg',
+        src: 'https://vd1.bdstatic.com/mda-hdewiv13quzsqyj7/hd/mda-hdewiv13quzsqyj7.mp4?playlist=%5B%22hd%22%2C%22sc%22%5D&auth_key=1497689426-0-0-5cfd8fcfa3e62a37e94e6b6def4fa28d&bcevod_channel=searchbox_feed'
+    },
+    {
+        id: '4605177881513504166',
+        poster: 'https://ss0.bdstatic.com/9bA1vGfa2gU2pMbfm9GUKT-w/timg?searchbox_feed&quality=100&wh_rate=0&size=b800_1000&ref=http%3A%2F%2Fwww.baidu.com&sec=0&di=99c1eb35b8f27fe5e6faf64c15caa07e&src=http%3A%2F%2Fbos.nj.bpc.baidu.com%2Fv1%2Fmediaspot%2Fd2b9b132a3daeb032103a7afdb9b5555.jpeg',
+        src: 'https://vd1.bdstatic.com/mda-hffgtxaifywk5eaj/mda-hffgtxaifywk5eaj.mp4?auth_key=1497689535-0-0-7ff9fa11c651afd0de7ad9db5ec7a9c1&bcevod_channel=searchbox_feed'
+    },
+    {
+        id: '14400512106424409164',
+        poster: 'https://ss0.bdstatic.com/9bA1vGfa2gU2pMbfm9GUKT-w/timg?searchbox_feed&quality=100&wh_rate=0&size=b800_1000&ref=http%3A%2F%2Fwww.baidu.com&sec=0&di=f2e129e8e88ea6a765b544482013f97c&src=http%3A%2F%2Fbos.nj.bpc.baidu.com%2Fv1%2Fmediaspot%2F280e1ee579cd2d56517b729ed3fa7719.jpeg',
+        src: 'https://vd1.bdstatic.com/mda-heymq7qgar7r6yhh/hd/mda-heymq7qgar7r6yhh.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689582-0-0-7d4e2588574c13060ce5c31f788223ff&bcevod_channel=searchbox_feed'
+    },
+    {
+        id: '14725699043277195038',
+        poster: 'https://ss0.bdstatic.com/9bA1vGfa2gU2pMbfm9GUKT-w/timg?searchbox_feed&quality=100&wh_rate=0&size=b800_1000&ref=http%3A%2F%2Fwww.baidu.com&sec=0&di=a44d1255959cf4b95f42973e58e1d929&src=http%3A%2F%2Fpic.rmb.bdstatic.com%2Fe8228351fc28b9cf3fc303bb655f6373.jpg',
+        src: 'https://vd1.bdstatic.com/mda-hdvwmku1dxxic1g1/hd/mda-hdvwmku1dxxic1g1.mp4?playlist=%5B%22hd%22%2C%22sc%22%5D&auth_key=1497689626-0-0-45f57860787dfb5415c8245ebff66588&bcevod_channel=searchbox_feed'
+    }
+];
+
+$(document).ready(function() {
+
+    // 初始化通信
+    postMessage.init();
+
+    // 切换具体集
+    $('.c-album-item').click(function(e) {
+        e.preventDefault();
+
+        if ($(this).find('.album-current').hasClass('hide')) {
+
+            $('.album-current').each(function() {
+
+                if ($(this).hasClass('show')) {
+                    $('.album-current').removeClass('show').addClass('hide');
+                }
+            });
+
+            $(this).find('.album-current').removeClass('hide').addClass('show');
+
+            var index = $(this).data('num') - 1;
+            var videoData = videoList[index % 5];
+
+            $('video')[0].src = videoData.src;
+            $('video')[0].poster = videoData.poster;
+
+           /* postMessage.post({
+                actionType: 'shareUrl',
+                actionParams: videoData.opt
+            });*/
+
+            // 通信：设置分享链接
+            /*BdVideoBox('baseUi', 'setShareConf', {
+                msgId: BdVideoBox('base', 'getMsgId'),
+                shareConf: videoData.opt
+            }, function () {
+                console.log(11);
+            })*/
+            BdVideoBox.Base.setVideoInfo({
+                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+                videoId: videoData.id
+            }, function(){
+
+            });
+        }
+    });
+
+    // 切换分集
+    $('.c-tab-item').click(function(e) {
+        e.preventDefault();
+
+        var index = $(this).index();
+
+        if ($('.m-album-num').eq(index).hasClass('hide')) {
+
+            $('.c-tab-item').removeClass('selected');
+            $(this).addClass('selected');
+
+            $('.m-album-num').removeClass('hide');
+            $('.m-album-num').addClass('hide');
+            $('.m-album-num').eq(index).removeClass('hide');
+
+            // 通信：切换tab,设置css样式
+
+            BdVideoBox.BaseUi.setWrapCss({
+                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+                wrapCss: {'height': $('body').height()}
+            }, function(){
+
+            });
+
+        }
+    });
+});
+
+    </script>
+
 </body>
 </html>
