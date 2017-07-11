@@ -189,13 +189,12 @@ var videoInfo = {
 
 
 var postMessage = {
-    msgTimer: {},
+    msgTimer: null,
     flag: "bdvideo",
     source: "iqiyi",
 
     init: function() {
 
-        console.log('postMessage init');
         /*var msgid = BdVideoBox('base', 'getMsgId');
         // 通信：初始发送链接请求
         BdVideoBox('base', 'connect', {
@@ -205,13 +204,18 @@ var postMessage = {
         }, function () {
             console.log('初始发送链接请求回调');
         });*/
-        BdVideoBox.Base.connect({
-            msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
-            flag: 'bdvideo',
-            source: "iqiyi"
-        }, function(){
 
-        });
+        this.msgTimer = window.setInterval(function() {
+
+            BdVideoBox.Base.connect({
+                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+                flag: 'bdvideo',
+                source: "iqiyi"
+            }, function(){
+
+            });
+
+        }, 1000);
 
         this.bindEvent()
     },
@@ -260,8 +264,8 @@ var postMessage = {
                     });*/
                 }
 
-                window.clearTimeout(that.msgTimer[data.msgId]);
-                delete that.msgTimer[data.msgId]
+                window.clearTimeout(that.msgTimer);
+                delete that.msgTimer;
             }
         });
     },
