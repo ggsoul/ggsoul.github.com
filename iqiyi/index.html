@@ -85,7 +85,8 @@
         </div>
     </div>
 
-    <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode" id="testapp">
+<div id="testapp">
+    <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
         <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
             <section class="m-title m-title-borderB">
                 <h3 class="c-title-des">剧集
@@ -169,6 +170,7 @@
             </div>
         </div>
     </div>
+</div>
 
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
@@ -235,7 +237,7 @@ var postMessage = {
             console.log('连接成功');console.log(data);
             if (data.fontSize) {
                 console.log('初始化修改字体大小');
-                $("#testapp").removeClass('font-size-0 font-size-1 font-size-2 font-size-3');
+                $("#testapp").removeClass();
                 $("#testapp").addClass(data.fontSize);
             }
 
@@ -248,7 +250,7 @@ var postMessage = {
             console.log('字体大小变更');
             if (data.fontSize) {
                 console.log('初始化修改字体大小');
-                $("#testapp").removeClass('font-size-0 font-size-1 font-size-2 font-size-3');
+                $("#testapp").removeClass();
                 $("#testapp").addClass(data.fontSize);
             }
         });
