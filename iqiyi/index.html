@@ -21,6 +21,9 @@
     <link rel="alternate" hreflang="zh" href=" http://m.iqiyi.com/v_19rr700mq0.html">
 
     <style>
+    .font-size-1 .c-title-des {
+        font-size: 1.15rem;
+    }
     .mip-video-box {
         width: 100%;
         position: absolute;
@@ -189,22 +192,13 @@ var videoInfo = {
 
 
 var postMessage = {
-    msgTimer: null,
+    msgTimer: {},
     flag: "bdvideo",
     source: "iqiyi",
 
     init: function() {
 
-        /*var msgid = BdVideoBox('base', 'getMsgId');
-        // 通信：初始发送链接请求
-        BdVideoBox('base', 'connect', {
-            msgId: msgid,
-            flag: 'bdvideo',
-            source: "iqiyi"
-        }, function () {
-            console.log('初始发送链接请求回调');
-        });*/
-
+        // 发送链接请求
         BdVideoBox.Base.connect({
             msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
             flag: 'bdvideo',
@@ -213,91 +207,38 @@ var postMessage = {
 
         });
 
-        this.bindEvent()
+        this.bindEvent();
     },
     bindEvent: function() {
         var that = this;
 
-        window.addEventListener("message", function(e) {
-            var data = e.data || {};
-            console.log(data);
+        // 监听链接请求，成功后
+        BdVideoBox.Event.listen('onConnect', function(e) {
+            var data = e || {};
 
-            if (data.flag === that.flag) {
+            BdVideoBox.BaseUi.setWrapCss({
+                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+                wrapCss: {'height': $('body').height()}
+            }, function(){
 
-                if (data.actionType === 'connect') {
-                    /*that.post({
-                        actionType: ['wrapCss', 'shareUrl'],
-                        actionParams: {
-                            wrapCss: {'padding-top': '111%'},
-                            shareUrl: videoInfo
-                        }
-                    });*/
-                    // 通信：初始链接成功，修改高度
-                    /*BdVideoBox('baseUi', 'setWrapCss', {
-                        msgId: BdVideoBox('base', 'getMsgId'),
-                        wrapCss: {'padding-top': '111%'}
-                    }, function () {
-                        console.log('内嵌页wrapCss');
-                    });
-                    // 通信：初始链接成功，设置分享url
-                    BdVideoBox('baseUi', 'setShareConf', {
-                        msgId: BdVideoBox('base', 'getMsgId'),
-                        shareConf: videoInfo
-                    }, function () {
-                        console.log('setShareConf');
-                    });*/
-                    BdVideoBox.BaseUi.setWrapCss({
-                        msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
-                        wrapCss: {'height': $('body').height()}
-                    }, function(){
+            });
 
-                    });
-
-                    /*BdVideoBox.BaseUi.setVideoInfo({
-                        msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
-                        shareConf: videoInfo
-                    }, function(){
-
-                    });*/
-                }
-
-                window.clearTimeout(that.msgTimer);
-                delete that.msgTimer;
+            console.log('连接成功');console.log(data);
+            if (data.fontSize) {
+                console.log('初始化修改字体大小');
+                $("#testapp").addClass(data.fontSize);
             }
+
+        });
+
+        // 监听字体变化
+        BdVideoBox.Event.listen('onFontChange', function (e) {
+            console.log('字体大小变更');
         });
     },
     isSupportedPostMsg: function() {
         return window.parent && window.parent.postMessage
-    },
-    /*getMsgId: function() {
-        return + new Date + "" + Math.round(Math.random() * 1000)
-    },*/
-    /*post: function(params, cycle) {
-        if (!this.isSupportedPostMsg()) {
-            return
-        }
-        var that = this;
-        var msgId = this.getMsgId();
-        params = params || {};
-        params.flag = that.flag;
-        params.source = that.source;
-        params.msgId = msgId;
-
-        window.parent.postMessage(params, "*");
-
-        if (cycle) {
-            this.msgTimer[msgId] = window.setInterval(function() {
-                params.resend = params.resend ? params.resend++ : 1;
-                window.parent.postMessage(params, "*")
-            }, 1000);
-        }
-        else {
-            this.msgTimer[msgId] = window.setTimeout(function() {
-                params.resend = 1;
-                window.parent.postMessage(params, "*")
-            }, 1000);
-        }
-    }*/
+    }
 };
 
 var videoList = [
