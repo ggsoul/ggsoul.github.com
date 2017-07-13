@@ -173,6 +173,7 @@
 </div>
 
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+    <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
     <!--<script src="./js/postMessage.js"></script>
     <script src="./js/changeAlbum.js"></script>-->
     <!-第三方引入处->
@@ -228,7 +229,7 @@ var postMessage = {
 
             BdVideoBox.BaseUi.setWrapCss({
                 msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
-                wrapCss: {'height': $('body').height() + 5}
+                wrapCss: {'height': $('body').height()}
             }, function(){
 
             });
@@ -297,6 +298,9 @@ $(document).ready(function() {
     // 初始化通信
     postMessage.init();
 
+    console.log('cookie: ');
+    console.log(document.cookie);
+
     // 切换具体集
     $('.c-album-item').click(function(e) {
         e.preventDefault();
@@ -358,7 +362,7 @@ $(document).ready(function() {
 
             BdVideoBox.BaseUi.setWrapCss({
                 msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
-                wrapCss: {'height': $('body').height() + 5}
+                wrapCss: {'height': $('body').height()}
             }, function(){
 
             });
