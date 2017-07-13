@@ -181,6 +181,10 @@
     <script src="http://szth-sys-rpm70.szth.baidu.com:8376/static/fecommon/longvideo/BdVideoBox.js?v=1"></script>
     <script>
 
+    console.log('cookie: ');
+    document.cookie= "name=gxf";
+    console.log(document.cookie);
+
 var videoInfo = {
     "id":"8704195909973021667",
     "commentVersion":"2017244180",
@@ -297,10 +301,6 @@ $(document).ready(function() {
 
     // 初始化通信
     postMessage.init();
-
-    console.log('cookie: ');
-    document.cookie= "name=gxf";  
-    console.log(document.cookie);
 
     // 切换具体集
     $('.c-album-item').click(function(e) {
