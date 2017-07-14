@@ -24,14 +24,17 @@
     body {
         background: #fff;
     }
+    .font-size-1 .c-title-des {
+        font-size: 1.15rem;
+    }
     .font-size-2 .c-title-des {
-        font-size: .2rem;
+        font-size: 0.15rem;
     }
     .font-size-3 .c-title-des {
-        font-size: .22rem;
+        font-size: 0.45rem;
     }
     .font-size-0 .c-title-des {
-        font-size: .16rem;
+        font-size: 0.85rem;
     }
     .mip-video-box {
         width: 100%;
@@ -181,10 +184,6 @@
     <script src="http://szth-sys-rpm70.szth.baidu.com:8376/static/fecommon/longvideo/BdVideoBox.js?v=1"></script>
     <script>
 
-    console.log('cookie: ');
-    // document.cookie= "name2=gxf";
-    console.log(document.cookie);
-
 var videoInfo = {
     "id":"8704195909973021667",
     "commentVersion":"2017244180",
@@ -214,12 +213,9 @@ var postMessage = {
     init: function() {
 
         // 发送链接请求
-        BdVideoBox.Base.connect({
-            msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+        BdVideoBox.invoke('connect', {
             flag: 'bdvideo',
             source: "iqiyi"
-        }, function(){
-
         });
 
         this.bindEvent();
@@ -231,16 +227,11 @@ var postMessage = {
         BdVideoBox.Event.listen('onConnect', function(e) {
             var data = e || {};
 
-            BdVideoBox.BaseUi.setWrapCss({
-                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+            BdVideoBox.invoke('setPageStyle', {
                 wrapCss: {'height': $('body').height()}
-            }, function(){
-
             });
 
-            console.log('连接成功');console.log(data);
             if (data.fontSize) {
-                console.log('初始化修改字体大小');
                 $("#testapp").removeClass();
                 $("#testapp").addClass(data.fontSize);
             }
@@ -251,9 +242,7 @@ var postMessage = {
         BdVideoBox.Event.listen('onFontChange', function (e) {
             var data = e || {};
 
-            console.log('字体大小变更');
             if (data.fontSize) {
-                console.log('初始化修改字体大小');
                 $("#testapp").removeClass();
                 $("#testapp").addClass(data.fontSize);
             }
@@ -323,23 +312,9 @@ $(document).ready(function() {
             $('video')[0].src = videoData.src;
             $('video')[0].poster = videoData.poster;
 
-           /* postMessage.post({
-                actionType: 'shareUrl',
-                actionParams: videoData.opt
-            });*/
 
-            // 通信：设置分享链接
-            /*BdVideoBox('baseUi', 'setShareConf', {
-                msgId: BdVideoBox('base', 'getMsgId'),
-                shareConf: videoData.opt
-            }, function () {
-                console.log(11);
-            })*/
-            BdVideoBox.Base.setVideoInfo({
-                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+            BdVideoBox.invoke('setVideoInfo',{
                 videoId: videoData.id
-            }, function(){
-
             });
         }
     });
@@ -361,11 +336,8 @@ $(document).ready(function() {
 
             // 通信：切换tab,设置css样式
 
-            BdVideoBox.BaseUi.setWrapCss({
-                msgId: BdVideoBox.Utils.MsgUtil.getMsgId(),
+            BdVideoBox.invoke('setPageStyle', {
                 wrapCss: {'height': $('body').height()}
-            }, function(){
-
             });
 
         }
