@@ -133,7 +133,7 @@
         </div>
     </div>
 
-    <input type="button" value="Play" onclick="document.getElementsByTagName('video')[0].play()">
+    <input id="myPlay" type="button" value="Play" onclick="document.getElementsByTagName('video')[0].play()">
 
     <div class="mod-info">
         <div class="openAppCommonTpl-1 new-style">
@@ -329,6 +329,8 @@ $(document).ready(function() {
 
     var v = document.getElementsByTagName("video")[0];
     v.play();
+
+    $('#myPlay').click();
 
     $('video').click();
 
