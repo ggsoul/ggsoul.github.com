@@ -243,7 +243,7 @@ var postMessage = {
         BdVideoBox.invoke('connect', {
             flag: 'bdvideo',
             source: "iqiyi",
-            openApp: {// 调起第三方app所需
+            openApp: {
                 ulink: 'http://wapsite.baidu.com/haokan/share/detail?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin',
                 androidSchema: 'baiduhaokan://video/details/?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin',
                 iosSchema: 'baiduhaokan://video/details/?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin'
@@ -348,7 +348,12 @@ $(document).ready(function() {
 
 
             BdVideoBox.invoke('setVideoInfo',{
-                videoId: videoData.id
+                videoId: videoData.id,
+                openApp: {
+                    ulink: 'http://wapsite.baidu.com/haokan/share/detail?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin',
+                    androidSchema: 'baiduhaokan://video/details/?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin',
+                    iosSchema: 'baiduhaokan://video/details/?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin'
+                }
             });
         }
     });
