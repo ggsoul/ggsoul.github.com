@@ -285,7 +285,8 @@ var postMessage = {
 
             if (data.move) {
                 var move = parseInt(data.move, 10);
-                $('#testapp').css('top', 210-move);
+                move = move === 210 ? -210 : 0;
+                $('#testapp').css('top', move);
                 // console.log(data.move);
             }
         });
