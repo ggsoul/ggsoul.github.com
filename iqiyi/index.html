@@ -210,7 +210,7 @@
 </div>
 
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-    <!-- <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script> -->
+    <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
     <!--<script src="./js/postMessage.js"></script>
     <script src="./js/changeAlbum.js"></script>-->
     <!-第三方引入处->
@@ -247,12 +247,12 @@ var postMessage = {
     init: function() {
 
         // 发送链接请求
-        BdVideoBox.invoke('connect', {
-            flag: 'bdvideo',
-            source: "iqiyi"
-        });
-
-        this.bindEvent();
+        // BdVideoBox.invoke('connect', {
+        //     flag: 'bdvideo',
+        //     source: "iqiyi"
+        // });
+        //
+        // this.bindEvent();
     },
     bindEvent: function() {
         var that = this;
