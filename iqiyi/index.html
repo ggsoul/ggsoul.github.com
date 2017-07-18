@@ -122,7 +122,7 @@
     <div class="mod-play1er">
         <div class="play1er">
             <div class="play1er-box">
-                <video src="https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed" poster="http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg" autoplay="true" controls webkit-playsinline="true" playsinline="true"></video>
+                <video src="https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed" poster="http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg" autoplay="true"  webkit-playsinline playsinline></video>
             </div>
         </div>
     </div>
@@ -242,7 +242,12 @@ var postMessage = {
         // 发送链接请求
         BdVideoBox.invoke('connect', {
             flag: 'bdvideo',
-            source: "iqiyi"
+            source: "iqiyi",
+            openApp: {// 调起第三方app所需
+                ulink: 'http://wapsite.baidu.com/haokan/share/detail?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin',
+                androidSchema: 'baiduhaokan://video/details/?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin',
+                iosSchema: 'baiduhaokan://video/details/?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin'
+            }
         });
 
         this.bindEvent();
