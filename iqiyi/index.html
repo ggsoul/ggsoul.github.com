@@ -290,7 +290,7 @@ var postMessage = {
             if (data.move) {
                 var move = parseInt(data.move, 10);
                 move = move === 210 ? -210 : 0;
-
+                console.log(move);
 
                 if (move === 0) {
                     $('#testapp').css('opacity', 1);
