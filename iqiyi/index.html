@@ -115,6 +115,10 @@
         -webkit-box-pack: center;
     }
 
+    #testapp {
+        position: relative;
+        top: 0;
+    }
     </style>
 </head>
 <body>
@@ -127,6 +131,7 @@
         </div>
     </div>
 
+<div id="testapp">
     <div class="mod-info">
         <div class="openAppCommonTpl-1 new-style">
             <div class="appAdd-commonTpl">
@@ -134,8 +139,6 @@
             </div>
         </div>
     </div>
-
-<div id="testapp">
     <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
         <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
             <section class="m-title m-title-borderB">
@@ -281,7 +284,9 @@ var postMessage = {
             }
 
             if (data.move) {
-                console.log(data.move);
+                var move = parseInt(data.move, 10);
+                $('#testapp').css('top', -move);
+                // console.log(data.move);
             }
         });
     },
