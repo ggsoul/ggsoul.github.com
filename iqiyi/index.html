@@ -279,6 +279,10 @@ var postMessage = {
                 $("#testapp").removeClass();
                 $("#testapp").addClass(data.fontSize);
             }
+
+            if (data.move) {
+                console.log(data.move);
+            }
         });
     },
     isSupportedPostMsg: function() {
