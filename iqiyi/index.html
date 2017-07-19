@@ -118,10 +118,10 @@
     #testapp {
         position: relative;
         top: 0;
-        transition: all .2s;
+        /*transition: all .2s;
         -moz-transition: all .2s;
         -webkit-transition: all .2s;
-        -o-transition: all .2s;
+        -o-transition: all .2s;*/
     }
     </style>
 </head>
@@ -295,11 +295,11 @@ var postMessage = {
                 console.log(move);
 
                 requestAnimationFrame(function() {
-                    if (move === 0) {
-                        $('#testapp').css('opacity', 1);
-                    } else {
-                        $('#testapp').css('opacity', 0);
-                    }
+                    // if (move === 0) {
+                    //     $('#testapp').css('opacity', 1);
+                    // } else {
+                    //     $('#testapp').css('opacity', 0);
+                    // }
 
                     $('#testapp').css('top', data.move);
                 });
