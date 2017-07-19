@@ -278,6 +278,8 @@ var postMessage = {
 
         });
 
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
         // 监听字体变化
         BdVideoBox.Event.listen('onFontChange', function (e) {
             var data = e || {};
@@ -292,13 +294,16 @@ var postMessage = {
                 move = move === 210 ? -210 : 0;
                 console.log(move);
 
-                if (move === 0) {
-                    $('#testapp').css('opacity', 1);
-                } else {
-                    $('#testapp').css('opacity', 0);
-                }
+                requestAnimationFrame(function() {
+                    if (move === 0) {
+                        $('#testapp').css('opacity', 1);
+                    } else {
+                        $('#testapp').css('opacity', 0);
+                    }
 
-                $('#testapp').css('top', move);
+                    $('#testapp').css('top', move);
+                });
+
                 // console.log(data.move);
             }
         });
