@@ -291,7 +291,7 @@ var postMessage = {
 
             if (data.move) {
                 var move = parseInt(data.move, 10);
-                move = move === 210 ? -210 : 0;
+                // move = move === 210 ? -210 : 0;
                 console.log(move);
 
                 requestAnimationFrame(function() {
@@ -301,7 +301,7 @@ var postMessage = {
                         $('#testapp').css('opacity', 0);
                     }
 
-                    $('#testapp').css('top', move);
+                    $('#testapp').css('top', data.move);
                 });
 
                 // console.log(data.move);
@@ -350,8 +350,6 @@ $(document).ready(function() {
 
     // 初始化通信
     postMessage.init();
-
-    window.location.href = 'http://wapsite.baidu.com/haokan/share/detail?url_key=http://www.internal.video.baidu.com/c73538dc8bee318b0b1d9eeed772b733.html&tab=guide&tag=web_share&source=share_weixin';
 
     $('video')[0].play();
 
