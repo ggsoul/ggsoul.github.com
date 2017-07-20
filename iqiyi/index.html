@@ -292,18 +292,18 @@ var postMessage = {
 
             if (data.move) {
                 var move = parseInt(data.move, 10);
-                // move = move === 210 ? -210 : 0;
-                // console.log(move);
-                //
-                // requestAnimationFrame(function() {
-                //     if (move === 0) {
-                //         $('#testapp').css('opacity', 1);
-                //     } else {
-                //         $('#testapp').css('opacity', 0);
-                //     }
-                //
-                //     $('#testapp').css('top', -move);
-                // });
+                move = move === 210 ? -210 : 0;
+                console.log(move);
+
+                requestAnimationFrame(function() {
+                    if (move === 0) {
+                        $('#testapp').css('opacity', 1);
+                    } else {
+                        $('#testapp').css('opacity', 0);
+                    }
+
+                    $('#testapp').css('top', -move);
+                });
 
                 // console.log(data.move);
             }
@@ -351,11 +351,6 @@ $(document).ready(function() {
 
     // 初始化通信
     postMessage.init();
-
-    var ifr = document.createElement('iframe');
-    ifr.src = 'intent://self/res.made?key=69842642483add0a63503306d63f0443&aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27&identifier=qymobile&other=&from_sub_type=22';
-    ifr.style.display = 'none';
-    document.body.appendChild(ifr);
 
     // 切换具体集
     $('.c-album-item').click(function(e) {
