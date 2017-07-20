@@ -111,9 +111,7 @@ body {
 }
 
 #partnerFrame {
-    position: fixed;
     height: 300px;
-    z-index: 10;
 }
 
 .font-size-1 .c-title-des {
@@ -210,7 +208,7 @@ body {
 
 #testapp {
     position: relative;
-    top: 200px;
+    top: 0;
     transition: all .2s;
     -moz-transition: all .2s;
     -webkit-transition: all .2s;
@@ -222,10 +220,10 @@ body {
 <body onload="loaded()">
 
 <div id="monitor">Y position: <strong id="position">0</strong></div>
-<iframe id="partnerFrame" name="partnerFrame" scrolling="no" allowFullScreen src="./index.html"></iframe>
 
 <div id="wrapper">
 	<div id="scroller">
+        <iframe id="partnerFrame" name="partnerFrame" scrolling="no" allowFullScreen src="./index.html"></iframe>
 
     <div id="testapp">
         <div class="mod-info">
