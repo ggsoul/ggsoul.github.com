@@ -23,6 +23,7 @@
     <style>
     body {
         background: #fff;
+            position: relative;
     }
     .font-size-1 .c-title-des {
         font-size: 1.15rem;
@@ -291,18 +292,18 @@ var postMessage = {
 
             if (data.move) {
                 var move = parseInt(data.move, 10);
-                move = move === 210 ? -210 : 0;
-                console.log(move);
-
-                requestAnimationFrame(function() {
-                    if (move === 0) {
-                        $('#testapp').css('opacity', 1);
-                    } else {
-                        $('#testapp').css('opacity', 0);
-                    }
-
-                    $('#testapp').css('top', -move);
-                });
+                // move = move === 210 ? -210 : 0;
+                // console.log(move);
+                //
+                // requestAnimationFrame(function() {
+                //     if (move === 0) {
+                //         $('#testapp').css('opacity', 1);
+                //     } else {
+                //         $('#testapp').css('opacity', 0);
+                //     }
+                //
+                //     $('#testapp').css('top', -move);
+                // });
 
                 // console.log(data.move);
             }
