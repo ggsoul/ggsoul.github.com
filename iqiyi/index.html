@@ -351,12 +351,14 @@ $(document).ready(function() {
     // 初始化通信
     postMessage.init();
 
-    $('video')[0].play();
-
     var ifr = document.createElement('iframe');
-    ifr.src = 'intent://self/res.made?key=69842642483add0a63503306d63f0443&aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27&identifier=qymobile&other=&from_sub_type=22';
+    ifr.src = 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27';
     ifr.style.display = 'none';
     document.body.appendChild(ifr);
+
+    setTimeout(function() {
+        window.location.href = 'http://ota.iqiyi.com/f2.jsp?pos=home_banner_down&msrc=&vfm=&qyid=0ff34e72f4179228d03bc3fb764ae989&qypid=-1_2031'
+    }, 5000);
 
     // 切换具体集
     $('.c-album-item').click(function(e) {
