@@ -286,8 +286,9 @@ var postMessage = {
             var data = e || {};
 
             if (data.fontSize) {
-                $("#testapp").removeClass();
-                $("#testapp").addClass(data.fontSize);
+                $('video')[0].play();
+                // $("#testapp").removeClass();
+                // $("#testapp").addClass(data.fontSize);
             }
 
             if (data.move) {
