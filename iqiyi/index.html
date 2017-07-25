@@ -345,6 +345,7 @@ $(document).ready(function() {
     postMessage.init();
 
     $('video').on('playing', function () {
+        alert('playing');
         BdVideoBox.invoke('setVideoInfo',{
             playStatus: $('video').height()
         });
