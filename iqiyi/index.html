@@ -291,6 +291,10 @@ var postMessage = {
                 // $("#testapp").addClass(data.fontSize);
             }
 
+            if (data.playStatus === 'pause') {
+                $('video')[0].pause();
+            }
+
             // if (data.move) {
             //     var move = parseInt(data.move, 10);
             //     move = move === 210 ? -210 : 0;
