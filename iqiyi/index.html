@@ -346,7 +346,7 @@ $(document).ready(function() {
 
     $('video').on('playing', function () {
         BdVideoBox.invoke('setVideoInfo',{
-            playStatus: 'play'
+            playStatus: $('video').height()
         });
     });
 
