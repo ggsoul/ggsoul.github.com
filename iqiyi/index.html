@@ -22,8 +22,6 @@
 
     <style>
     html,body {
-        height: 100%;
-        width: 100%;
         background: #fff;
     }
     .font-size-1 .c-title-des {
@@ -293,20 +291,20 @@ var postMessage = {
                 // $("#testapp").addClass(data.fontSize);
             }
 
-            if (data.move) {
-                var move = parseInt(data.move, 10);
-                move = move === 210 ? -210 : 0;
-
-                requestAnimationFrame(function() {
-                    if (move === 0) {
-                        $('#testapp').css('opacity', 1);
-                    } else {
-                        $('#testapp').css('opacity', 0);
-                    }
-
-                    $('#testapp').css('top', move);
-                });
-            }
+            // if (data.move) {
+            //     var move = parseInt(data.move, 10);
+            //     move = move === 210 ? -210 : 0;
+            //
+            //     requestAnimationFrame(function() {
+            //         if (move === 0) {
+            //             $('#testapp').css('opacity', 1);
+            //         } else {
+            //             $('#testapp').css('opacity', 0);
+            //         }
+            //
+            //         $('#testapp').css('top', move);
+            //     });
+            // }
         });
     },
     isSupportedPostMsg: function() {
