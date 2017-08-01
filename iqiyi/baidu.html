@@ -54,7 +54,6 @@ var params = {
                         + 'S.bdsb_light_start_url=' + url + ';';
                         intent += 'B.bdsb_append_param=true;S.toolbaricons=%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D;S.menumode=2;end';
                         params = "{'mode': '0','intent': '" + intent + "', 'min_v': '16789248'}";
-                        console.log(params);
                         Box.android.invokeApp("Bdbox_android_utils", "command", [params]);
     }
 }
