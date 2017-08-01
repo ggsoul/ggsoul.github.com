@@ -24,12 +24,10 @@ var isIOS = /(iPhone|iPod|iPad)/.test(navigator.userAgent);
 var isAndroid = /(Android);?[\s\/]+([\d.]+)?/.test(navigator.userAgent);
 
 var m = (location.href.split('targeturl='));
-console.log(m);
 var url = m && m[1] || 'http://sv.baidu.com/videoui/page/videoland?context=%7B%22nid%22%3A%22sv_3280040790821811129%22%2C%22sourceFrom%22%3A%22bjh%22%7D';
 if (url) {
     document.querySelector('#text').innerText = '打开页面 ' + url;
     url = encodeURIComponent(url);
-    console.log(isIOS, url);
     if (isIOS) {
         params = {
                         "openurl": (url),
@@ -56,6 +54,7 @@ var params = {
                         + 'S.bdsb_light_start_url=' + url + ';';
                         intent += 'B.bdsb_append_param=true;S.toolbaricons=%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D;S.menumode=2;end';
                         params = "{'mode': '0','intent': '" + intent + "', 'min_v': '16789248'}";
+                        console.log(params);
                         Box.android.invokeApp("Bdbox_android_utils", "command", [params]);
     }
 }
