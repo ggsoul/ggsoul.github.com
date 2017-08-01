@@ -24,10 +24,12 @@ var isIOS = /(iPhone|iPod|iPad)/.test(navigator.userAgent);
 var isAndroid = /(Android);?[\s\/]+([\d.]+)?/.test(navigator.userAgent);
 
 var m = (location.href.split('targeturl='));
+console.log(m);
 var url = m && m[1] || 'http://sv.baidu.com/videoui/page/videoland?context=%7B%22nid%22%3A%22sv_3280040790821811129%22%2C%22sourceFrom%22%3A%22bjh%22%7D';
 if (url) {
     document.querySelector('#text').innerText = '打开页面 ' + url;
     url = encodeURIComponent(url);
+    console.log(isIOS, url);
     if (isIOS) {
         params = {
                         "openurl": (url),
