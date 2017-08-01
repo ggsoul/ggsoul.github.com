@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+    <base target="_self">
+    <title>video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="description" content="<&$bsShowVideo.title|escape&>">
+    <meta name="keywords" content="<&$bsShowVideo.title|escape&>">
+    <meta name="screen-orientation" content="portrait">
+    <meta name="x5-orientation" content="portrait">
+</head>
+<body>
+<p id="text">打开中，请稍候</p>
+<br>
+<script type="text/javascript" src="//s.bdstatic.com/common/openjs/boxjs/boxjs.js?_v=fe10d1e"></script>
+<script src="//m.baidu.com/static/searchbox/openjs/aio.js?v=201610"></script>
+<script type="text/javascript">
+var isIOS = /(iPhone|iPod|iPad)/.test(navigator.userAgent);
+var isAndroid = /(Android);?[\s\/]+([\d.]+)?/.test(navigator.userAgent);
+
+var m = (location.href.split('targeturl='));
+var url = m && m[1] || 'http://sv.baidu.com/videoui/page/videoland?context=%7B%22nid%22%3A%22sv_3280040790821811129%22%2C%22sourceFrom%22%3A%22bjh%22%7D';
+if (url) {
+    document.querySelector('#text').innerText = '打开页面 ' + url;
+    url = encodeURIComponent(url);
+    if (isIOS) {
+        params = {
+                        "openurl": (url),
+                        "opentype": "1",
+                        "isla": "0",
+                        "type": "video",
+                        "page_type": "empty",
+                        "newbrowser": "1",
+                        "context": "112233",
+                        "sfrom": "feed",
+                        "minver": "6.0.0.0",
+                        "toolbaricons": "%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D",
+                        "menumode": "2"
+                    };
+
+                        Box.ios.invokeApp("easybrowse", params, "");
+    } else {
+var params = {
+                            "intent": "intent:#Intent;component=com.baidu.searchbox/.home.feed.ShortVideoDetailActivity;S.bdsb_light_start_url=" + encodeURIComponent(url) + ";B.bdsb_append_param=true;S.toolbaricons=%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D;S.menumode=2;end",
+                            "class": "com.baidu.searchbox.video.VideoHomeActivity",
+                            "mode": "0"
+                        };
+                        var intent = 'intent:#Intent;component=com.baidu.searchbox/.home.feed.ShortVideoDetailActivity;'
+                        + 'S.bdsb_light_start_url=' + url + ';';
+                        intent += 'B.bdsb_append_param=true;S.toolbaricons=%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D;S.menumode=2;end';
+                        params = "{'mode': '0','intent': '" + intent + "', 'min_v': '16789248'}";
+                        Box.android.invokeApp("Bdbox_android_utils", "command", [params]);
+    }
+}
+</script>
+</body>
+</html>
