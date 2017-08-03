@@ -148,8 +148,7 @@
         <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
             <section class="m-title m-title-borderB">
                 <h3 class="c-title-des">剧集
-                    <!-- <span class="c-info ad-link">查看详情</span> -->
-                    <span class="c-info err-link">请求错误</span>
+                    <span class="c-info ad-link">查看详情</span>
                 </h3>
             </section>
         </div>
@@ -416,10 +415,7 @@ $(document).ready(function() {
         BdVideoBox.invoke('openLink', {
             link: 'https://m.baidu.com'
         });
-    });
 
-    $('.err-link').click(function (e) {
-        console.log('err');
         BdVideoBox.invoke('setInterFaceStatus', {
              // 接口名称
              interfaceName: 'xxx',
