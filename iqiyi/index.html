@@ -419,6 +419,7 @@ $(document).ready(function() {
     });
 
     $('.err-link').click(function (e) {
+        console.log('err');
         BdVideoBox.invoke('setInterFaceStatus', {
              // 接口名称
              interfaceName: 'xxx',
