@@ -53,7 +53,19 @@ var params = {
                         + 'S.bdsb_light_start_url=' + url + ';';
                         intent += 'B.bdsb_append_param=true;S.toolbaricons=%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D;S.menumode=2;end';
                         params = "{'mode': '0','intent': '" + intent + "', 'min_v': '16789248'}";
-                        Box.android.invokeApp("Bdbox_android_utils", "command", [params]);
+                        schemaIOS(params);
+                        function schemaIOS(schemaURL) {
+                var $node = document.createElement('iframe');
+                $node.style.display = 'none';
+                $node.src = schemaURL;
+                var body = document.body || document.getElementsByTagName('body')[0];
+                body.appendChild($node);
+                // 销毁 iframe
+                setTimeout(function () {
+                    body.removeChild($node);
+                    $node = null;
+                }, 0);
+            }
     }
 }
 </script>
