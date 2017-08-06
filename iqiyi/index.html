@@ -211,9 +211,309 @@
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <!-- <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script> -->
     <!-第三方引入处->
-    <script src="http://szth-sys-rpm70.szth.baidu.com:8555/static/fecommon/longvideo/BdVideoBox.js?v=10"></script>
+    <!-- <script src="http://szth-sys-rpm70.szth.baidu.com:8555/static/fecommon/longvideo/BdVideoBox.js?v=10"></script> -->
     <!-- <script src="https://sv.bdstatic.com/static/fecommon/longvideo/BdVideoBox.js?v=5"></script> -->
     <script>
+    var self = this;
+    !function(e, t) {
+        "object" == typeof exports && "object" == typeof module ? module.exports = t() : "function" == typeof define && define.amd ? define([], t) : "object" == typeof exports ? exports["BdVideoBox.js"] = t() : e["BdVideoBox.js"] = t()
+    }(this, function() {
+        return function(e) {
+            function t(o) {
+                if (n[o])
+                    return n[o].exports;
+                var s = n[o] = {
+                    i: o,
+                    l: !1,
+                    exports: {}
+                };
+                return e[o].call(s.exports, s, s.exports, t),
+                s.l = !0,
+                s.exports
+            }
+            var n = {};
+            return t.m = e,
+            t.c = n,
+            t.d = function(e, n, o) {
+                t.o(e, n) || Object.defineProperty(e, n, {
+                    configurable: !1,
+                    enumerable: !0,
+                    get: o
+                })
+            }
+            ,
+            t.n = function(e) {
+                var n = e && e.__esModule ? function() {
+                    return e.default
+                }
+                : function() {
+                    return e
+                }
+                ;
+                return t.d(n, "a", n),
+                n
+            }
+            ,
+            t.o = function(e, t) {
+                return Object.prototype.hasOwnProperty.call(e, t)
+            }
+            ,
+            t.p = "",
+            t(t.s = 0)
+        }([function(e, t, n) {
+            "use strict";
+            Object.defineProperty(t, "__esModule", {
+                value: !0
+            });
+            var o = {
+                ua: navigator.userAgent,
+                isBox: / baiduboxapp\//i.test(this.ua) && !/ lite baiduboxapp/.test(this.ua),
+                isBoxFunc: function() {
+                    var e = window.navigator || {}
+                      , t = e.userAgent;
+                    return / baiduboxapp\//i.test(t) && !/ lite baiduboxapp/.test(t)
+                },
+                isLiteBox: / lite baiduboxapp\//i.test(this.ua),
+                isLiteBoxFunc: function() {
+                    return / lite baiduboxapp\//i.test((window.navigator || {}).userAgent)
+                },
+                isIOS: /(iPhone|iPod|iPad)/.test(this.ua),
+                isIOSFunc: function() {
+                    return /(iPhone|iPod|iPad)/.test((window.navigator || {}).userAgent)
+                },
+                isAndroid: /(Android);?[\s\/]+([\d.]+)?/.test(this.ua),
+                isAndroidFunc: function() {
+                    return /(Android);?[\s\/]+([\d.]+)?/.test((window.navigator || {}).userAgent)
+                }
+            }
+              , s = {
+                source: "",
+                flag: "",
+                connectInterval: null,
+                CONNECT_CHECK_TIME: 1e3,
+                CHECK_COUNT: 10,
+                connect: function(e, t) {
+                    if (e.flag && e.source) {
+                        var n = 0;
+                        s.flag = e.flag || "",
+                        s.source = e.source || "",
+                        window.addEventListener("message", function(e) {
+                            var t = e.data || {};
+                            t.flag === s.flag && t.actionType === u.Const.ACTION_TYPE.CONNECT && t.status === u.Const.MSG_STATUS.OK && s.connectInterval && window.clearInterval(s.connectInterval)
+                        }),
+                        s.connectInterval && window.clearInterval(s.connectInterval),
+                        s.connectInterval = window.setInterval(function() {
+                            if (n > s.CHECK_COUNT && s.connectInterval && window.clearInterval(s.connectInterval),
+                            u.MsgUtil && u.MsgUtil.isSupportedPostMsg()) {
+                                var t = {
+                                    msgId: u.MsgUtil.getMsgId(),
+                                    flag: e.flag || "",
+                                    source: e.source || "",
+                                    actionType: u.Const.ACTION_TYPE.CONNECT,
+                                    actionParams: e || {}
+                                };
+                                delete e.flag,
+                                delete e.source,
+                                self !== top && window.parent.postMessage(t, "*")
+                            }
+                            n++
+                        }, s.CONNECT_CHECK_TIME)
+                    }
+                },
+                setVideoInfo: function(e) {
+                    u.MsgUtil.postMsgToParent(u.Const.ACTION_TYPE.SET_VIDEOINFO, e)
+                },
+                openApp: function(e) {
+                    u.MsgUtil.postMsgToParent(u.Const.ACTION_TYPE.OPEN_APP, e)
+                },
+                openLink: function(e) {
+                    u.MsgUtil.postMsgToParent(u.Const.ACTION_TYPE.OPEN_LINK, e)
+                }
+            }
+              , i = s
+              , a = {
+                getMsgId: function() {
+                    return i.source + +new Date + "" + Math.round(1e3 * Math.random())
+                },
+                isSupportedPostMsg: function() {
+                    return window.parent && window.parent.postMessage
+                },
+                postMsgToParent: function(e, t) {
+                    if (i.flag && i.source && a.isSupportedPostMsg()) {
+                        var n = {
+                            msgId: t.msgId || "",
+                            flag: i.flag || "",
+                            source: i.source || "",
+                            actionType: e || "",
+                            actionParams: t || {}
+                        };
+                        self !== top && window.parent.postMessage(n, "*")
+                    }
+                }
+            }
+              , r = a
+              , c = {
+                ACTION_TYPE: {
+                    CONNECT: "connect",
+                    SET_VIDEOINFO: "setVideoInfo",
+                    SET_PAGESTYLE: "setPageStyle",
+                    SET_FONTSIZE: "setFontSize",
+                    OPEN_APP: "openApp",
+                    OPEN_LINK: "openLink",
+                    SET_INTER_STATUS: "setInterfaceStatus"
+                },
+                MSG_STATUS: {
+                    OK: "OK",
+                    ERROR: "error"
+                }
+            }
+              , u = {
+                CommonUtil: o,
+                MsgUtil: r,
+                Const: c
+            }
+              , l = {
+                firePool: {},
+                listenPool: {},
+                syncListenPool: {},
+                fire: function(e, t) {
+                    var n = [];
+                    l.firePool[e] = l.firePool[e] || [],
+                    l.firePool[e].push(t);
+                    var o = l.listenPool[e];
+                    if (o) {
+                        for (var s = 0, i = o.length; s < i; s++) {
+                            var a = o[s]
+                              , r = a.callback && a.callback.call({
+                                event: e
+                            }, t);
+                            r && n.push(r),
+                            o[s].once && (o = null)
+                        }
+                        return n
+                    }
+                    return null
+                },
+                listen: function(e, t, n) {
+                    "string" == typeof e && (e = [e]),
+                    n = n || {};
+                    for (var o = 0; o < e.length; o++) {
+                        var s = e[o];
+                        l.listenPool[s] = l.listenPool[s] || [],
+                        l.listenPool[s].push({
+                            once: n.once,
+                            callback: t
+                        })
+                    }
+                },
+                unlisten: function(e) {
+                    for (var t = l.listenPool[e] || [], n = 0; n < t.length && t[n] !== e; n++)
+                        l.listenPool[e].slice(n, 1)
+                },
+                syncActionListen: function(e, t, n) {
+                    l.syncListenPool[e] = l.syncListenPool[e] || {},
+                    l.syncListenPool[e][t.msgId] = n
+                },
+                syncActionFire: function(e, t) {
+                    var n = l.syncListenPool[e]
+                      , o = n && n[t.msgId];
+                    o && (o(t),
+                    delete n[t.msgId])
+                }
+            }
+              , d = l
+              , f = {
+                setInterFaceStatus: function(e) {
+                    var t = {
+                        page: 1,
+                        interfaceName: e.interfaceName || "",
+                        errType: e.errType || "",
+                        errno: e.errno || "",
+                        status: e.status || ""
+                    };
+                    u.MsgUtil.postMsgToParent(u.Const.ACTION_TYPE.SET_INTER_STATUS, t)
+                }
+            }
+              , p = f
+              , T = {
+                setPageStyle: function(e) {
+                    u.MsgUtil.postMsgToParent("setPageStyle", e)
+                }
+            }
+              , g = T
+              , P = {
+                init: function() {
+                    window.addEventListener("message", function(e) {
+                        var t = e.data || {};
+                        if (t.flag === i.flag && t.source === i.source) {
+                            switch (t.actionType) {
+                            case u.Const.ACTION_TYPE.SET_FONTSIZE:
+                                d.fire("onFontChange", t.backParams || {});
+                                break;
+                            case u.Const.ACTION_TYPE.CONNECT:
+                                d.fire("onConnect", t.backParams || {}, {
+                                    once: !0
+                                });
+                                break;
+                            case "onNeedChangePlayStatus":
+                                d.fire("onNeedChangePlayStatus", t.backParams || {})
+                            }
+                            P._isActionSupportSyncCallBack(t.actionType) && d.syncActionFire(t.actionType, t || {})
+                        }
+                    })
+                },
+                _isActionSupportSyncCallBack: function(e) {
+                    return {}[e] || !1
+                },
+                invoke: function(e, t, n) {
+                    var o = u.MsgUtil.getMsgId();
+                    switch (t = t || {},
+                    t.msgId = o,
+                    e) {
+                    case u.Const.ACTION_TYPE.CONNECT:
+                        i.connect(t);
+                        break;
+                    case u.Const.ACTION_TYPE.SET_PAGESTYLE:
+                        g.setPageStyle(t);
+                        break;
+                    case u.Const.ACTION_TYPE.SET_VIDEOINFO:
+                        i.setVideoInfo(t);
+                        break;
+                    case u.Const.ACTION_TYPE.OPEN_APP:
+                        i.openApp(t);
+                        break;
+                    case u.Const.ACTION_TYPE.OPEN_LINK:
+                        i.openLink(t);
+                        break;
+                    case u.Const.ACTION_TYPE.SET_INTER_STATUS:
+                        p.setInterFaceStatus(t)
+                    }
+                    P._isActionSupportSyncCallBack(e) && d.syncActionListen(e, t, n)
+                }
+            }
+              , C = P;
+            n.d(t, "invoke", function() {
+                return E
+            }),
+            n.d(t, "Event", function() {
+                return d
+            }),
+            n.d(t, "Utils", function() {
+                return u
+            });
+            var E = C.invoke
+              , I = {
+                version: "1.0.0",
+                Event: d,
+                Utils: u,
+                invoke: E
+            };
+            C.init(),
+            window.BdVideoBox = I,
+            t.default = I
+        }
+        ])
+    });
 
 var videoInfo = {
     "id":"8704195909973021667",
