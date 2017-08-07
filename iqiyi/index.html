@@ -308,7 +308,7 @@ $(document).ready(function() {
 
             BdVideoBox.Event.listen('onNeedChangePlayStatus', function (e) {
                 var data = e || {};
-
+console.log(data);
                 if (data.playStatus === 'pause') {
                     $('video')[0].pause();
                 }
