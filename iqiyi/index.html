@@ -264,6 +264,7 @@ $(document).ready(function() {
             // 监听链接请求，成功后
             BdVideoBox.Event.listen('onConnect', function(e) {
                 var data = e || {};
+                console.log(data);
 
                 BdVideoBox.invoke('setPageStyle', {
                     wrapCss: {'height': $('body').height()}
