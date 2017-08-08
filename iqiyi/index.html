@@ -209,7 +209,7 @@
 </div>
 
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-    <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
+    <!-- <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script> -->
     <!-第三方引入处->
     <script src="http://szth-sys-rpm70.szth.baidu.com:8555/static/fecommon/longvideo/BdVideoBox.js?v=10"></script>
     <!-- <script src="https://sv.bdstatic.com/static/fecommon/longvideo/BdVideoBox.js?v=5"></script> -->
@@ -344,47 +344,14 @@ $(document).ready(function() {
     // 初始化通信
     postMessage.init();
 
-    $('video').on('playing', function () {
-        console.log('playing');
-    });
-    $('video').on('abort', function () {
-        console.log('abort');
-    });
-    $('video').on('canplay', function () {
-        console.log('canplay');
-    });
-    $('video').on('canplaythrough', function () {
-        console.log('canplaythrough');
-    });
-    $('video').on('durationchange', function () {
-        console.log('durationchange');
-    });
-    $('video').on('emptied', function () {
-        console.log('emptied');
-    });
-    $('video').on('ended', function () {
-        console.log('ended');
-    });
-    $('video').on('error', function () {
-        console.log('error');
-    });
-    $('video').on('loadeddata', function () {
-        console.log('loadeddata');
-    });
-    $('video').on('loadedmetadata', function () {
-        console.log('loadedmetadata');
-    });
-    $('video').on('loadstart', function () {
-        console.log('loadstart');
-    });
     $('video').on('play', function () {
-        console.log('play');
-    });
-    $('video').on('progress', function () {
-        console.log('progress');
-    });
-    $('video').on('waiting', function () {
-        console.log('waiting');
+        BdVideoBox.invoke('setVideoInfo',{
+            playerHeight: $('video').height()
+        });
+
+        BdVideoBox.invoke('setVideoSrc',{
+            src: $('video').attr('src');
+        });
     });
 
     // 切换具体集
