@@ -359,20 +359,18 @@ $(document).ready(function() {
         //     playerHeight: $('video').height()
         // });
         // alert('play');
-        if (isFirst) {
-            isFirst = 0;
-            return;
-        }
+        // if (isFirst) {
+        //     isFirst = 0;
+        //     return;
+        // }
         BdVideoBox.invoke('setVideoSrc',{
             src: $('video').attr('src')
         });
     });
 
-setTimeout(function() {
-    BdVideoBox.invoke('setVideoSrc',{
-        src: $('video').attr('src')
-    });
-}, 500);
+    // BdVideoBox.invoke('setVideoSrc',{
+    //     src: $('video').attr('src')
+    // });
 
 
     // 切换具体集
