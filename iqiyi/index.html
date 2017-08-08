@@ -209,7 +209,7 @@
 </div>
 
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-    <!-- <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script> -->
+    <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
     <!-第三方引入处->
     <script src="http://szth-sys-rpm70.szth.baidu.com:8555/static/fecommon/longvideo/BdVideoBox.js?v=10"></script>
     <!-- <script src="https://sv.bdstatic.com/static/fecommon/longvideo/BdVideoBox.js?v=5"></script> -->
@@ -348,7 +348,7 @@ $(document).ready(function() {
         BdVideoBox.invoke('setVideoInfo',{
             playerHeight: $('video').height()
         });
-
+        console.log('play');
         BdVideoBox.invoke('setVideoSrc',{
             src: $('video').attr('src')
         });
