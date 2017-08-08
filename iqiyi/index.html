@@ -352,14 +352,24 @@ $(document).ready(function() {
         $('video')[0].src = videoData.src;
     });
 
+    var isFirst = 1;
+
     $('video').on('play', function () {
         // BdVideoBox.invoke('setVideoInfo',{
         //     playerHeight: $('video').height()
         // });
         // alert('play');
+        if (isFirst) {
+            isFirst = 0;
+            return;
+        }
         BdVideoBox.invoke('setVideoSrc',{
             src: $('video').attr('src')
         });
+    });
+
+    BdVideoBox.invoke('setVideoSrc',{
+        src: $('video').attr('src')
     });
 
     // 切换具体集
