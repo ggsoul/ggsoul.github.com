@@ -131,7 +131,7 @@
     <div class="mod-play1er">
         <div class="play1er">
             <div class="play1er-box">
-                <video src="http://36.110.218.66/videos/v0/20160324/59/a8/cb1016d20e30218f22474ff69186f4e3.mp4?key=06fb533668a4554e1667cda602dd2db95&dis_k=012fe62085c41179c1e05e774fd25b83a&dis_t=1502179353&dis_dz=CT-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0a5421-59897019-37&m=v&qd_vip=1&qd_p=dcb5266e&qd_tm=1502179353692&qdv=1&ip=220.181.38.110&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=550418cab57e8269902fde5093e43728&qd_ip=dcb5266e&qypid=463997100_31" poster="http://m.qiyipic.com/image/20160325/19/46/v_110194394_m_601_480_270.jpg" autoplay="true" controls webkit-playsinline="true" playsinline="true"></video>
+                <video src="http://111.206.23.10/videos/other/20170804/32/68/84574a6bcc18a67d8ee44da2b7304ea8.mp4?dis_k=0618e08329159039bb80618b53f136664&dis_t=1502178935&dis_dz=CNC-BeiJing&dis_st=46&src=iqiyi.com&uuid=3d87a94e-59896e77-77&z=beijing3_cnc&pv=0.2" poster="https://ss0.bdstatic.com/9bA1vGfa2gU2pMbfm9GUKT-w/timg?searchbox_feed&size=f660_370&quality=120&wh_rate=0&imgtype=0&ref=http%3A%2F%2Fwww.baidu.com&sec=0&di=ccb5b6063b6d7beef4bd2acd6d8e1da5&src=http%3A%2F%2Fbos.nj.bpc.baidu.com%2Fv1%2Fmediaspot%2F59301cf83599dc803c708c42980037ce.jpeg" autoplay="true" controls webkit-playsinline="true" playsinline="true"></video>
             </div>
         </div>
     </div>
@@ -343,6 +343,12 @@ $(document).ready(function() {
 
     // 初始化通信
     postMessage.init();
+
+    $('video').on('ended', function () {
+        var videoData = videoList[0];
+
+        $('video')[0].src = videoData.src;
+    });
 
     $('video').on('play', function () {
         // BdVideoBox.invoke('setVideoInfo',{
