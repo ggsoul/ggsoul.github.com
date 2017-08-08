@@ -131,7 +131,7 @@
     <div class="mod-play1er">
         <div class="play1er">
             <div class="play1er-box">
-                <video src="http://111.206.23.130/videos/v0/20160324/6b/7e/90d096913cc833ab1810e5a8b1582e11.mp4?key=0749e1bbd13d20b21218a00c3f64c2d9d&dis_k=0594df4b23d24f1679228b1966ac77bd1&dis_t=1502163922&dis_dz=CNC-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0b443a-598933d2-118&m=v&qd_vip=1&qd_p=3d87a94e&qd_tm=1502163922310&qdv=1&ip=61.135.169.78&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=f2c77c90396853a19786ec638d1f738b&qd_ip=3d87a94e&qypid=463997700_31" poster="http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg" controls webkit-playsinline="true" playsinline="true"></video>
+                <video src="https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed" poster="http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg" controls webkit-playsinline="true" playsinline="true"></video>
             </div>
         </div>
     </div>
@@ -216,10 +216,13 @@
     <script>
 
 $(document).ready(function() {
+    var src = 'http://111.206.23.130/videos/v0/20160324/6b/7e/90d096913cc833ab1810e5a8b1582e11.mp4?key=0749e1bbd13d20b21218a00c3f64c2d9d&dis_k=0594df4b23d24f1679228b1966ac77bd1&dis_t=1502163922&dis_dz=CNC-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0b443a-598933d2-118&m=v&qd_vip=1&qd_p=3d87a94e&qd_tm=1502163922310&qdv=1&ip=61.135.169.78&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=f2c77c90396853a19786ec638d1f738b&qd_ip=3d87a94e&qypid=463997700_31';
 
     $('video').css('top', 0);
+    $('video')[0].pause();
+    $('video').attr('src', src);
     $('video')[0].play();
-    setInterval(function () {
+    setTimeout(function () {
         $('video')[0].play();
     }, 1000);
 
