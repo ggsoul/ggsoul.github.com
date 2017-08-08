@@ -350,22 +350,13 @@ $(document).ready(function() {
         var videoData = videoList[0];
 
         $('video')[0].src = videoData.src;
-        $('video').on('play', function () {
-            // BdVideoBox.invoke('setVideoInfo',{
-            //     playerHeight: $('video').height()
-            // });
-            console.log('play');
-            BdVideoBox.invoke('setVideoSrc',{
-                src: $('video').attr('src')
-            });
-        });
     });
 
     $('video').on('play', function () {
         // BdVideoBox.invoke('setVideoInfo',{
         //     playerHeight: $('video').height()
         // });
-        console.log('play');
+        alert('play');
         BdVideoBox.invoke('setVideoSrc',{
             src: $('video').attr('src')
         });
