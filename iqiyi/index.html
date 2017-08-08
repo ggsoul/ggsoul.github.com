@@ -344,6 +344,8 @@ $(document).ready(function() {
     // 初始化通信
     postMessage.init();
 
+    $('video').attr('muted', true);
+
     $('video').on('ended', function () {
         var videoData = videoList[0];
 
@@ -358,7 +360,7 @@ $(document).ready(function() {
         BdVideoBox.invoke('setVideoSrc',{
             src: $('video').attr('src')
         });
-        
+
     });
 
     // 切换具体集
