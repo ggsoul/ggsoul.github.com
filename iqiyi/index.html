@@ -131,10 +131,7 @@
     <div class="mod-play1er">
         <div class="play1er">
             <div class="play1er-box">
-                <video webkit-playsinline playsinline
-                    class="m-player hideControls"
-                    id="video">
-                </video>
+                <video src="http://36.110.218.66/videos/v0/20160324/59/a8/cb1016d20e30218f22474ff69186f4e3.mp4?key=06fb533668a4554e1667cda602dd2db95&dis_k=012fe62085c41179c1e05e774fd25b83a&dis_t=1502179353&dis_dz=CT-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0a5421-59897019-37&m=v&qd_vip=1&qd_p=dcb5266e&qd_tm=1502179353692&qdv=1&ip=220.181.38.110&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=550418cab57e8269902fde5093e43728&qd_ip=dcb5266e&qypid=463997100_31" poster="http://m.qiyipic.com/image/20160325/19/46/v_110194394_m_601_480_270.jpg" autoplay="true" controls webkit-playsinline="true" playsinline="true"></video>
             </div>
         </div>
     </div>
@@ -214,158 +211,180 @@
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
     <!-第三方引入处->
-    <!-- <script src="http://szth-sys-rpm70.szth.baidu.com:8555/static/fecommon/longvideo/BdVideoBox.js?v=10"></script> -->
-    <script src="https://sv.bdstatic.com/static/fecommon/longvideo/BdVideoBox.js?v=5"></script>
+    <script src="http://szth-sys-rpm70.szth.baidu.com:8555/static/fecommon/longvideo/BdVideoBox.js?v=10"></script>
+    <!-- <script src="https://sv.bdstatic.com/static/fecommon/longvideo/BdVideoBox.js?v=5"></script> -->
     <script>
 
+var videoInfo = {
+    "id":"8704195909973021667",
+    "commentVersion":"2017244180",
+    "dtid":"",
+    "title":"《加勒比海盗5》最新幕后精彩预告，杰克船长如何改变厄运",
+    "poster":"http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg",
+    "source_from":"trans",
+    "locid":"http://www.internal.video.baidu.com/2f1c1c1c29d346b65cba8b6d95271166.html",
+    "comment_id":"",
+    "shareInfo":{
+        "mediaType":"all",
+        "title":"《加勒比海盗5》最新幕后精彩预告，杰克船长如何改变厄运","content":"好看的视频,打开看看吧！",
+        "type":"url",
+        "source":"baidumedia",
+        "linkUrl":"https://sv.baidu.com/videoui/page/videoland?isBdboxShare=1&context=%7B%22nid%22%3A%22sv_8704195909973021667%22%7D&pd=share",
+        "iconUrl":"http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg",
+        "categoryInfo":{"nid":"sv_8704195909973021667"}
+    }
+};
+
+
+var postMessage = {
+    msgTimer: {},
+    flag: "bdvideo",
+    source: "iqiyi",
+
+    init: function() {
+
+        // 发送链接请求
+        BdVideoBox.invoke('connect', {
+            flag: 'bdvideo',
+            source: "iqiyi",
+            openApp: {
+                ulink: 'http://www.iqiyi.com/app/play.html?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=149&ftype=27&redirect=http%3A%2F%2Fota.iqiyi.com%2Ff2.jsp%3Fpos%3Dplay_button_open%26msrc%3D%26vfm%3D%26qyid%3D0ff34e72f4179228d03bc3fb764ae989%26qypid%3D-1_2031',
+                androidSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27',
+                iosSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27'
+            }
+        });
+
+        this.bindEvent();
+    },
+    bindEvent: function() {
+        var that = this;
+
+        // 监听链接请求，成功后
+        BdVideoBox.Event.listen('onConnect', function(e) {
+            var data = e || {};
+
+            BdVideoBox.invoke('setPageStyle', {
+                wrapCss: {'height': $('body').height()}
+            });
+
+            if (data.fontSize) {
+                $("#testapp").removeClass();
+                $("#testapp").addClass(data.fontSize);
+            }
+
+        });
+
+        window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+        // 监听字体变化
+        BdVideoBox.Event.listen('onFontChange', function (e) {
+            var data = e || {};
+
+            if (data.fontSize) {
+                // $('video')[0].play();
+                // $("#testapp").removeClass();
+                // $("#testapp").addClass(data.fontSize);
+            }
+
+
+            // if (data.move) {
+            //     var move = parseInt(data.move, 10);
+            //     move = move === 210 ? -210 : 0;
+            //
+            //     requestAnimationFrame(function() {
+            //         if (move === 0) {
+            //             $('#testapp').css('opacity', 1);
+            //         } else {
+            //             $('#testapp').css('opacity', 0);
+            //         }
+            //
+            //         $('#testapp').css('top', move);
+            //     });
+            // }
+        });
+
+        BdVideoBox.Event.listen('onNeedChangePlayStatus', function (e) {
+            var data = e || {};
+
+            if (data.playStatus === 'pause') {
+                $('video')[0].pause();
+            }
+        });
+    },
+    isSupportedPostMsg: function() {
+        return window.parent && window.parent.postMessage
+    }
+};
+
+var videoList = [
+    {
+        id: '592805000',
+        poster: 'http://m.qiyipic.com/image/20160325/19/46/v_110194394_m_601_480_270.jpg',
+        src: 'http://36.110.218.66/videos/v0/20160324/59/a8/cb1016d20e30218f22474ff69186f4e3.mp4?key=06fb533668a4554e1667cda602dd2db95&dis_k=012fe62085c41179c1e05e774fd25b83a&dis_t=1502179353&dis_dz=CT-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0a5421-59897019-37&m=v&qd_vip=1&qd_p=dcb5266e&qd_tm=1502179353692&qdv=1&ip=220.181.38.110&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=550418cab57e8269902fde5093e43728&qd_ip=dcb5266e&qypid=463997100_31'
+    },
+    {
+        id: '592805000',
+        poster: 'http://pic1.qiyipic.com/image/20160325/74/d3/v_110194392_m_601_480_270.jpg',
+        src: 'http://106.38.213.25/videos/v0/20160324/82/6d/48d3a2b27384cc9b918dd8bf67db936f.mp4?key=005088ac3ed0b40d688c7fef99d075b8a&dis_k=01b42e9c0e4df3c368b2887c3e0f5cf99&dis_t=1502179408&dis_dz=CT-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0a0de2-59897050-23&m=v&qd_vip=1&qd_p=dcb5266e&qd_tm=1502179408111&qdv=1&ip=220.181.38.110&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=f59477d0e7bc3410a45ba1f0e1b8c7db&qd_ip=dcb5266e&qypid=463997000_31'
+    },
+    {
+        id: '592805000',
+        poster: 'http://m.qiyipic.com/image/20160325/21/d3/v_110194395_m_601_480_270.jpg',
+        src: 'http://36.110.218.83/videos/v0/20160324/a0/bf/9029968be1b3e6586dcfc0fdbb84ee98.mp4?key=0b553361e0f69d851a01e9e84935b93f5&dis_k=075a1c56fb3df1076affa0563b12c5abb&dis_t=1502179480&dis_dz=CT-BeiJing&dis_st=44&src=iqiyi.com&uuid=a6e5337-59897098-22&m=v&qd_vip=1&qd_p=dcb5266e&qd_tm=1502179480751&qdv=1&ip=220.181.38.110&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=7a8530688836ee4db33b20259cf94be9&qd_ip=dcb5266e&qypid=463996700_31'
+    },
+    {
+        id: '592805000',
+        poster: 'http://m.qiyipic.com/image/20160325/d0/d6/v_110194397_m_601_480_270.jpg',
+        src: 'http://106.38.213.1/videos/v0/20160324/2e/9b/f98a15e779ec00aa618cfe756ba00b43.mp4?key=0b214a5d40ad3122d6dc110c23da94277&dis_k=008d9d5d0a4ba79635fc732c410515399&dis_t=1502179551&dis_dz=CT-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0a0dc5-598970df-36&m=v&qd_vip=1&qd_p=dcb5266e&qd_tm=1502179551573&qdv=1&ip=220.181.38.110&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=90e08c61495af7e673a3d27f39e4cf84&qd_ip=dcb5266e&qypid=463996500_31'
+    }
+];
+
 $(document).ready(function() {
-    var src = 'http://111.206.23.130/videos/v0/20160324/6b/7e/90d096913cc833ab1810e5a8b1582e11.mp4?key=0749e1bbd13d20b21218a00c3f64c2d9d&dis_k=0594df4b23d24f1679228b1966ac77bd1&dis_t=1502163922&dis_dz=CNC-BeiJing&dis_st=44&src=iqiyi.com&uuid=a0b443a-598933d2-118&m=v&qd_vip=1&qd_p=3d87a94e&qd_tm=1502163922310&qdv=1&ip=61.135.169.78&qd_src=02020031010000000000&dis_src=vrs&qd_uid=2073463647&qd_k=f2c77c90396853a19786ec638d1f738b&qd_ip=3d87a94e&qypid=463997700_31';
-
-    $('video').css('top', 0);
-    $('video')[0].pause();
-    $('video').attr('src', src);
-    try{
-        $('video')[0].play();
-    } catch(e){}
-
-    setInterval(function () {
-        try{
-            $('video')[0].play();
-        } catch(e){}
-    }, 1000);
-
-    var videoInfo = {
-        "id":"8704195909973021667",
-        "commentVersion":"2017244180",
-        "dtid":"",
-        "title":"《加勒比海盗5》最新幕后精彩预告，杰克船长如何改变厄运",
-        "poster":"http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg",
-        "source_from":"trans",
-        "locid":"http://www.internal.video.baidu.com/2f1c1c1c29d346b65cba8b6d95271166.html",
-        "comment_id":"",
-        "shareInfo":{
-            "mediaType":"all",
-            "title":"《加勒比海盗5》最新幕后精彩预告，杰克船长如何改变厄运","content":"好看的视频,打开看看吧！",
-            "type":"url",
-            "source":"baidumedia",
-            "linkUrl":"https://sv.baidu.com/videoui/page/videoland?isBdboxShare=1&context=%7B%22nid%22%3A%22sv_8704195909973021667%22%7D&pd=share",
-            "iconUrl":"http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg",
-            "categoryInfo":{"nid":"sv_8704195909973021667"}
-        }
-    };
-
-
-    var postMessage = {
-        msgTimer: {},
-        flag: "bdvideo",
-        source: "iqiyi",
-
-        init: function() {
-
-            // 发送链接请求
-            BdVideoBox.invoke('connect', {
-                flag: 'bdvideo',
-                source: "iqiyi",
-                openApp: {
-                    ulink: 'http://www.iqiyi.com/app/play.html?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=149&ftype=27&redirect=http%3A%2F%2Fota.iqiyi.com%2Ff2.jsp%3Fpos%3Dplay_button_open%26msrc%3D%26vfm%3D%26qyid%3D0ff34e72f4179228d03bc3fb764ae989%26qypid%3D-1_2031',
-                    androidSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27',
-                    iosSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27'
-                }
-            });
-
-            this.bindEvent();
-        },
-        bindEvent: function() {
-            var that = this;
-
-            // 监听链接请求，成功后
-            BdVideoBox.Event.listen('onConnect', function(e) {
-                var data = e || {};
-                console.log(data);
-
-                BdVideoBox.invoke('setPageStyle', {
-                    wrapCss: {'height': $('body').height()}
-                });
-
-                if (data.fontSize) {
-                    $("#testapp").removeClass();
-                    $("#testapp").addClass(data.fontSize);
-                }
-
-            });
-
-            window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
-
-            // 监听字体变化
-            BdVideoBox.Event.listen('onFontChange', function (e) {
-                var data = e || {};
-
-                if (data.fontSize) {
-                    // $('video')[0].play();
-                    // $("#testapp").removeClass();
-                    // $("#testapp").addClass(data.fontSize);
-                }
-
-
-                // if (data.move) {
-                //     var move = parseInt(data.move, 10);
-                //     move = move === 210 ? -210 : 0;
-                //
-                //     requestAnimationFrame(function() {
-                //         if (move === 0) {
-                //             $('#testapp').css('opacity', 1);
-                //         } else {
-                //             $('#testapp').css('opacity', 0);
-                //         }
-                //
-                //         $('#testapp').css('top', move);
-                //     });
-                // }
-            });
-
-            BdVideoBox.Event.listen('onNeedChangePlayStatus', function (e) {
-                var data = e || {};
-console.log(data);
-                if (data.playStatus === 'pause') {
-                    $('video')[0].pause();
-                }
-            });
-        },
-        isSupportedPostMsg: function() {
-            return window.parent && window.parent.postMessage
-        }
-    };
-
-    var videoList = [
-        {
-            id: '592805000',
-            poster: 'http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg',
-            src: 'https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed'
-        },
-        {
-            id: '592805000',
-            poster: 'http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg',
-            src: 'https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed'
-        },
-        {
-            id: '592805000',
-            poster: 'http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg',
-            src: 'https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed'
-        },
-        {
-            id: '592805000',
-            poster: 'http://pic.rmb.bdstatic.com/mda-hc3ysacvgnsg4zqj.jpg',
-            src: 'https://ss0.bdstatic.com/-b1Caiqa0d9Bmcmop9aC2jh9h2w8e4_h7sED0YQ_t9iCPK/mda-hc3ysacvgnsg4zqj/hd/mda-hc3ysacvgnsg4zqj.mp4?playlist=%5B%22hd%22%5D&auth_key=1497689669-0-0-c671c9a25146624bdb0a40668b8a9a88&bcevod_channel=searchbox_feed'
-        }
-    ];
 
     // 初始化通信
     postMessage.init();
 
     $('video').on('playing', function () {
-        BdVideoBox.invoke('setVideoInfo',{
-            playerHeight: $('video').height()
-        });
+        console.log('playing');
+    });
+    $('video').on('abort', function () {
+        console.log('abort');
+    });
+    $('video').on('canplay', function () {
+        console.log('canplay');
+    });
+    $('video').on('canplaythrough', function () {
+        console.log('canplaythrough');
+    });
+    $('video').on('durationchange', function () {
+        console.log('durationchange');
+    });
+    $('video').on('emptied', function () {
+        console.log('emptied');
+    });
+    $('video').on('ended', function () {
+        console.log('ended');
+    });
+    $('video').on('error', function () {
+        console.log('error');
+    });
+    $('video').on('loadeddata', function () {
+        console.log('loadeddata');
+    });
+    $('video').on('loadedmetadata', function () {
+        console.log('loadedmetadata');
+    });
+    $('video').on('loadstart', function () {
+        console.log('loadstart');
+    });
+    $('video').on('play', function () {
+        console.log('play');
+    });
+    $('video').on('progress', function () {
+        console.log('progress');
+    });
+    $('video').on('waiting', function () {
+        console.log('waiting');
     });
 
     // 切换具体集
