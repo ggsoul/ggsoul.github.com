@@ -368,9 +368,12 @@ $(document).ready(function() {
         });
     });
 
+setTimeout(function() {
     BdVideoBox.invoke('setVideoSrc',{
         src: $('video').attr('src')
     });
+}, 200);
+
 
     // 切换具体集
     $('.c-album-item').click(function(e) {
