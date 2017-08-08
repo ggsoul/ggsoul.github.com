@@ -352,7 +352,7 @@ $(document).ready(function() {
         BdVideoBox.invoke('setVideoSrc',{
             src: $('video').attr('src')
         });
-        $('video').pause();
+        $('video')[0].pause();
     });
 
     // 切换具体集
