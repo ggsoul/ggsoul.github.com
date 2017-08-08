@@ -224,9 +224,14 @@ $(document).ready(function() {
     $('video').css('top', 0);
     $('video')[0].pause();
     $('video').attr('src', src);
-    $('video')[0].play();
-    setTimeout(function () {
+    try{
         $('video')[0].play();
+    } catch(e){}
+
+    setInterval(function () {
+        try{
+            $('video')[0].play();
+        } catch(e){}
     }, 1000);
 
     var videoInfo = {
