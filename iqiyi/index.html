@@ -355,7 +355,12 @@ $(document).ready(function() {
 
     var isFirst = 1;
 
+    $('video').on('pause', function () {
+        alert('pause');
+    });
+
     $('video').on('play', function () {
+        alert('paly');
         // BdVideoBox.invoke('setVideoInfo',{
         //     playerHeight: $('video').height()
         // });
@@ -364,9 +369,9 @@ $(document).ready(function() {
         //     isFirst = 0;
         //     return;
         // }
-        BdVideoBox.invoke('setVideoSrc',{
-            src: $('video').attr('src')
-        });
+        // BdVideoBox.invoke('setVideoSrc',{
+        //     src: $('video').attr('src')
+        // });
     });
 
     // BdVideoBox.invoke('setVideoSrc',{

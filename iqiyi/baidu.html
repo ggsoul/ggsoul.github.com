@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -16,146 +17,9 @@
 <body>
 <p id="text">打开中，请稍候</p>
 <br>
+<script type="text/javascript" src="//s.bdstatic.com/common/openjs/boxjs/boxjs.js?_v=fe10d1e"></script>
+<script src="//m.baidu.com/static/searchbox/openjs/aio.js?v=201610"></script>
 <script type="text/javascript">
-(function () {
-    function invokeIOS (action, params, callback) {
-        if (!action) {
-            return;
-        }
-
-        var url = [];
-        if (typeof params === 'function') {
-            callback = params;
-        } else {
-            for (var i in params) {
-                url.push(i + '=' + params[i]);
-            }
-        }
-        if (typeof callback === 'function') {
-            var funcName = '_bdbox_js_00000';
-            window[funcName] = function() {
-                callback.apply(window, ([]).slice.call(arguments, 0));
-            };
-            url.push('func=' + funcName);
-        } else {
-            if (callback) {
-                url.push('func=' + callback);
-            }
-        }
-        url = 'baiduboxapp://' + action + '?' + url.join('&');
-
-        var $node = document.createElement('iframe');
-        $node.style.display = 'none';
-        $node.src = url;
-        var body = document.body || document.getElementsByTagName('body')[0];
-        body.appendChild($node);
-        setTimeout(function() {
-            body.removeChild($node);
-            $node = null;
-        }, 0);
-    }
-
-    window['__video_landing_invokeIOS__'] = invokeIOS;
-}());
-
-(function () {
-    function getVersion () {
-        var back = 0;
-        if (window.baiduboxapp_version) {
-            back = window.baiduboxapp_version;
-        }
-        else {
-            var str = navigator.userAgent;
-            var a;
-
-            if (a = /([\d+.]+)_(?:diordna|enohpi)_/.exec(str)) {
-                a = a[1].split('.');
-                back = a.reverse().join('.');
-            } else if (a = /baiduboxapp\/([\d+.]+)/.exec(str)) {
-                back = a[1];
-            }
-        }
-        getVersion = function() {
-            return back;
-        };
-        return back;
-    }
-
-    function version_compare (version1, version2) {
-        version2 += '';
-        version1 += '';
-
-        var a = version1.split('.'),
-            b = version2.split('.'),
-            i = 0,
-            len = Math.max(a.length, b.length);
-
-        for (; i < len; i++) {
-            if ((a[i] && !b[i] && parseInt(a[i]) > 0) || (parseInt(a[i]) > parseInt(b[i]))) {
-                return 1;
-            } else if ((b[i] && !a[i] && parseInt(b[i]) > 0) || (parseInt(a[i]) < parseInt(b[i]))) {
-                return -1;
-            }
-        }
-        return 0;
-    };
-    function invokeAndroid(name, func, args) {
-        if (args && !(args instanceof Array)) {
-            args = Array.prototype.slice.call(arguments, 0).slice(2);
-        }
-        if (window[name] && window[name][func]) {
-            try {
-                var result = window[name][func].apply(window[name], args);
-            }
-            catch (e) {
-                window.androidError = !0;
-            }
-            return {
-                error: 0,
-                result: result,
-                __from: 'js'
-            };
-        }
-        var version = getVersion();
-        if (version_compare(version, 4.8) >= 0) {
-            var back = execCaller(name, func, args);
-
-            back = back ? JSON.parse(back) : {};
-            back.__from = 'app';
-            return back;
-        }
-        else if (version === '4.7.1' || version == '4.7') {
-            var rs = execCaller(name, func, args);
-
-            return {
-                error: 0,
-                result: rs,
-                __from: 'app4.7'
-            };
-        }
-        return {
-            error: 200
-        };
-    }
-    function execCaller(nameSpace, funcName, funcArgs) {
-        var caller = {
-            obj: nameSpace,
-            func: funcName,
-            args: funcArgs ? funcArgs : []
-        };
-        try {
-            return window.prompt('BdboxApp:' + JSON.stringify(caller));
-        }
-        catch (e) {
-            return {
-                error: 201
-            };
-        }
-    }
-
-    window['__video_landing_invokeAndroid__'] = invokeAndroid;
-})();
-
 var isIOS = /(iPhone|iPod|iPad)/.test(navigator.userAgent);
 var isAndroid = /(Android);?[\s\/]+([\d.]+)?/.test(navigator.userAgent);
 
@@ -179,7 +43,7 @@ if (url) {
                         "menumode": "2"
                     };
 
-                        window['__video_landing_invokeIOS__']("easybrowse", params, "");
+                        Box.ios.invokeApp("easybrowse", params, "");
     } else {
 var params = {
                             "intent": "intent:#Intent;component=com.baidu.searchbox/.home.feed.ShortVideoDetailActivity;S.bdsb_light_start_url=" + encodeURIComponent(url) + ";B.bdsb_append_param=true;S.toolbaricons=%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D;S.menumode=2;end",
@@ -190,9 +54,11 @@ var params = {
                         + 'S.bdsb_light_start_url=' + url + ';';
                         intent += 'B.bdsb_append_param=true;S.toolbaricons=%7B%22toolids%22%3A%5B%221%22%2C%222%22%2C%223%22%5D%7D;S.menumode=2;end';
                         params = "{'mode': '0','intent': '" + intent + "', 'min_v': '16789248'}";
-                        window['__video_landing_invokeAndroid__']("Bdbox_android_utils", "command", [params]);
+                        Box.android.invokeApp("Bdbox_android_utils", "command", [params]);
     }
 }
 </script>
 </body>
 </html>
+<!--04472410130924964362081101-->
+<script> var _trace_page_logid = 0447241013; </script>
