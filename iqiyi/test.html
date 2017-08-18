@@ -86,6 +86,8 @@
 
         setTimeout(function () {
             $('video')[0].src = src;
+
+            $('video').css("top", "0px");
             $('video')[0].play();
 
             setTimeout(function () {
