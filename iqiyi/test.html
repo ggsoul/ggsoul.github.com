@@ -84,6 +84,16 @@
 
     $(document).ready(function() {
 
+        BdVideoBox.invoke('connect', {
+            flag: 'bdvideo',
+            source: "iqiyi",
+            openApp: {
+                ulink: 'http://www.iqiyi.com/app/play.html?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=149&ftype=27&redirect=http%3A%2F%2Fota.iqiyi.com%2Ff2.jsp%3Fpos%3Dplay_button_open%26msrc%3D%26vfm%3D%26qyid%3D0ff34e72f4179228d03bc3fb764ae989%26qypid%3D-1_2031',
+                androidSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27',
+                iosSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27'
+            }
+        });
+
         var myVideo = $('#myVideo');
         myVideo[0].src = "https://vd1.bdstatic.com/mda-hgasfc4jdv6buy8p/hd/mda-hgasfc4jdv6buy8p.mp4?playlist=%5B%22hd%22%5D&auth_key=1503494558-0-0-d7e6e31bc87052ca2bc8459c6b26c683&bcevod_channel=searchbox_feed";
 
