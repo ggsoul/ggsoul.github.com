@@ -73,7 +73,7 @@
         <div class="play1er">
             <div class="play1er-box">
                 <video
-                id="myVideo" muted="true" controls webkit-playsinline="true" playsinline="true"></video>
+                id="myVideo" controls webkit-playsinline="true" playsinline="true"></video>
             </div>
         </div>
     </div>
@@ -97,15 +97,11 @@
         var myVideo = $('#myVideo');
         myVideo[0].src = "https://vd1.bdstatic.com/mda-hgasfc4jdv6buy8p/hd/mda-hgasfc4jdv6buy8p.mp4?playlist=%5B%22hd%22%5D&auth_key=1503494558-0-0-d7e6e31bc87052ca2bc8459c6b26c683&bcevod_channel=searchbox_feed";
 
-        var callback = function () {
+        BdVideoBox.Event.listen('onConnect', function(e) {
+            var data = e || {};
+
             myVideo[0].play();
-        }
-
-        setTimeout(function () {
-            callback();
-        }, 1000);
-
-
+        });
     });
     </script>
 
