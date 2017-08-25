@@ -29,7 +29,7 @@
 
 
     setInterval(function () {
-        window.postMessage({'test': 1}, '*');
+        window.parent.postMessage({'test': 1}, '*');
     }, 1000);
 
     </script>
