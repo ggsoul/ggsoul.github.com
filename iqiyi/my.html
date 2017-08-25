@@ -6,8 +6,13 @@
 </head>
 <body>
     <script type="text/javascript">
-        setInterval(function () {
-            window.parent.postMessage({'test': 1}, '*');
+        var i = 0;
+        var wait = setInterval(function () {
+            if (i <= 5) {
+                clearInterval(wait);
+                window.parent.postMessage({'test': 1}, '*');
+            }
+            i++;
         }, 1000);
     </script>
 </body>
