@@ -97,12 +97,17 @@
         //     }
         // });
 
+        var iframe = $('#partnerFrame')[0];
+        iframe.contentWindow.postMessage({'test': 2}, '*');
+
         var myVideo = $('#myVideo');
         myVideo[0].src = "https://vd1.bdstatic.com/mda-hgasfc4jdv6buy8p/hd/mda-hgasfc4jdv6buy8p.mp4?playlist=%5B%22hd%22%5D&auth_key=1503494558-0-0-d7e6e31bc87052ca2bc8459c6b26c683&bcevod_channel=searchbox_feed";
 
         window.addEventListener('message', function (e) {
-            alert('message');
-            myVideo[0].play();
+            if (e.data.test === '1') {
+                alert('主页面');
+                myVideo[0].play();
+            }
         }, false);
     });
     </script>
