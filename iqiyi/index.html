@@ -799,10 +799,14 @@ var modComment = {
         });
     }
 };
-modComment.init($('.mod-comment'), {
-    title: '楚乔传第1集 楚乔血战群狼',
-    comment_id: 'http://www.iqiyi.com/_203965201'
-});
+
+setTimeout(function () {
+    modComment.init($('.mod-comment'), {
+        title: '楚乔传第1集 楚乔血战群狼',
+        comment_id: 'http://www.iqiyi.com/_203965201'
+    });
+}, 3000);
+
 
 });
 
