@@ -745,7 +745,7 @@ var modComment = {
         var self = this;
         data.inputBox = false;
         data.isInf = true;
-        data.maginTop = global.innerWidth * 0.5625;
+        data.maginTop = 0;
         data.cmtCb = function (res) {
 
             window.globalErrmsg += 'bottomBar.js:setComment\'s data.cmtCb,[tip:1.commentEmbed callback cmtCb.2.etc]; ';
@@ -773,9 +773,8 @@ var modComment = {
             inputBox: true,
             type: 0,
             listNum: 3,
-            shareConfig: shareOption,
             sfrom: 'feedLandingComment',
-            sid: VdDev.sid || '',
+            sid: '',
             logCb: function (eventName) {
 
             },
