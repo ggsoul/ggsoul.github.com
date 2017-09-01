@@ -468,6 +468,7 @@
 </div>
 
     <script src="https://s.bdstatic.com/common/openjs/amd/eslx.js"></script>
+    <script type="text/javascript" src="http://szth-sys-rpm70.szth.baidu.com:8375/static/videoui/dep/boxjs/index_aa71557.js"></script>
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <!-- <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script> -->
     <!-第三方引入处->
@@ -495,6 +496,12 @@ var videoInfo = {
     }
 };
 
+BoxJS.config({
+            id: 'feed',
+            success: function () {
+
+            }
+        });
 
 var postMessage = {
     msgTimer: {},
