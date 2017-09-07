@@ -268,21 +268,8 @@
         </div>
     </div>
 
-    <style>
-.commentEmbed-footer {
-    display: none;
-}
-.mod-comment {
-    background: #fff;
-}
-</style>
-
-<div class="mod-comment" id="commentModule">
-</div>
 </div>
 
-    <script src="https://s.bdstatic.com/common/openjs/amd/eslx.js"></script>
-    <script type="text/javascript" src="http://szth-sys-rpm70.szth.baidu.com:8375/static/videoui/dep/boxjs/index_aa71557.js"></script>
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <!-- <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script> -->
     <!-第三方引入处->
@@ -541,86 +528,6 @@ $(document).ready(function() {
              status: 'xxx'
         });
     });
-
-var modComment = {
-    init: function ($ele, opts) {
-        this.$ele = $ele;
-        this.opts = opts;
-        this.$body = $('body');
-
-        var amdRequire = window.eslx_require;
-        amdRequire && amdRequire.config({
-            paths: {
-                'bdbox-amd': 'https://s.bdstatic.com/common/openjs/amd',
-                'bdbox-components': 'https://s.bdstatic.com/common/openjs/amd/ui'
-            },
-            urlArgs: {
-                'bdbox-amd': '_t=2017354180'
-            }
-        });
-
-        this.initComment();
-    },
-
-    setComment: function (data) {
-        var self = this;
-        data.inputBox = false;
-        data.isInf = true;
-        data.maginTop = 0;
-        data.cmtCb = function (res) {
-
-            window.globalErrmsg += 'bottomBar.js:setComment\'s data.cmtCb,[tip:1.commentEmbed callback cmtCb.2.etc]; ';
-        };
-        // window.globalErrmsg += 'bottomBar.js:setComment end; ';
-        return data;
-    },
-
-    initComment: function (shareOption) {
-        var self = this;
-        var opts = this.opts;
-
-        if (!opts.comment_id) {
-            return;
-        }
-
-        // 评论参数
-        var options = {
-            container: 'commentModule',
-            source: 'baidumedia',
-            id: encodeURIComponent(opts.comment_id),
-            defaultCss: true,
-            desc: opts.title,
-            listTitle: '最新评论',
-            inputBox: true,
-            type: 0,
-            listNum: 3,
-            sfrom: 'feedLandingComment',
-            sid: '',
-            logCb: function (eventName) {
-
-            },
-            actionCb: function (actionName, actionData) {
-            }
-        };
-
-        var amdRequire = window.eslx_require || require;
-        amdRequire && amdRequire(['bdbox-amd/uiManager'], function (uiManager) {
-
-            uiManager('comment', function (initComment) {
-
-                commentInstance = initComment(self.setComment(options));
-            })
-        });
-    }
-};
-
-setTimeout(function () {
-    modComment.init($('.mod-comment'), {
-        title: '楚乔传第1集 楚乔血战群狼',
-        comment_id: 'http://www.iqiyi.com/_203965201'
-    });
-}, 3000);
-
 
 });
 
