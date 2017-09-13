@@ -128,11 +128,13 @@
     }
 
     #testapp {
-        padding-top: 56.25%;
         /*position: relative;*/
         position: absolute;
         bottom: 0;
         width: 100%;
+    }
+    #backHeight {
+        padding-top: 56.25%;
     }
     </style>
 </head>
@@ -456,6 +458,7 @@
         </div>
     </div>
 </div>
+<div id="backHeight"></div>
 
     <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
     <!-- <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script> -->
@@ -593,7 +596,7 @@ $(document).ready(function() {
 
     $('html').append(videoHtml);
 
-    $('body').height($('#testapp').height());
+    $('#backHeight').height($('#testapp').height());
 
     // 初始化通信
     postMessage.init();
