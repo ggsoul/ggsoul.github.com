@@ -129,8 +129,8 @@
 
     #testapp {
         padding-top: 56.25%;
-        position: relative;
-        /*position: absolute;*/
+        /*position: relative;*/
+        position: absolute;
         bottom: 0;
         width: 100%;
     }
@@ -592,6 +592,8 @@ $(document).ready(function() {
     var videoHtml = '<div class="play1er"><div class="play1er-box"><video src="http://111.206.23.10/videos/other/20170804/32/68/84574a6bcc18a67d8ee44da2b7304ea8.mp4?dis_k=0618e08329159039bb80618b53f136664&dis_t=1502178935&dis_dz=CNC-BeiJing&dis_st=46&src=iqiyi.com&uuid=3d87a94e-59896e77-77&z=beijing3_cnc&pv=0.2" poster="https://ss0.bdstatic.com/9bA1vGfa2gU2pMbfm9GUKT-w/timg?searchbox_feed&size=f660_370&quality=120&wh_rate=0&imgtype=0&ref=http%3A%2F%2Fwww.baidu.com&sec=0&di=ccb5b6063b6d7beef4bd2acd6d8e1da5&src=http%3A%2F%2Fbos.nj.bpc.baidu.com%2Fv1%2Fmediaspot%2F59301cf83599dc803c708c42980037ce.jpeg" muted="true" controls webkit-playsinline="true" playsinline="true"></video></div></div>';
 
     $('html').append(videoHtml);
+
+    $('body').height($('#testapp').height());
 
     // 初始化通信
     postMessage.init();
