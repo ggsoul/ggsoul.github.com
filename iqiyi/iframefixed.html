@@ -126,7 +126,11 @@
 <script type="text/javascript">
 
     $(document).ready(function() {
-         
+
+         $('.m-video-poster').on('click', function () {
+            $('.m-video-fullScreenWrap').hide();
+            $('#video')[0].play();
+        });
     });
 </script>
 </body>
