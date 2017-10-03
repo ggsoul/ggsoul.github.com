@@ -26,7 +26,6 @@
     }
     #testapp {
         position: relative;
-        z-index: 20;
     }
     .mod-info {
         padding: 0 0 .08rem;
@@ -69,9 +68,9 @@
         position: relative;
         top: 0;
         width: 100%;
-        height: 210px;
         overflow: hidden;
-        z-index: 22;
+        z-index: 10;
+        height: 210px;
     }
     iframe {
         position: fixed;
@@ -87,9 +86,9 @@
 </head>
 <body>
 
-    <div class="partner">
-        <iframe id="partnerFrame" name="partnerFrame" scrolling="no" allowfullscreen="" src="http://gaoxuefeng.com/iqiyi/iframefixed.html"></iframe>
-    </div>
+<div class="partner">
+    <iframe id="partnerFrame" name="partnerFrame" scrolling="no" allowfullscreen="" src="http://gaoxuefeng.com/iqiyi/iframefixed.html"></iframe>
+</div>
 
 <div id="testapp">
     <div class="mod-info">
