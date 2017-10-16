@@ -493,14 +493,12 @@
     </div>
 </div>
 
-<div id="backHeight"></div>
-
 <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
 
-        $('#backHeight').height($('#testapp').height());
+        $('body').height($('#testapp').height() + $('.po-relative').height());
 
          $('.m-video-poster').on('click', function () {
             $('.m-video-fullScreenWrap').hide();
