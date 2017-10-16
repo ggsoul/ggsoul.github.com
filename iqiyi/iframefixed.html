@@ -499,7 +499,7 @@
 
         $('#backHeight').height($('#testapp').height());
 
-        $('#testapp').css('bottom', $('#testapp').height() - $('body').height() + $('.po-relative').height());
+        $('#testapp').css('bottom', -($('#testapp').height() - $('body').height() + $('.po-relative').height()));
 
          $('.m-video-poster').on('click', function () {
             $('.m-video-fullScreenWrap').hide();
