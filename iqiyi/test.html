@@ -21,91 +21,478 @@
     <link rel="alternate" hreflang="zh" href=" http://m.iqiyi.com/v_19rr700mq0.html">
 
     <style>
-    html,body {
+    html {
         background: #fff;
     }
-    .mip-video-box {
-        width: 100%;
+    body {
+        background: #fff;
+    }
+    .po-relative {
+        position: relative;
+        background-color: #fff;
+        z-index: 9999;
+    }
+    .m-box-items {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .m-video-fixed {
+        position: relative;
+    }
+    .m-video-fixed:before {
+        content: "";
+        display: block;
+        padding-top: 56.25%;
+    }
+    .m-video-player {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        color: #fff;
+        background: #3c3c3c url(http://www.qiyipic.com/common/fix/h5-aura/logoH5-play.jpg) center center no-repeat;
+        background-size: cover;
+    }
+    .m-video-player:before {
+        content: "";
+        display: block;
+        padding-top: 56.25%;
+    }
+    #videoZone {
+
+    }
+    .m-player {
         position: absolute;
         top: 0;
+        right: 0;
         bottom: 0;
         left: 0;
-        background: #000;
-    }
-    .mod-play1er {
-        position: relative;
-        padding-top: 56.25%;
-    }
-    .mod-play1er .play1er {
-        position: fixed;
-        padding-top: 56.25%;
-        top: 0;
-        left: 0;
-        right: 0;
-        background: #000;
-        z-index: 99;
-    }
-    .mod-play1er .play1er-box {
-        position: absolute;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 100%;
-        overflow: hidden;
+        z-index: 900;
     }
-    .mod-play1er video {
+    .m-video-fullScreenWrap {
+
+    }
+    .m-video-poster {
         position: absolute;
         top: 0;
-        left: 0;
+        padding-top: 56.25%;
+        width: 100%;
+        z-index: 910;
+    }
+    .m-video-poster img {
+        position: absolute;
+        top: 0;
         width: 100%;
         height: 100%;
-        border: 0 none;
-        background: #000;
-        z-index: 101;
-        overflow: hidden;
+    }
+    img {
+        border: none;
+        vertical-align: top;
     }
 
+    .mod-info {
+        padding: 0 0 .08rem;
+        background: #fff;
+        /*padding-top: 210px;*/
+    }
+
+    .new-style.openAppCommonTpl-1 {
+        margin: 15px;
+        position: relative;
+        border: 1px solid #63b504;
+        border-radius: 5px;
+    }
+    .appAdd-commonTpl {
+        text-align: center;
+        font-size: .18rem;
+        height: .44rem;
+        line-height: .44rem;
+        color: #000;
+        border: 1px solid #000;
+        font-family: "PingFang SC";
+    }
+
+    .new-style .appAdd-commonTpl {
+        color: #63b504;
+        height: .36rem;
+        line-height: .36rem;
+        font-size: .15rem;
+        border-width: 0;
+        display: flex;
+        display: -webkit-flex;
+        display: -webkit-box;
+        align-items: center;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        justify-content: center;
+        -webkit-justify-content: center;
+        -webkit-box-pack: center;
+    }
+
+    #testapp {
+        position: relative;
+        /*position: absolute;*/
+        bottom: 0px;
+        width: 100%;
+        z-index: 10;
+    }
     </style>
 </head>
 <body>
 
-    <div class="mod-play1er">
-        <div class="play1er">
-            <div class="play1er-box">
-                <video id="myVideo" controls webkit-playsinline="true" playsinline="true"></video>
+<div class="po-relative">
+    <div class="m-box-items">
+        <div class="m-video-fixed">
+            <section class="m-video-player">
+
+                <div id="videoZone">
+                    <video webkit-playsinline="" playsinline="" class="m-player" id="video"  src="http://111.206.23.10/videos/other/20170804/32/68/84574a6bcc18a67d8ee44da2b7304ea8.mp4?dis_k=0618e08329159039bb80618b53f136664&dis_t=1502178935&dis_dz=CNC-BeiJing&dis_st=46&src=iqiyi.com&uuid=3d87a94e-59896e77-77&z=beijing3_cnc&pv=0.2">
+                    </video>
+
+                    <div class="m-video-fullScreenWrap">
+                        <div class="m-video-poster">
+                            <img src="//m.qiyipic.com/image/20170606/18/08/v_112469993_m_601_m1_480_270.jpg">
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+    </div>
+</div>
+
+<div id="testapp">
+    <div class="mod-info">
+        <div class="openAppCommonTpl-1 new-style">
+            <div class="appAdd-commonTpl">
+                打开爱奇艺，更多精彩视频
             </div>
         </div>
     </div>
+    <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
+        <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
+            <section class="m-title m-title-borderB">
+                <h3 class="c-title-des">剧集
+                    <span class="c-info ad-link">查看详情</span>
+                </h3>
+            </section>
+        </div>
+        <div class="m-box-items m-box-items-full" glue-component="page.playMovie.component.albumList" glue-id="albumList" data-behavior="common.behavior.horizontalScroll.horizontalScroll" glue-node="tabBody" data-pageSize="10" data-aid="203965201">
 
-    <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
-    <script type="text/javascript" src="http://zhangyao.fe.baidu.com/test/lib/vconsole.min.js"></script>
-    <script src="https://sv.bdstatic.com/static/fecommon/longvideo/BaiduVideoBox.js?v=5"></script>
-    <script type="text/javascript">
+            <section class="g-tab-num g-tab-num-line">
+                <div class="m-tab-num m-sliding" glue-node="horizontalScroll">
+                    <div class="m-tab-num-list m-sliding-list" style="-webkit-transform: translate(0px, 0px) scale(1); transform: translate(0px, 0px) scale(1);" glue-node="groupTitle">
+                        <span class="c-tab-item  selected " glue-type="switchTab" data-key="$collectionInfo.id-1" tab-index="0" from="1" to="10" >1-10</span>
+                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
+                    </div>
+                </div>
+            </section>
+            <div class="m-box-items m-box-items-full" glue-node="albumlist">
+                <section class="m-album-num clearfix item">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="1" class="c-album-item">
+                        <span class="num">1</span>
+                        <span class="album-current  show "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="2"  class="c-album-item">
+                        <span class="num">2</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="3"  class="c-album-item">
+                        <span class="num">3</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="4"  class="c-album-item">
+                        <span class="num">4</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6yeg5w.html" data-num="5"  class="c-album-item">
+                        <span class="num">5</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+                <section class="m-album-num clearfix item  hide ">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="11"  class="c-album-item">
+                        <span class="num">11</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="12"  class="c-album-item">
+                        <span class="num">12</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="13"  class="c-album-item">
+                        <span class="num">13</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="14"  class="c-album-item">
+                        <span class="num">14</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
+        <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
+            <section class="m-title m-title-borderB">
+                <h3 class="c-title-des">剧集
+                    <span class="c-info ad-link">查看详情</span>
+                </h3>
+            </section>
+        </div>
+        <div class="m-box-items m-box-items-full" glue-component="page.playMovie.component.albumList" glue-id="albumList" data-behavior="common.behavior.horizontalScroll.horizontalScroll" glue-node="tabBody" data-pageSize="10" data-aid="203965201">
+
+            <section class="g-tab-num g-tab-num-line">
+                <div class="m-tab-num m-sliding" glue-node="horizontalScroll">
+                    <div class="m-tab-num-list m-sliding-list" style="-webkit-transform: translate(0px, 0px) scale(1); transform: translate(0px, 0px) scale(1);" glue-node="groupTitle">
+                        <span class="c-tab-item  selected " glue-type="switchTab" data-key="$collectionInfo.id-1" tab-index="0" from="1" to="10" >1-10</span>
+                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
+                    </div>
+                </div>
+            </section>
+            <div class="m-box-items m-box-items-full" glue-node="albumlist">
+                <section class="m-album-num clearfix item">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="1" class="c-album-item">
+                        <span class="num">1</span>
+                        <span class="album-current  show "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="2"  class="c-album-item">
+                        <span class="num">2</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="3"  class="c-album-item">
+                        <span class="num">3</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="4"  class="c-album-item">
+                        <span class="num">4</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6yeg5w.html" data-num="5"  class="c-album-item">
+                        <span class="num">5</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+                <section class="m-album-num clearfix item  hide ">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="11"  class="c-album-item">
+                        <span class="num">11</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="12"  class="c-album-item">
+                        <span class="num">12</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="13"  class="c-album-item">
+                        <span class="num">13</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="14"  class="c-album-item">
+                        <span class="num">14</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
+        <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
+            <section class="m-title m-title-borderB">
+                <h3 class="c-title-des">剧集
+                    <span class="c-info ad-link">查看详情</span>
+                </h3>
+            </section>
+        </div>
+        <div class="m-box-items m-box-items-full" glue-component="page.playMovie.component.albumList" glue-id="albumList" data-behavior="common.behavior.horizontalScroll.horizontalScroll" glue-node="tabBody" data-pageSize="10" data-aid="203965201">
+
+            <section class="g-tab-num g-tab-num-line">
+                <div class="m-tab-num m-sliding" glue-node="horizontalScroll">
+                    <div class="m-tab-num-list m-sliding-list" style="-webkit-transform: translate(0px, 0px) scale(1); transform: translate(0px, 0px) scale(1);" glue-node="groupTitle">
+                        <span class="c-tab-item  selected " glue-type="switchTab" data-key="$collectionInfo.id-1" tab-index="0" from="1" to="10" >1-10</span>
+                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
+                    </div>
+                </div>
+            </section>
+            <div class="m-box-items m-box-items-full" glue-node="albumlist">
+                <section class="m-album-num clearfix item">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="1" class="c-album-item">
+                        <span class="num">1</span>
+                        <span class="album-current  show "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="2"  class="c-album-item">
+                        <span class="num">2</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="3"  class="c-album-item">
+                        <span class="num">3</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="4"  class="c-album-item">
+                        <span class="num">4</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6yeg5w.html" data-num="5"  class="c-album-item">
+                        <span class="num">5</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+                <section class="m-album-num clearfix item  hide ">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="11"  class="c-album-item">
+                        <span class="num">11</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="12"  class="c-album-item">
+                        <span class="num">12</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="13"  class="c-album-item">
+                        <span class="num">13</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="14"  class="c-album-item">
+                        <span class="num">14</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
+        <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
+            <section class="m-title m-title-borderB">
+                <h3 class="c-title-des">剧集
+                    <span class="c-info ad-link">查看详情</span>
+                </h3>
+            </section>
+        </div>
+        <div class="m-box-items m-box-items-full" glue-component="page.playMovie.component.albumList" glue-id="albumList" data-behavior="common.behavior.horizontalScroll.horizontalScroll" glue-node="tabBody" data-pageSize="10" data-aid="203965201">
+
+            <section class="g-tab-num g-tab-num-line">
+                <div class="m-tab-num m-sliding" glue-node="horizontalScroll">
+                    <div class="m-tab-num-list m-sliding-list" style="-webkit-transform: translate(0px, 0px) scale(1); transform: translate(0px, 0px) scale(1);" glue-node="groupTitle">
+                        <span class="c-tab-item  selected " glue-type="switchTab" data-key="$collectionInfo.id-1" tab-index="0" from="1" to="10" >1-10</span>
+                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
+                    </div>
+                </div>
+            </section>
+            <div class="m-box-items m-box-items-full" glue-node="albumlist">
+                <section class="m-album-num clearfix item">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="1" class="c-album-item">
+                        <span class="num">1</span>
+                        <span class="album-current  show "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="2"  class="c-album-item">
+                        <span class="num">2</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="3"  class="c-album-item">
+                        <span class="num">3</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="4"  class="c-album-item">
+                        <span class="num">4</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6yeg5w.html" data-num="5"  class="c-album-item">
+                        <span class="num">5</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+                <section class="m-album-num clearfix item  hide ">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="11"  class="c-album-item">
+                        <span class="num">11</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="12"  class="c-album-item">
+                        <span class="num">12</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="13"  class="c-album-item">
+                        <span class="num">13</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="14"  class="c-album-item">
+                        <span class="num">14</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+    <div class="m-box m-box-top" data-scroll-show="true" data-block="605251_episode">
+        <div class="m-box-items" glue-component="page.playMovie.component.tabMenu" glue-id="tabMenu" data-latestEpisode="16">
+            <section class="m-title m-title-borderB">
+                <h3 class="c-title-des">剧集
+                    <span class="c-info ad-link">查看详情</span>
+                </h3>
+            </section>
+        </div>
+        <div class="m-box-items m-box-items-full" glue-component="page.playMovie.component.albumList" glue-id="albumList" data-behavior="common.behavior.horizontalScroll.horizontalScroll" glue-node="tabBody" data-pageSize="10" data-aid="203965201">
+
+            <section class="g-tab-num g-tab-num-line">
+                <div class="m-tab-num m-sliding" glue-node="horizontalScroll">
+                    <div class="m-tab-num-list m-sliding-list" style="-webkit-transform: translate(0px, 0px) scale(1); transform: translate(0px, 0px) scale(1);" glue-node="groupTitle">
+                        <span class="c-tab-item  selected " glue-type="switchTab" data-key="$collectionInfo.id-1" tab-index="0" from="1" to="10" >1-10</span>
+                        <span class="c-tab-item " glue-type="switchTab" data-key="$collectionInfo.id-2" tab-index="1" from="11" to="24" >11-14</span>
+                    </div>
+                </div>
+            </section>
+            <div class="m-box-items m-box-items-full" glue-node="albumlist">
+                <section class="m-album-num clearfix item">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="1" class="c-album-item">
+                        <span class="num">1</span>
+                        <span class="album-current  show "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="2"  class="c-album-item">
+                        <span class="num">2</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="3"  class="c-album-item">
+                        <span class="num">3</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="4"  class="c-album-item">
+                        <span class="num">4</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6yeg5w.html" data-num="5"  class="c-album-item">
+                        <span class="num">5</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+                <section class="m-album-num clearfix item  hide ">
+                    <a href="http://m.iqiyi.com/v_19rr700mq0.html" data-num="11"  class="c-album-item">
+                        <span class="num">11</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr70087k.html" data-num="12"  class="c-album-item">
+                        <span class="num">12</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z41d8.html" data-num="13"  class="c-album-item">
+                        <span class="num">13</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                    <a href="http://m.iqiyi.com/v_19rr6z55pc.html" data-num="14"  class="c-album-item">
+                        <span class="num">14</span>
+                        <span class="album-current  hide "><i class="c-glyphicon c-glyphicon-playarrow"></i></span>
+                    </a>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
+<script type="text/javascript">
 
     $(document).ready(function() {
 
-        BdVideoBox.invoke('connect', {
-            flag: 'bdvideo',
-            source: "iqiyi",
-            openApp: {
-                ulink: 'http://www.iqiyi.com/app/play.html?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=149&ftype=27&redirect=http%3A%2F%2Fota.iqiyi.com%2Ff2.jsp%3Fpos%3Dplay_button_open%26msrc%3D%26vfm%3D%26qyid%3D0ff34e72f4179228d03bc3fb764ae989%26qypid%3D-1_2031',
-                androidSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27',
-                iosSchema: 'iqiyi://mobile/player?aid=728158400&vid=668454c05aaf42c8fdbd79feb00bbf4b&tvid=728158400&cid=25&offset=0&down=0&video_type=1&subtype=144&ftype=27'
-            }
+         $('.m-video-poster').on('click', function () {
+            $('.m-video-fullScreenWrap').hide();
+            $('#video')[0].play();
         });
-
-        // var iframe = $('#partnerFrame')[0];
-        // iframe.contentWindow.postMessage({'test': 2}, '*');
-
-        var myVideo = $('#myVideo');
-        myVideo[0].src = "https://vd1.bdstatic.com/mda-hgasfc4jdv6buy8p/hd/mda-hgasfc4jdv6buy8p.mp4?playlist=%5B%22hd%22%5D&auth_key=1503494558-0-0-d7e6e31bc87052ca2bc8459c6b26c683&bcevod_channel=searchbox_feed";
-
-        window.addEventListener('message', function (e) {
-            alert('message');
-            myVideo[0].play();
-        }, false);
     });
-    </script>
-
+</script>
 </body>
 </html>
