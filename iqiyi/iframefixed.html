@@ -497,7 +497,9 @@
 
     $(document).ready(function() {
 
-        $('#backHeight').height($('#testapp').height() + $('.po-relative').height());
+        $('#backHeight').height($('#testapp').height());
+
+        $('#testapp').css('bottom', $('#testapp').height() - $('body').height() + $('.po-relative').height());
 
          $('.m-video-poster').on('click', function () {
             $('.m-video-fullScreenWrap').hide();
