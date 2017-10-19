@@ -110,8 +110,6 @@
             BdVideoBox.Event.listen('onFontChange', function (e) {
                 var data = e || {};
 
-                alert('webkitEnterFullScreen');
-                alert(document.getElementById('myVideo'));
                 document.getElementById('myVideo').webkitEnterFullScreen();
             });
         },
