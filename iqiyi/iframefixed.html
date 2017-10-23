@@ -139,8 +139,8 @@
     }
 
     #testapp {
-        /*position: relative;*/
-        position: absolute;
+        position: relative;
+        /*position: absolute;*/
         bottom: 0px;
         width: 100%;
         z-index: 10;
@@ -496,16 +496,16 @@
     </div>
 </div>
 
-<div id="backHeight"></div>
+<!-- <div id="backHeight"></div> -->
 
 <script src="https://cdn.bootcss.com/zepto/1.2.0/zepto.min.js"></script>
 <script type="text/javascript">
 
     $(document).ready(function() {
 
-        $('#backHeight').height($('#testapp').height());
-
-        $('#testapp').css('bottom', -($('#testapp').height() - $('body').height() + $('.po-relative').height()));
+        // $('#backHeight').height($('#testapp').height());
+        //
+        // $('#testapp').css('bottom', -($('#testapp').height() - $('body').height() + $('.po-relative').height()));
 
          $('.m-video-poster').on('click', function () {
             $('.m-video-fullScreenWrap').hide();
