@@ -139,12 +139,12 @@
     }
 
     #testapp {
-        position: relative;
-        /*position: absolute;*/
+        /*position: relative;*/
+        position: absolute;
         bottom: 0px;
         width: 100%;
         z-index: 10;
-        -webkit-overflow-scrolling: touch;
+        overflow: scroll;
     }
     #backHeight {
         position: relative;
@@ -506,6 +506,8 @@
         // $('#backHeight').height($('#testapp').height());
         //
         // $('#testapp').css('bottom', -($('#testapp').height() - $('body').height() + $('.po-relative').height()));
+
+        $('#testapp').height($('body').height() - $('.po-relative').height());
 
          $('.m-video-poster').on('click', function () {
             $('.m-video-fullScreenWrap').hide();
