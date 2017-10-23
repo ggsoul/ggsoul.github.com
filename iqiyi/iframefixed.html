@@ -34,6 +34,23 @@
         position: relative;
         -webkit-overflow-scrolling: touch;
     }
+    .po-relative {
+        position: relative;
+        background-color: #fff;
+        z-index: 9999;
+    }
+    .m-box-items {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .m-video-fixed {
+        position: relative;
+    }
+    .m-video-fixed:before {
+        content: "";
+        display: block;
+        padding-top: 56.25%;
+    }
     .m-video-player {
         position: fixed;
         top: 0;
@@ -126,7 +143,6 @@
         position: absolute;
         bottom: 0px;
         width: 100%;
-        height: 100%;
         z-index: 10;
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
@@ -139,7 +155,6 @@
     </style>
 </head>
 <body>
-
 
 <div class="po-relative">
     <div class="m-box-items">
@@ -164,7 +179,7 @@
 
 <div id="testapp">
 
-  <div class="m-box m-box-bottom" style="padding-top:56.25%;" glue-component="page.playMovie.component.starCircle" glue-id="starCircle" data-behavior="common.behavior.horizontalScroll.horizontalScroll" data-scroll-show="false" data-block="612061_starcircle" style="">
+  <div class="m-box m-box-bottom" glue-component="page.playMovie.component.starCircle" glue-id="starCircle" data-behavior="common.behavior.horizontalScroll.horizontalScroll" data-scroll-show="false" data-block="612061_starcircle" style="">
    <div class="m-box-items">
     <section class="m-title">
      <h3 class="c-title-des">参演明星</h3>
@@ -338,7 +353,7 @@
         //
         // $('#testapp').css('bottom', -($('#testapp').height() - $('body').height() + $('.po-relative').height()));
 
-        // $('#testapp').height($('body').height() - $('.po-relative').height());
+        $('#testapp').height($('body').height() - $('.po-relative').height());
 
          $('.m-video-poster').on('click', function () {
             $('.m-video-fullScreenWrap').hide();
