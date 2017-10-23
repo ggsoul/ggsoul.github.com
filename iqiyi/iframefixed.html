@@ -34,23 +34,6 @@
         position: relative;
         -webkit-overflow-scrolling: touch;
     }
-    .po-relative {
-        position: relative;
-        background-color: #fff;
-        z-index: 9999;
-    }
-    .m-box-items {
-        padding-left: 0;
-        padding-right: 0;
-    }
-    .m-video-fixed {
-        position: relative;
-    }
-    .m-video-fixed:before {
-        content: "";
-        display: block;
-        padding-top: 56.25%;
-    }
     .m-video-player {
         position: fixed;
         top: 0;
@@ -143,6 +126,7 @@
         position: absolute;
         bottom: 0px;
         width: 100%;
+        height: 100%;
         z-index: 10;
         overflow: scroll;
         -webkit-overflow-scrolling: touch;
@@ -353,7 +337,7 @@
         //
         // $('#testapp').css('bottom', -($('#testapp').height() - $('body').height() + $('.po-relative').height()));
 
-        $('#testapp').height($('body').height() - $('.po-relative').height());
+        // $('#testapp').height($('body').height() - $('.po-relative').height());
 
          $('.m-video-poster').on('click', function () {
             $('.m-video-fullScreenWrap').hide();
