@@ -347,13 +347,13 @@
 </ul>
 <h2 id="linux-bash-shell中获取本机ip地址"><a href="#linux-bash-shell中获取本机ip地址" class="headerlink" title="linux bash shell中获取本机ip地址"></a>linux bash shell中获取本机ip地址</h2><ul>
 <li><p>方法一：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">/sbin/ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk &apos;&#123;print $2&#125;&apos;|tr -d &quot;addr:&quot;</div><div class="line">or</div><div class="line">/sbin/ifconfig|sed -n &apos;/inet addr/s/^[^:]*:\([0-9.]\&#123;7,15\&#125;\) .*/\1/p&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">/sbin/ifconfig -a|grep inet|grep -v 127.0.0.1|grep -v inet6|awk &apos;&#123;print $2&#125;&apos;|tr -d &quot;addr:&quot;</div><div class="line">or</div><div class="line">/sbin/ifconfig|sed -n &apos;/inet addr/s/^[^:]*:\([0-9.]\&#123;7,15\&#125;\) .*/\1/p&apos;</div></pre></td></tr></table></figure>
 </li>
 <li><p>方法二： </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">local_host=&quot;`hostname --fqdn`&quot;</div><div class="line">local_ip=`host $local_host 2&gt;/dev/null | awk &apos;&#123;print $NF&#125;&apos;`</div><div class="line">echo $local_ip</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">local_host=&quot;`hostname --fqdn`&quot;</div><div class="line">local_ip=`host $local_host 2&gt;/dev/null | awk &apos;&#123;print $NF&#125;&apos;`</div><div class="line">echo $local_ip</div></pre></td></tr></table></figure>
 </li>
 <li><p>方法三：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">local_host=&quot;`hostname --fqdn`&quot;</div><div class="line">nslookup -sil $local_host 2&gt;/dev/null | grep Address: | sed &apos;1d&apos; | sed &apos;s/Address://g&apos;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><div class="line">local_host=&quot;`hostname --fqdn`&quot;</div><div class="line">nslookup -sil $local_host 2&gt;/dev/null | grep Address: | sed &apos;1d&apos; | sed &apos;s/Address://g&apos;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h2 id="从一个机器传到另一个机器"><a href="#从一个机器传到另一个机器" class="headerlink" title="从一个机器传到另一个机器"></a>从一个机器传到另一个机器</h2><p>本机IP：192.168.138.150</p>
@@ -500,7 +500,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">24</span>
+              <span class="site-state-item-count">25</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
