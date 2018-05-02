@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0006.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png">
-<meta property="og:updated_time" content="2018-05-02T14:36:02.724Z">
+<meta property="og:updated_time" content="2018-05-02T14:37:12.007Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods私有库">
 <meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定，可以自建私有库管理项目内部基础组件代码">
@@ -452,7 +452,7 @@
 </ul>
 <h2 id="在gerrit环境下创建私有Pods"><a href="#在gerrit环境下创建私有Pods" class="headerlink" title="在gerrit环境下创建私有Pods"></a>在gerrit环境下创建私有Pods</h2><h3 id="gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问"><a href="#gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问" class="headerlink" title="gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问"></a>gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问</h3><p>解决的方法是:</p>
 <p><strong>使用Https</strong></p>
-<p>利用https地址。例如：<a href="https://YOURHOST/apps/Specs-iOS.git" target="_blank" rel="external">https://YOURHOST/apps/Specs-iOS.git</a><br>配置密码</p>
+<p>利用https地址。例如：<code>https://YOURHOST/apps/Specs-iOS.git</code><br>配置密码</p>
 <p>在<code>gerrit</code>个人页面－<code>HTTP Password</code>，生成<code>http</code>密码<br><code>username</code>和<code>password</code>为<code>git clone</code>需要的用户名和密码</p>
 <p><strong>使用ssh</strong></p>
 <p>通过配置<code>config</code>文件来统一<code>clone</code>命名，不再需要写用户名<br>编辑<code>~/.ssh/config</code>文件<br>添加<br><code>Host YOURHOST User YOURNAME</code></p>
