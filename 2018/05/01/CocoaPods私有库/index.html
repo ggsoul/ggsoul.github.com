@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0006.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png">
-<meta property="og:updated_time" content="2018-05-03T08:12:02.828Z">
+<meta property="og:updated_time" content="2018-05-03T08:15:22.877Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods私有库">
 <meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
@@ -354,7 +354,7 @@
 <p>安装完成后需要执行这个命令完成<code>CocoaPods</code>的初始配置:</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod setup</div></pre></td></tr></table></figure>
 <blockquote>
-<p>注：pod setup 是Cocoapods将它的信息下载到 ~/.cocoapods/repos 目录下<br>即使在安装时不执行此命令，在初次执行 pod install 命令时，系统也会自动执行 pod setup</p>
+<p>注: pod setup 是Cocoapods将它的信息下载到 ~/.cocoapods/repos 目录下<br>即使在安装时不执行此命令，在初次执行 pod install 命令时，系统也会自动执行 pod setup</p>
 </blockquote>
 <h2 id="使用CocoaPods"><a href="#使用CocoaPods" class="headerlink" title="使用CocoaPods"></a>使用CocoaPods</h2><p>利用<code>CocoaPods</code>，在项目中导入<code>MJExtension</code>类库</p>
 <p>为了确定<code>MJExtension</code>是否支持<code>CocoaPods</code>，可以用<code>CocoaPods</code>的搜索功能验证一下。在终端中输入:</p>
@@ -450,7 +450,9 @@
 <li>在版本库中搜索我们<code>pod &#39;MyAdditions&#39;</code>的<code>MyAdditions.podspec</code>文件</li>
 <li>根据<code>MyAdditions.podspec</code>文件中描述的源码地址下载并整合到项目中</li>
 </ul>
-<p>与<code>pod install</code>命令类似的还有一个<code>pod update</code>命令，两者需要注意的区别是<code>pod install</code>会使用<code>Podfile.lock</code>文件内的版本，<code>pod update</code>会无视并修改<code>Podfile.lock</code>文件内的版本</p>
+<blockquote>
+<p>注: 与<code>pod install</code>命令类似的还有一个<code>pod update</code>命令，两者需要注意的区别是<code>pod install</code>会使用<code>Podfile.lock</code>文件内的版本，<code>pod update</code>会无视并修改<code>Podfile.lock</code>文件内的版本</p>
+</blockquote>
 <h2 id="Podfile-lock的文件"><a href="#Podfile-lock的文件" class="headerlink" title="Podfile.lock的文件"></a>Podfile.lock的文件</h2><p>执行<code>pod install</code>之后，<code>CocoaPods</code>会生成一个名为<code>Podfile.lock</code>的文件。并锁定当前各依赖库的版本，之后如果多次执行<code>pod install</code>或者团队中的其它人<code>check</code>下来这份包含<code>Podfile.lock</code>文件的工程后再执行<code>pod install</code>命令时，获取下来的Pods依赖库的版本就和最开始用户获取到的版本一致。如果没有<code>Podfile.lock</code>文件，执行<code>pod install</code>命令会获取第三方库的最新版本，这就有可能造成同一个团队使用的依赖库版本不一致，这对团队协作的危害无疑是灾难性的</p>
 <p>更改<code>Podfile</code>中各依赖库的版本和执行<code>pod update</code>两种操作会修改<code>Podfile.lock</code>文件</p>
 <p>鉴于<code>Podfile.lock</code>文件对团队协作如此重要，我们应该将它添加到版本控制里</p>
