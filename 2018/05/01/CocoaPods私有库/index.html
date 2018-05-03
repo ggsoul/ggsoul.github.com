@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0006.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png">
-<meta property="og:updated_time" content="2018-05-03T05:04:57.198Z">
+<meta property="og:updated_time" content="2018-05-03T05:10:23.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods私有库">
 <meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
@@ -403,12 +403,12 @@
 <p><strong>use_frameworks!</strong></p>
 <p>通过指定<code>use_frameworks!</code>要求生成的是<code>framework</code>而不是静态库</p>
 <p>如果使用<code>use_frameworks!</code>命令会在<code>Pods</code>工程下的<code>Frameworks</code>目录下生成依赖库的<code>framework</code><br>如果不使用<code>use_frameworks!</code>命令会在<code>Pods</code>工程下的<code>Products</code>目录下生成<code>.a</code>的静态库</p>
-<h2 id="私有库"><a href="#私有库" class="headerlink" title="私有库"></a>私有库</h2><p>上面介绍的<code>CocoaPods</code>都是使用第三方代码库，接下来是使用<code>CocoaPods</code>创建私有库，管理项目内部基础组件代码。这里的私有库包括两个代码库，版本库和代码库</p>
-<h3 id="创建版本库"><a href="#创建版本库" class="headerlink" title="创建版本库"></a>创建版本库</h3><p>创建私人<code>git</code>仓库，这个仓库用来存放版本描述文件，我们选择<code>oschina</code>创建远程私有仓库，然后在终端执行命令:</p>
+<h2 id="私有库"><a href="#私有库" class="headerlink" title="私有库"></a>私有库</h2><p>上面介绍的<code>CocoaPods</code>都是使用第三方代码库，接下来是使用<code>CocoaPods</code>创建私有库，管理项目内部基础组件代码。这里的私有库包括两个代码库，<code>版本仓库</code>和<code>代码仓库</code></p>
+<h3 id="创建版本仓库"><a href="#创建版本仓库" class="headerlink" title="创建版本仓库"></a>创建版本仓库</h3><p>创建私人<code>git</code>仓库，这个仓库用来存放版本描述文件，我们选择<code>oschina</code>创建远程私有仓库，然后在终端执行命令:</p>
 <p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png" alt="cache07"></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod repo add MyRepo https://git.oschina.net/XXX/MyRepo.git</div></pre></td></tr></table></figure>
 <p>然后查看在<code>Finder</code>目录<code>~/.cocoapods/repos</code>，可以发现增加了一个<code>MyRepo</code>的储存库</p>
-<h3 id="创建代码库"><a href="#创建代码库" class="headerlink" title="创建代码库"></a>创建代码库</h3><p>回到<code>oschina</code>创建私人代码库，创建时添加<code>MIT License</code>和<code>README</code></p>
+<h3 id="创建代码仓库"><a href="#创建代码仓库" class="headerlink" title="创建代码仓库"></a>创建代码仓库</h3><p>回到<code>oschina</code>创建私人代码库，创建时添加<code>MIT License</code>和<code>README</code></p>
 <p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png" alt="cache08"></p>
 <p>将仓库克隆到本地，添加你的代码文件、<code>仓库名.podspec</code>描述文件</p>
 <p><code>.podspec</code>文件是你这个代码库的<code>pod</code>描述文件,可以通过<code>pod</code>指令创建空白模板:</p>
@@ -421,25 +421,25 @@
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod lib lint --allow-warnings</div></pre></td></tr></table></figure>
 <p>验证成功后出现:</p>
 <figure class="highlight javascript"><table><tr><td class="code"><pre><div class="line">-&gt; MyAdditions (<span class="number">0.0</span><span class="number">.1</span>)</div><div class="line"></div><div class="line">MyAdditions passed validation.</div></pre></td></tr></table></figure>
-<h3 id="将描述文件推送到版本库"><a href="#将描述文件推送到版本库" class="headerlink" title="将描述文件推送到版本库"></a>将描述文件推送到版本库</h3><p>将项目打上标签推到远程仓库，标签号和版本号对应都是<code>0.0.1</code></p>
+<h3 id="将描述文件推送到版本库"><a href="#将描述文件推送到版本库" class="headerlink" title="将描述文件推送到版本库"></a>将描述文件推送到版本库</h3><p>将项目打上标签推到远程<code>代码仓库</code>，标签号和版本号对应都是<code>0.0.1</code></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 创建标签</span></div><div class="line">git tag -a 0.0.1 -m <span class="string">'标签说明'</span></div><div class="line"><span class="comment"># 推送到远程</span></div><div class="line">git push origin --tags</div></pre></td></tr></table></figure>
-<p>最后将我们的代码仓库的描述信息，<code>push</code>到我们的版本仓库中</p>
+<p>最后将我们的<code>代码仓库</code>的描述信息，<code>push</code>到我们的<code>版本仓库</code>中</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod repo push MyRepo MyAdditions.podspec</div></pre></td></tr></table></figure>
 <p>这时会对远程仓库进行验证，成功的话就会在<code>~/.cocoapods/repos/MyRep</code>中发现新增的仓库描述信息了</p>
 <p>若是出现错误信息:</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">[!] The repo `MyRepo` at `../.cocoapods/repos/MyRepo` is not clean</div></pre></td></tr></table></figure>
-<p>更新下我们的版本库:</p>
+<p>更新下我们的<code>版本仓库</code>:</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod repo update MyRepo</div></pre></td></tr></table></figure>
 <p>再继续上传即可</p>
 <p><code>pod repo push MyRepo MyAdditions.podspec</code>的过程就是</p>
 <ol>
 <li>验证 MyAdditions.podspec 文件</li>
-<li>拉取远程版本库 MyRepo</li>
-<li>添加 MyAdditions.podspec 到版本库中</li>
+<li>拉取远程<code>版本仓库</code> MyRepo</li>
+<li>添加 MyAdditions.podspec 到<code>版本仓库</code>中</li>
 <li>push 到远程</li>
 </ol>
-<h3 id="私人pod库的使用"><a href="#私人pod库的使用" class="headerlink" title="私人pod库的使用"></a>私人pod库的使用</h3><p>使用私人<code>pod</code>库的需要在<code>Podflie</code>中添加这句话，指明你的版本库地址:</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://git.oschina.net/XXX/MyRepo.git'</span> **注意**是版本库的地址，而不是代码库的地址</div></pre></td></tr></table></figure>
+<h3 id="私人pod库的使用"><a href="#私人pod库的使用" class="headerlink" title="私人pod库的使用"></a>私人pod库的使用</h3><p>使用私人<code>pod</code>库的需要在<code>Podflie</code>中添加这句话，指明你的<code>版本仓库</code>地址:</p>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://git.oschina.net/XXX/MyRepo.git'</span> **注意** 是版本仓库的地址，而不是代码仓库的地址</div></pre></td></tr></table></figure>
 <p>若有还使用了公有的<code>pod</code>库，需要把公有库地址也带上:</p>
 <figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source ‘<span class="symbol">https:</span>/<span class="regexp">/github.com/</span>CocoaPods/Specs.git’</div></pre></td></tr></table></figure>
 <p>最后的<code>Podflie</code>文件变成这个样子:</p>
@@ -667,7 +667,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CocoaPods"><span class="nav-number">2.</span> <span class="nav-text">安装CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用CocoaPods"><span class="nav-number">3.</span> <span class="nav-text">使用CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile-lock的文件"><span class="nav-number">4.</span> <span class="nav-text">Podfile.lock的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile文件"><span class="nav-number">5.</span> <span class="nav-text">Podfile文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependencies"><span class="nav-number">5.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Target-configuration"><span class="nav-number">5.2.</span> <span class="nav-text">Target configuration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有库"><span class="nav-number">6.</span> <span class="nav-text">私有库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建版本库"><span class="nav-number">6.1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建代码库"><span class="nav-number">6.2.</span> <span class="nav-text">创建代码库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将描述文件推送到版本库"><span class="nav-number">6.3.</span> <span class="nav-text">将描述文件推送到版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私人pod库的使用"><span class="nav-number">6.4.</span> <span class="nav-text">私人pod库的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在gerrit环境下创建私有Pods"><span class="nav-number">7.</span> <span class="nav-text">在gerrit环境下创建私有Pods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问"><span class="nav-number">7.1.</span> <span class="nav-text">gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod-repo-push中的push这一步会出错"><span class="nav-number">7.2.</span> <span class="nav-text">pod repo push中的push这一步会出错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CocoaPods"><span class="nav-number">2.</span> <span class="nav-text">安装CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用CocoaPods"><span class="nav-number">3.</span> <span class="nav-text">使用CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile-lock的文件"><span class="nav-number">4.</span> <span class="nav-text">Podfile.lock的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile文件"><span class="nav-number">5.</span> <span class="nav-text">Podfile文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependencies"><span class="nav-number">5.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Target-configuration"><span class="nav-number">5.2.</span> <span class="nav-text">Target configuration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有库"><span class="nav-number">6.</span> <span class="nav-text">私有库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建版本仓库"><span class="nav-number">6.1.</span> <span class="nav-text">创建版本仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建代码仓库"><span class="nav-number">6.2.</span> <span class="nav-text">创建代码仓库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将描述文件推送到版本库"><span class="nav-number">6.3.</span> <span class="nav-text">将描述文件推送到版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私人pod库的使用"><span class="nav-number">6.4.</span> <span class="nav-text">私人pod库的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在gerrit环境下创建私有Pods"><span class="nav-number">7.</span> <span class="nav-text">在gerrit环境下创建私有Pods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问"><span class="nav-number">7.1.</span> <span class="nav-text">gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod-repo-push中的push这一步会出错"><span class="nav-number">7.2.</span> <span class="nav-text">pod repo push中的push这一步会出错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
