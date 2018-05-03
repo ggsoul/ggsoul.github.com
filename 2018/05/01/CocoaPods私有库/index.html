@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0006.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png">
-<meta property="og:updated_time" content="2018-05-03T05:27:32.192Z">
+<meta property="og:updated_time" content="2018-05-03T05:39:06.259Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods私有库">
 <meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
@@ -425,7 +425,7 @@
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line"><span class="comment"># 创建标签</span></div><div class="line">git tag -a 0.0.1 -m <span class="string">'标签说明'</span></div><div class="line"><span class="comment"># 推送到远程</span></div><div class="line">git push origin --tags</div></pre></td></tr></table></figure>
 <p>最后将我们的<code>代码仓库</code>的描述信息，<code>push</code>到我们的<code>版本仓库</code>中</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod repo push MyRepo MyAdditions.podspec</div></pre></td></tr></table></figure>
-<p>这时会对远程仓库进行验证，成功的话就会在<code>~/.cocoapods/repos/MyRep</code>中发现新增的仓库描述信息了</p>
+<p>这时会对远程仓库进行验证，成功的话就会在<code>~/.cocoapods/repos/MyRepo</code>中发现新增的仓库描述信息了</p>
 <p>若是出现错误信息:</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">[!] The repo `MyRepo` at `../.cocoapods/repos/MyRepo` is not clean</div></pre></td></tr></table></figure>
 <p>更新下我们的<code>版本仓库</code>:</p>
@@ -443,7 +443,7 @@
 <p>若有还使用了公有的<code>pod</code>库，需要把公有库地址也带上:</p>
 <figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></div></pre></td></tr></table></figure>
 <p>最后的<code>Podflie</code>文件变成这个样子:</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></div><div class="line">source <span class="string">'https://git.oschina.net/baiyingqiu/MyRepo.git'</span></div><div class="line"></div><div class="line">platform <span class="symbol">:ios</span>, <span class="string">'8.0'</span></div><div class="line"></div><div class="line">target ‘MyPodTest’ <span class="keyword">do</span></div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">pod <span class="string">'BYPhoneNumTF'</span> <span class="comment">#公有库</span></div><div class="line">pod <span class="string">'MyAdditions'</span> <span class="comment">#我们的私有库</span></div><div class="line">pod <span class="string">'BYAdditions'</span> <span class="comment">#这是我又添加到版本库中的另一个代码库</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></div><div class="line">source <span class="string">'https://git.oschina.net/baiyingqiu/MyRepo.git'</span></div><div class="line"></div><div class="line">platform <span class="symbol">:ios</span>, <span class="string">'8.0'</span></div><div class="line"></div><div class="line">target <span class="string">'MyPodTest'</span> <span class="keyword">do</span></div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">pod <span class="string">'BYPhoneNumTF'</span> <span class="comment">#公有库</span></div><div class="line">pod <span class="string">'MyAdditions'</span> <span class="comment">#我们的私有库</span></div><div class="line">pod <span class="string">'BYAdditions'</span> <span class="comment">#这是我又添加到版本库中的另一个代码库</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <p>然后执行:</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
 <p>加载完成可以看到代码已经整合到我们的项目中了</p>
