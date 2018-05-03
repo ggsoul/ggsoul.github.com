@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0006.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png">
-<meta property="og:updated_time" content="2018-05-03T05:10:23.845Z">
+<meta property="og:updated_time" content="2018-05-03T05:11:20.171Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods私有库">
 <meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
@@ -403,7 +403,7 @@
 <p><strong>use_frameworks!</strong></p>
 <p>通过指定<code>use_frameworks!</code>要求生成的是<code>framework</code>而不是静态库</p>
 <p>如果使用<code>use_frameworks!</code>命令会在<code>Pods</code>工程下的<code>Frameworks</code>目录下生成依赖库的<code>framework</code><br>如果不使用<code>use_frameworks!</code>命令会在<code>Pods</code>工程下的<code>Products</code>目录下生成<code>.a</code>的静态库</p>
-<h2 id="私有库"><a href="#私有库" class="headerlink" title="私有库"></a>私有库</h2><p>上面介绍的<code>CocoaPods</code>都是使用第三方代码库，接下来是使用<code>CocoaPods</code>创建私有库，管理项目内部基础组件代码。这里的私有库包括两个代码库，<code>版本仓库</code>和<code>代码仓库</code></p>
+<h2 id="私有库"><a href="#私有库" class="headerlink" title="私有库"></a>私有库</h2><p>上面介绍的<code>CocoaPods</code>都是使用第三方公有代码库，接下来是使用<code>CocoaPods</code>创建私有库，管理项目内部基础组件代码。这里的私有库包括两个代码库，<code>版本仓库</code>和<code>代码仓库</code></p>
 <h3 id="创建版本仓库"><a href="#创建版本仓库" class="headerlink" title="创建版本仓库"></a>创建版本仓库</h3><p>创建私人<code>git</code>仓库，这个仓库用来存放版本描述文件，我们选择<code>oschina</code>创建远程私有仓库，然后在终端执行命令:</p>
 <p><img src="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png" alt="cache07"></p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod repo add MyRepo https://git.oschina.net/XXX/MyRepo.git</div></pre></td></tr></table></figure>
