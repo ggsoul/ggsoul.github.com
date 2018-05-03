@@ -80,13 +80,13 @@
 
 
 
-<meta name="description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定，可以自建私有库管理项目内部基础组件代码">
+<meta name="description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
 <meta name="keywords" content="iOS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CocoaPods私有库">
 <meta property="og:url" content="http://gaoxuefeng.com/2018/05/01/CocoaPods私有库/index.html">
 <meta property="og:site_name" content="Gaoxuefeng&#39;s Blog">
-<meta property="og:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定，可以自建私有库管理项目内部基础组件代码">
+<meta property="og:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0002.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0001.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0004.png">
@@ -94,10 +94,10 @@
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0006.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png">
-<meta property="og:updated_time" content="2018-05-02T14:48:40.383Z">
+<meta property="og:updated_time" content="2018-05-03T03:31:41.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods私有库">
-<meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定，可以自建私有库管理项目内部基础组件代码">
+<meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
 <meta name="twitter:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0002.png">
 
 
@@ -339,8 +339,10 @@
       
 
       
-        <p><code>CocoaPods</code>是<code>iOS</code>开发中的类库管理工具，项目的类库依赖关系在一个称为<code>Podfile</code>的文本文件中指定，可以自建私有库管理项目内部基础组件代码</p>
+        <p><code>CocoaPods</code>是<code>iOS</code>开发中的类库管理工具，项目的类库依赖关系在一个称为<code>Podfile</code>的文本文件中指定</p>
 <a id="more"></a>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p><code>CocoaPods</code>使用独立的<code>版本仓库</code>来管理<code>代码仓库</code>版本，通过更新仓库版本来管理代码。<code>CocoaPods</code>的独立的<code>版本仓库</code>在<code>github</code>上是这个<a href="https://www.jianshu.com/p/1711e131987d" target="_blank" rel="external">Specs版本仓库</a>，同时本地安装配置好<code>CocoaPods</code>后，在本地<code>~/.cocoapods/repos/master</code>目录下也能查看。</p>
+<p>开发者通过<code>Cocoapods</code>命令向<code>Specs版本仓库</code>添加自己开源仓库的信息和版本，所以开发者就都可以通过<code>CocoaPods</code>下载使用的开源仓库的代码，除此之外，开发者还可以通过自建私有库管理自己项目内部基础组件代码，这里主要介绍<code>CocoaPods私有库</code>的使用</p>
 <h2 id="安装CocoaPods"><a href="#安装CocoaPods" class="headerlink" title="安装CocoaPods"></a>安装CocoaPods</h2><p><code>CocoaPods</code>依赖于<code>Ruby</code>环境，刚好<code>Mac</code>下自带<code>Ruby</code>，使用<code>Ruby</code>的<code>gem</code>命令即可安装<code>CocoaPods</code></p>
 <p>为防止因<code>gem</code>太老而引发问题，建议执行如下命令先更新<code>gem</code>:</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">sudo gem update --system</div></pre></td></tr></table></figure>
@@ -665,7 +667,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CocoaPods"><span class="nav-number">1.</span> <span class="nav-text">安装CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用CocoaPods"><span class="nav-number">2.</span> <span class="nav-text">使用CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile-lock的文件"><span class="nav-number">3.</span> <span class="nav-text">Podfile.lock的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile文件"><span class="nav-number">4.</span> <span class="nav-text">Podfile文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependencies"><span class="nav-number">4.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Target-configuration"><span class="nav-number">4.2.</span> <span class="nav-text">Target configuration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有库"><span class="nav-number">5.</span> <span class="nav-text">私有库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建版本库"><span class="nav-number">5.1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建代码库"><span class="nav-number">5.2.</span> <span class="nav-text">创建代码库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将描述文件推送到版本库"><span class="nav-number">5.3.</span> <span class="nav-text">将描述文件推送到版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私人pod库的使用"><span class="nav-number">5.4.</span> <span class="nav-text">私人pod库的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在gerrit环境下创建私有Pods"><span class="nav-number">6.</span> <span class="nav-text">在gerrit环境下创建私有Pods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问"><span class="nav-number">6.1.</span> <span class="nav-text">gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod-repo-push中的push这一步会出错"><span class="nav-number">6.2.</span> <span class="nav-text">pod repo push中的push这一步会出错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装CocoaPods"><span class="nav-number">2.</span> <span class="nav-text">安装CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#使用CocoaPods"><span class="nav-number">3.</span> <span class="nav-text">使用CocoaPods</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile-lock的文件"><span class="nav-number">4.</span> <span class="nav-text">Podfile.lock的文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Podfile文件"><span class="nav-number">5.</span> <span class="nav-text">Podfile文件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Dependencies"><span class="nav-number">5.1.</span> <span class="nav-text">Dependencies</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Target-configuration"><span class="nav-number">5.2.</span> <span class="nav-text">Target configuration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#私有库"><span class="nav-number">6.</span> <span class="nav-text">私有库</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建版本库"><span class="nav-number">6.1.</span> <span class="nav-text">创建版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建代码库"><span class="nav-number">6.2.</span> <span class="nav-text">创建代码库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将描述文件推送到版本库"><span class="nav-number">6.3.</span> <span class="nav-text">将描述文件推送到版本库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#私人pod库的使用"><span class="nav-number">6.4.</span> <span class="nav-text">私人pod库的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#在gerrit环境下创建私有Pods"><span class="nav-number">7.</span> <span class="nav-text">在gerrit环境下创建私有Pods</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问"><span class="nav-number">7.1.</span> <span class="nav-text">gerrit的项目的git地址带有邮箱，而私有pod要求同一个git地址能够被大家都能访问</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pod-repo-push中的push这一步会出错"><span class="nav-number">7.2.</span> <span class="nav-text">pod repo push中的push这一步会出错</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">8.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
           </div>
         </section>
