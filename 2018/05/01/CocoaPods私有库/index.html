@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0006.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0007.png">
 <meta property="og:image" content="http://7xir4w.com1.z0.glb.clouddn.com/blog/images/b0008.png">
-<meta property="og:updated_time" content="2018-05-03T05:11:20.171Z">
+<meta property="og:updated_time" content="2018-05-03T05:27:32.192Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CocoaPods私有库">
 <meta name="twitter:description" content="CocoaPods是iOS开发中的类库管理工具，项目的类库依赖关系在一个称为Podfile的文本文件中指定">
@@ -441,9 +441,9 @@
 <h3 id="私人pod库的使用"><a href="#私人pod库的使用" class="headerlink" title="私人pod库的使用"></a>私人pod库的使用</h3><p>使用私人<code>pod</code>库的需要在<code>Podflie</code>中添加这句话，指明你的<code>版本仓库</code>地址:</p>
 <figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://git.oschina.net/XXX/MyRepo.git'</span> **注意** 是版本仓库的地址，而不是代码仓库的地址</div></pre></td></tr></table></figure>
 <p>若有还使用了公有的<code>pod</code>库，需要把公有库地址也带上:</p>
-<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source ‘<span class="symbol">https:</span>/<span class="regexp">/github.com/</span>CocoaPods/Specs.git’</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></div></pre></td></tr></table></figure>
 <p>最后的<code>Podflie</code>文件变成这个样子:</p>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">source ‘https://github.com/CocoaPods/Specs.git’</div><div class="line">source ‘https://git.oschina.net/baiyingqiu/MyRepo.git’</div><div class="line"></div><div class="line">platform :ios, '8.0'</div><div class="line"></div><div class="line">target ‘MyPodTest’ do</div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">pod “BYPhoneNumTF” #公有库</div><div class="line">pod ‘MyAdditions’ #我们的私有库</div><div class="line">pod ‘BYAdditions’ #这是我又添加到版本库中的另一个代码库</div><div class="line"></div><div class="line">end</div></pre></td></tr></table></figure>
+<figure class="highlight ruby"><table><tr><td class="code"><pre><div class="line">source <span class="string">'https://github.com/CocoaPods/Specs.git'</span></div><div class="line">source <span class="string">'https://git.oschina.net/baiyingqiu/MyRepo.git'</span></div><div class="line"></div><div class="line">platform <span class="symbol">:ios</span>, <span class="string">'8.0'</span></div><div class="line"></div><div class="line">target ‘MyPodTest’ <span class="keyword">do</span></div><div class="line">use_frameworks!</div><div class="line"></div><div class="line">pod <span class="string">'BYPhoneNumTF'</span> <span class="comment">#公有库</span></div><div class="line">pod <span class="string">'MyAdditions'</span> <span class="comment">#我们的私有库</span></div><div class="line">pod <span class="string">'BYAdditions'</span> <span class="comment">#这是我又添加到版本库中的另一个代码库</span></div><div class="line"></div><div class="line"><span class="keyword">end</span></div></pre></td></tr></table></figure>
 <p>然后执行:</p>
 <figure class="highlight sh"><table><tr><td class="code"><pre><div class="line">pod install</div></pre></td></tr></table></figure>
 <p>加载完成可以看到代码已经整合到我们的项目中了</p>
